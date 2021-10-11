@@ -1,6 +1,6 @@
 /**
  * @file MainFrame.cpp
- * @author Anurag
+ * @author Anurag Kompalli
  */
 #include "pch.h"
 #include "MainFrame.h"

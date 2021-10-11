@@ -1,6 +1,6 @@
 /**
  * @file UMLWarsApp.h
- * @author Anurag
+ * @author Anurag Kompalli
  *
  *
  */
