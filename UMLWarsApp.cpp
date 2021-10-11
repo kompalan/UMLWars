@@ -3,6 +3,7 @@
  * @author Anurag Kompalli
  */
 #include "pch.h"
+#include <MainFrame.h>
 #include "UMLWarsApp.h"
 
 /**
@@ -15,6 +16,14 @@ bool UMLWarsApp::OnInit()
     {
         return false;
     }
+
+    // Add image type handlers
+    wxInitAllImageHandlers();
+
+    auto frame = new MainFrame();
+    frame->Initialize();
+    frame->Show(true);
+
 
     return true;
 }
