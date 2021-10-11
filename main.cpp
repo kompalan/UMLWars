@@ -1,7 +1,7 @@
 #include <iostream>
+#include "UMLWarsApp.h"
 
-int main()
-{
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
-}
+/**
+ * Start the WX Widgets Application
+ */
+wxIMPLEMENT_APP(UMLWarsApp);
