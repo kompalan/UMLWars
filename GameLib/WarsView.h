@@ -1,21 +1,21 @@
 /**
- * @file GameView.h
+ * @file WarsView.h
  * @author Anurag Kompalli
  *
  *
  */
 
-#ifndef INC_335PROJECT1_GAMEVIEW_H
-#define INC_335PROJECT1_GAMEVIEW_H
+#ifndef INC_335PROJECT1_WARSVIEW_H
+#define INC_335PROJECT1_WARSVIEW_H
 
 #include "pch.h"
 #include "Game.h"
 
 /**
- * The GameView Class. This class represents a
+ * The WarsView Class. This class represents a
  * view that holds the UML Wars Game.
  */
-class GameView : public wxWindow {
+class WarsView : public wxWindow {
 private:
     /// Game Object to Manipulate
     Game mGame;
@@ -39,4 +39,4 @@ public:
     void Stop() {mTimer.Stop();}
 };
 
-#endif //INC_335PROJECT1_GAMEVIEW_H
+#endif //INC_335PROJECT1_WARSVIEW_H

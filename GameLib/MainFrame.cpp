@@ -4,7 +4,7 @@
  */
 #include "pch.h"
 #include "MainFrame.h"
-#include "GameView.h"
+#include "WarsView.h"
 
 /**
  * Initialize the MainFrame window.
@@ -15,7 +15,7 @@ void MainFrame::Initialize()
 
     auto sizer = new wxBoxSizer( wxVERTICAL );
 
-    mGameView = new GameView();
+    mGameView = new WarsView();
     mGameView->Initialize(this);
 
     sizer->Add(mGameView, 1, wxEXPAND | wxALL);

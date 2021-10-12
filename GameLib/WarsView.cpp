@@ -1,11 +1,11 @@
 /**
- * @file GameView.cpp
+ * @file WarsView.cpp
  * @author Anurag Kompalli
  */
 
 
 #include "pch.h"
-#include "GameView.h"
+#include "WarsView.h"
 
 #include <wx/dcbuffer.h>
 
@@ -19,12 +19,12 @@ const int FrameDuration = 30;
  * to their respective handlers. Also Set Up Timer for Animations
  * @param mainFrame Parent MainFrame object to bind to
  */
-void GameView::Initialize(wxFrame* mainFrame)
+void WarsView::Initialize(wxFrame* mainFrame)
 {
     Create(mainFrame, wxID_ANY);
     SetBackgroundStyle(wxBG_STYLE_PAINT);
-    Bind(wxEVT_PAINT, &GameView::OnPaint, this);
-    Bind(wxEVT_TIMER, &GameView::OnTimer, this);
+    Bind(wxEVT_PAINT, &WarsView::OnPaint, this);
+    Bind(wxEVT_TIMER, &WarsView::OnTimer, this);
 
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
@@ -35,7 +35,7 @@ void GameView::Initialize(wxFrame* mainFrame)
  * Paint Event that Draws the Window
  * @param event Paint Event Object
  */
-void GameView::OnPaint(wxPaintEvent& event)
+void WarsView::OnPaint(wxPaintEvent& event)
 {
     // Create a double-buffered display context
     wxAutoBufferedPaintDC dc(this);
@@ -57,7 +57,7 @@ void GameView::OnPaint(wxPaintEvent& event)
  * Handler for the Timer Event
  * @param event Timer Event Object
  */
-void GameView::OnTimer(wxTimerEvent& event)
+void WarsView::OnTimer(wxTimerEvent& event)
 {
     Refresh();
 }
