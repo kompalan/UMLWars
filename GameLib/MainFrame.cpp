@@ -6,6 +6,7 @@
 #include "MainFrame.h"
 #include "WarsView.h"
 
+using namespace std;
 /**
  * Initialize the MainFrame window.
  */

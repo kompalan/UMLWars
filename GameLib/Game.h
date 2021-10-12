@@ -8,8 +8,8 @@
 #ifndef INC_335PROJECT1_GAME_H
 #define INC_335PROJECT1_GAME_H
 
+#include "pch.h"
 #include <wx/graphics.h>
-
 /**
  * Game Class that represents one Instance of the UML Wars
  * Game.

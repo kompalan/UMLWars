@@ -48,6 +48,7 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
     // INSERT YOUR DRAWING CODE HERE
 
     // ======== EXAMPLE HAROLD DRAWING CODE =========
+
     if(mHaroldBitmap.IsNull())
     {
         mHaroldBitmap = graphics->CreateBitmapFromImage(*mHaroldImage);

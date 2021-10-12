@@ -8,6 +8,7 @@
 #ifndef INC_335PROJECT1_MAINFRAME_H
 #define INC_335PROJECT1_MAINFRAME_H
 
+#include "pch.h"
 #include "WarsView.h"
 
 /**
