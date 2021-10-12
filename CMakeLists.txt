@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.20)
 project(335Project1)
 set(APPLICATION_LIBRARY GameLib)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/images/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/images/)
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(SOURCE_FILES main.cpp UMLWarsApp.cpp UMLWarsApp.h pch.h)

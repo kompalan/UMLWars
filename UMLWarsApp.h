@@ -10,6 +10,10 @@
 
 #include <wx/wx.h>
 
+/**
+ * UMLWarsApp Class. This reprents the wxWidgets application
+ * that gets started in main.
+ */
 class UMLWarsApp : public wxApp {
 private:
 
