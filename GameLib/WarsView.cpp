@@ -29,6 +29,11 @@ void WarsView::Initialize(wxFrame* mainFrame)
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
     mStopWatch.Start();
+
+    /// Add Harold to the Screen
+    auto harold = std::make_shared<Harold>(&mGame);
+    harold->SetLocation(0, 800);
+    mGame.AddItem(harold);
 }
 
 /**
@@ -37,6 +42,11 @@ void WarsView::Initialize(wxFrame* mainFrame)
  */
 void WarsView::OnPaint(wxPaintEvent& event)
 {
+    auto newTime = mStopWatch.Time();
+    auto elapsed = (double)(newTime - mTime) * 0.001;
+    mTime = newTime;
+    mGame.Update(elapsed);
+
     // Create a double-buffered display context
     wxAutoBufferedPaintDC dc(this);
 
@@ -51,6 +61,7 @@ void WarsView::OnPaint(wxPaintEvent& event)
     // Tell the game class to draw
     wxRect rect = GetRect();
     mGame.OnDraw(gc.get(), rect.GetWidth(), rect.GetHeight());
+
 }
 
 /**

@@ -10,6 +10,7 @@
 
 #include "pch.h"
 #include "Item.h"
+#include "Harold.h"
 #include <wx/graphics.h>
 
 /**
@@ -37,10 +38,12 @@ public:
     /// New Scale of the Drawing
     double mScale;
 
+
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
     void Update(double elapsed);
 
+    void AddItem(std::shared_ptr<Item> item);
 };
 
 #endif //INC_335PROJECT1_GAME_H

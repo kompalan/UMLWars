@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Game.h"
+#include "Harold.h"
 
 using namespace std;
 
@@ -45,6 +46,10 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
     // Draw in virtual pixels on the graphics context
     //
     // INSERT YOUR DRAWING CODE HERE
+    for(auto item : mItems)
+    {
+        item->Draw(graphics);
+    }
 
     graphics->PopState();
 }
@@ -55,5 +60,17 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
  */
 void Game::Update(double elapsed)
 {
+    for(auto item : mItems)
+    {
+        item->Update(elapsed);
+    }
+}
 
+/**
+ * Adds an item to the list
+ * @param item Item to add to the list
+ */
+void Game::AddItem(std::shared_ptr<Item> item)
+{
+    mItems.push_back(item);
 }

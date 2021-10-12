@@ -28,7 +28,7 @@ private:
     std::unique_ptr<wxImage> mItemImage;
 
     /// The Bitmap for the Item
-    std::unique_ptr<wxGraphicsBitmap> mItemBitmap;
+    wxGraphicsBitmap mItemBitmap;
 
 public:
     double GetX() const;
@@ -42,6 +42,12 @@ public:
      * @param y Y location in virtual pixels
      */
     void SetLocation(double x, double y) { mX = x; mY = y; }
+
+    /**
+     * Handle updates for animation
+     * @param elapsed Time since last onDraw call
+     */
+     virtual void Update(double elapsed) {}
 
     /**
      * Deleted Default Constructor

@@ -39,15 +39,15 @@ double Item::GetY() const
  */
 void Item::Draw(wxGraphicsContext* graphics)
 {
-    if(mItemBitmap->IsNull())
+    if(mItemBitmap.IsNull())
     {
-        *mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
+        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
     double width = mItemImage->GetWidth();
     double height = mItemImage->GetHeight();
 
-    graphics->DrawBitmap(*mItemBitmap,
+    graphics->DrawBitmap(mItemBitmap,
             GetX(),
             GetY(),
             width,
