@@ -9,18 +9,17 @@
 #define INC_335PROJECT1_GAME_H
 
 #include "pch.h"
+#include "Item.h"
 #include <wx/graphics.h>
+
 /**
  * Game Class that represents one Instance of the UML Wars
  * Game.
  */
 class Game {
 private:
-    /// wxImage pointer to the Image of Harold in images/harold.png
-    std::shared_ptr<wxImage> mHaroldImage;
-
-    /// Converted bitmap from mHaroldImage
-    wxGraphicsBitmap mHaroldBitmap;
+    /// Collection of items holding everything on the screen
+    std::vector<std::shared_ptr<Item>> mItems;
 
 public:
     /// Game area in virtual pixels
