@@ -12,6 +12,11 @@
 #include "BadUMLName.h"
 #include "GoodUMLAttribute.h"
 #include "BadUMLAttribute.h"
+#include "GoodUMLOperation.h"
+#include "BadUMLOperation.h"
+#include "GoodInheritanceItem.h"
+#include "BadInheritanceItem.h"
+#include <wx/xml/xml.h>
 
 /**
  * Class to store the data from the uml.xml file
@@ -30,8 +35,25 @@ private:
     /// The list of bad UML attributes
     std::vector<std::shared_ptr<BadUMLAttribute>> mBadAttributes;
 
+    /// The list of good UML operations
+    std::vector<std::shared_ptr<GoodUMLOperation>> mGoodOperations;
+
+    /// The list of bad UML operations
+    std::vector<std::shared_ptr<BadUMLOperation>> mBadOperations;
+
+    /// The list of good inheritance relationships
+    std::vector<std::shared_ptr<GoodInheritanceItem>> mGoodInheritances;
+
+    /// The list of bad inheritance relationships
+    std::vector<std::shared_ptr<BadInheritanceItem>> mBadInheritances;
+
+    void XmlName(wxXmlNode *node);
+    void XmlAttribute(wxXmlNode *node);
+    void XmlOperation(wxXmlNode *node);
+    void XmlInheritance(wxXmlNode *node);
+
 public:
-    void LoadData();
+    void LoadData(const std::wstring &filename);
 
     /**
      * Getter for the list of bad UML class names
@@ -56,6 +78,30 @@ public:
      * @return the list of good UML class attributes
      */
     std::vector<std::shared_ptr<GoodUMLAttribute>> GetGoodAttributes() { return mGoodAttributes; }
+
+    /**
+     * Getter for the list of bad UML class operations
+     * @return the list of bad UML class operations
+     */
+    std::vector<std::shared_ptr<BadUMLOperation>> GetBadOperations() { return mBadOperations; }
+
+    /**
+     * Getter for the list of good UML class operations
+     * @return the list of good UML class operations
+     */
+    std::vector<std::shared_ptr<GoodUMLOperation>> GetGoodOperations() { return mGoodOperations; }
+
+    /**
+     * Getter for the list of good inheritances
+     * @return the list of good inheritances
+     */
+    std::vector<std::shared_ptr<GoodInheritanceItem>> GetGoodInheritances() { return mGoodInheritances; }
+
+    /**
+     * Getter for the list of bad inheritances
+     * @return the list of bad inheritances
+     */
+    std::vector<std::shared_ptr<BadInheritanceItem>> GetBadInheritances() { return mBadInheritances; }
 };
 
 #endif //INC_335PROJECT1_UMLDATA_H

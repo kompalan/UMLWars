@@ -9,6 +9,9 @@
 
 using namespace std;
 
+/// XML file to read the UML data from
+const std::wstring Filename = L"data/uml.xml";
+
 /**
  * Constructor
  */

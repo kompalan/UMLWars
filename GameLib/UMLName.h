@@ -17,12 +17,7 @@ class UMLName : public UMLClassItem {
 private:
 
 protected:
-    /**
-     * Constructor
-     * @param name the name of the UML class
-     */
-    UMLName(std::wstring name) : UMLClassItem(name) {}
-
+    UMLName(std::wstring name);
 public:
     /// Default constructor (disabled)
     UMLName() = delete;

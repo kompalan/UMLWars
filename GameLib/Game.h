@@ -8,10 +8,10 @@
 #ifndef INC_335PROJECT1_GAME_H
 #define INC_335PROJECT1_GAME_H
 
-#include "pch.h"
 #include "Item.h"
 #include "Harold.h"
 #include <wx/graphics.h>
+#include "UMLData.h"
 
 /**
  * Game Class that represents one Instance of the UML Wars
@@ -21,6 +21,9 @@ class Game {
 private:
     /// Collection of items holding everything on the screen
     std::vector<std::shared_ptr<Item>> mItems;
+
+    /// UML data from XML file
+    UMLData *mData;
 
 public:
     /// Game area in virtual pixels

@@ -28,12 +28,7 @@ public:
     /// Assignment operator
     void operator=(const BadUMLName &) = delete;
 
-    /**
-     * Constructor
-     * @param name the name of the UML class
-     * @param reason the reason the UML class name is bad
-     */
-    BadUMLName(std::wstring name, std::wstring reason) : UMLName(name) { mReason = reason; }
+    BadUMLName(std::wstring name, std::wstring reason);
 
     /**
      * Getter for the bad class name reason

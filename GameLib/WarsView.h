@@ -8,7 +8,6 @@
 #ifndef INC_335PROJECT1_WARSVIEW_H
 #define INC_335PROJECT1_WARSVIEW_H
 
-#include "pch.h"
 #include "Game.h"
 
 /**

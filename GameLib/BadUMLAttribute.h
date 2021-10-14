@@ -15,6 +15,7 @@
  */
 class BadUMLAttribute : public UMLAttribute {
 private:
+    /// The reason the UML class attribute is bad
     std::wstring mReason;
 
 public:
@@ -27,12 +28,13 @@ public:
     /// Assignment operator
     void operator=(const BadUMLAttribute &) = delete;
 
+    BadUMLAttribute(std::wstring attribute, std::wstring reason);
+
     /**
-     * Constructor
-     * @param attribute the attribute of the UML class
-     * @param reason the reason the UML class attribute is bad
+     * Getter for the bad class attribute reason
+     * @return the bad class attribute reason
      */
-    BadUMLAttribute(std::wstring attribute, std::wstring reason) : UMLAttribute(attribute) { mReason = reason; }
+    std::wstring GetReason() { return mReason; }
 };
 
 #endif //INC_335PROJECT1_BADUMLATTRIBUTE_H

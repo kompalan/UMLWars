@@ -8,16 +8,14 @@
 
 using namespace std;
 
-/// File name to load UML data from
-const wstring FileName = L"data/uml.xml";
-
 /**
  * Load the contents of an xml file into a UMLData object
+ * @param filename The name of the file the data will be loaded from
  */
-void UMLData::LoadData()
+void UMLData::LoadData(const std::wstring &filename)
 {
     wxXmlDocument xmlDoc;
-    if(!xmlDoc.Load(FileName))
+    if(!xmlDoc.Load(filename))
     {
         wxMessageBox(L"Unable to load UML file");
         return;
@@ -31,7 +29,7 @@ void UMLData::LoadData()
     for ( ; child; child=child->GetNext())
     {
         auto name = child->GetName();
-        if (name == L"class" || name == L"inherit")
+        if (name == L"class" || name == L"inheritance")
         {
             // Traverse each child of the root node's children
             auto umlChild = child->GetChildren();
@@ -40,41 +38,135 @@ void UMLData::LoadData()
                 auto umlChildName = umlChild->GetName();
 
                 // If the umlChild information is bad store the reason, otherwise empty
-                auto badReason = umlChild->GetAttribute(L"bad");
+                wstring badReason = umlChild->GetAttribute(L"bad").ToStdWstring();
 
                 // Determine the type of uml class item
                 if (umlChildName == L"name")
                 {
-                    // Determine if the uml class name is good or bad
-                    if (badReason != L"")
-                    {
-                        auto umlName = make_shared<BadUMLName>(umlChild->GetNodeContent().ToStdWstring(),
-                                badReason.ToStdWstring());
-                        mBadNames.push_back(umlName);
-                    }
-                    else
-                    {
-                        auto umlName = make_shared<GoodUMLName>(umlChild->GetNodeContent().ToStdWstring());
-                        mGoodNames.push_back(umlName);
-                    }
+                    XmlName(umlChild);
                 }
                 else if (umlChildName == L"attribute")
                 {
-                    // Determine if the uml class attribute is good or bad
-                    if (badReason != L"")
-                    {
-                        auto umlAttribute = make_shared<BadUMLAttribute>(umlChild->GetNodeContent().ToStdWstring(),
-                                badReason.ToStdWstring());
-                        mBadAttributes.push_back(umlAttribute);
-                    }
-                    else
-                    {
-                        auto umlAttribute = make_shared<GoodUMLAttribute>(umlChild->GetNodeContent().ToStdWstring());
-                        mGoodAttributes.push_back(umlAttribute);
-                    }
+                    XmlAttribute(umlChild);
+                }
+                else if (umlChildName == L"operation")
+                {
+                    XmlOperation(umlChild);
+                }
+                else if (umlChildName == L"inherit")
+                {
+                    XmlInheritance(umlChild);
                 }
             }
         }
     }
 }
 
+/**
+ * Handle a node of type name
+ * @param node XML node
+ */
+void UMLData::XmlName(wxXmlNode *node)
+{
+    // The uml class name
+    wstring name = node->GetNodeContent().ToStdWstring();
+
+    // If the uml name is bad store the reason, otherwise empty
+    wstring badReason = node->GetAttribute(L"bad").ToStdWstring();
+
+    // Determine if the uml class name is good or bad
+    if (badReason != L"")
+    {
+        auto umlName = make_shared<BadUMLName>(name, badReason);
+        mBadNames.push_back(umlName);
+    }
+    else
+    {
+        auto umlName = make_shared<GoodUMLName>(name);
+        mGoodNames.push_back(umlName);
+    }
+}
+
+/**
+ * Handle a node of type attribute
+ * @param node XML node
+ */
+void UMLData::XmlAttribute(wxXmlNode *node)
+{
+    // The uml class name
+    wstring attribute = node->GetNodeContent().ToStdWstring();
+
+    // If the uml name is bad store the reason, otherwise empty
+    wstring badReason = node->GetAttribute(L"bad").ToStdWstring();
+
+    // Determine if the uml class attribute is good or bad
+    if (badReason != L"")
+    {
+        auto umlAttribute = make_shared<BadUMLAttribute>(attribute, badReason);
+        mBadAttributes.push_back(umlAttribute);
+    }
+    else
+    {
+        auto umlAttribute = make_shared<GoodUMLAttribute>(attribute);
+        mGoodAttributes.push_back(umlAttribute);
+    }
+}
+
+/**
+ * Handle a node of type operation
+ * @param node XML node
+ */
+void UMLData::XmlOperation(wxXmlNode *node)
+{
+    // The uml class name
+    wstring operation = node->GetNodeContent().ToStdWstring();
+
+    // If the uml name is bad store the reason, otherwise empty
+    wstring badReason = node->GetAttribute(L"bad").ToStdWstring();
+
+    // Determine if the uml class operation is good or bad
+    if (badReason != L"")
+    {
+        auto umlOperation = make_shared<BadUMLOperation>(operation, badReason);
+        mBadOperations.push_back(umlOperation);
+    }
+    else
+    {
+        auto umlOperation = make_shared<GoodUMLOperation>(operation);
+        mGoodOperations.push_back(umlOperation);
+    }
+}
+
+/**
+ * Handle a node of type inheritance
+ * @param node XML node
+ */
+void UMLData::XmlInheritance(wxXmlNode *node)
+{
+    // The base and derived classes for the inheritance relationship
+    wstring base = node->GetAttribute(L"base").ToStdWstring();
+    wstring derived = node->GetAttribute(L"derived").ToStdWstring();
+
+    wstring badReason = node->GetAttribute(L"bad").ToStdWstring();
+
+    // Determine if the uml inheritance is good or bad
+    if (badReason != L"")
+    {
+        // Determine if the inheritance is upside down
+        if (node->GetAttribute(L"direction") != L"")
+        {
+            auto umlInheritance = make_shared<BadInheritanceItem>(base, derived, badReason, true);
+            mBadInheritances.push_back(umlInheritance);
+        }
+        else
+        {
+            auto umlInheritance = make_shared<BadInheritanceItem>(base, derived, badReason, false);
+            mBadInheritances.push_back(umlInheritance);
+        }
+    }
+    else
+    {
+        auto umlInheritance = make_shared<GoodInheritanceItem>(base, derived);
+        mGoodInheritances.push_back(umlInheritance);
+    }
+}

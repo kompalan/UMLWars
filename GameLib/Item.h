@@ -7,7 +7,7 @@
 
 #ifndef INC_335PROJECT1_ITEM_H
 #define INC_335PROJECT1_ITEM_H
-#include "pch.h"
+
 #include <wx/graphics.h>
 
 class Game; ///< Forward Reference to the Game Class

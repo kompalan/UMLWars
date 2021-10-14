@@ -26,11 +26,7 @@ public:
     /// Assignment operator
     void operator=(const GoodUMLName &) = delete;
 
-    /**
-     * Constructor
-     * @param name the name of the UML class
-     */
-    GoodUMLName(std::wstring name) : UMLName(name) {}
+    GoodUMLName(std::wstring name);
 };
 
 #endif //INC_335PROJECT1_GOODUMLNAME_H

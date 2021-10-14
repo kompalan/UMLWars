@@ -8,6 +8,8 @@
 #ifndef INC_335PROJECT1_UMLCLASSITEM_H
 #define INC_335PROJECT1_UMLCLASSITEM_H
 
+class UMLData;
+
 /**
  * Base class for any UML class items
  */
@@ -17,11 +19,7 @@ private:
     std::wstring mItem;
 
 protected:
-    /**
-     * Constructor
-     * @param item the UML class item
-     */
-    UMLClassItem(std::wstring item) { mItem = item; }
+    UMLClassItem(std::wstring item);
 public:
     /// Default constructor (disabled)
     UMLClassItem() = delete;
@@ -31,6 +29,11 @@ public:
 
     /// Assignment operator
     void operator=(const UMLClassItem &) = delete;
+
+    /**
+     * Destructor
+     */
+    ~UMLClassItem() {}
 
     /**
      * Getter for the UML class item

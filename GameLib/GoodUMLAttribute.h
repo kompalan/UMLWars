@@ -26,11 +26,7 @@ public:
     /// Assignment operator
     void operator=(const GoodUMLAttribute &) = delete;
 
-    /**
-     * Constructor
-     * @param attribute the attribute of the UML class
-     */
-    GoodUMLAttribute(std::wstring attribute) : UMLAttribute(attribute) {}
+    GoodUMLAttribute(std::wstring attribute);
 };
 
 #endif //INC_335PROJECT1_GOODUMLATTRIBUTE_H

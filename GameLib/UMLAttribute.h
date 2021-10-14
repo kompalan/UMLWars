@@ -17,11 +17,7 @@ class UMLAttribute : public UMLClassItem {
 private:
 
 protected:
-    /**
-     * Constructor
-     * @param attribute the attribute of the UML class
-     */
-    UMLAttribute(std::wstring attribute) : UMLClassItem(attribute) {}
+    UMLAttribute(std::wstring attribute);
 public:
     /// Default constructor (disabled)
     UMLAttribute() = delete;
