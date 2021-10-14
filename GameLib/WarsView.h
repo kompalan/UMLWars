@@ -17,7 +17,7 @@
 class WarsView : public wxWindow {
 private:
     /// Game Object to Manipulate
-    Game mGame;
+    Game mGame = Game();
 
     /// The timer that allows for animation
     wxTimer mTimer;
@@ -30,7 +30,7 @@ private:
 
     void OnPaint(wxPaintEvent& event);
     void OnTimer(wxTimerEvent& event);
-
+    void OnMouseMove(wxMouseEvent &event);
 public:
     void Initialize(wxFrame *mainFrame);
 

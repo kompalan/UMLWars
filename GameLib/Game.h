@@ -41,10 +41,14 @@ public:
     /// New Scale of the Drawing
     double mScale;
 
+    /// Pointer to Harold
+    std::shared_ptr<Harold> mHarold;
 
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
     void Update(double elapsed);
+
+    void OnMouseMove(int mouseX, int mouseY);
 
     void AddItem(std::shared_ptr<Item> item);
 };

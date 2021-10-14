@@ -24,17 +24,16 @@ private:
     double mX; ///< X location for the center of the item in virtual pixels
     double mY; ///< Y location for the center of the item in virtual pixels
 
-    /// The Item Image
-    std::unique_ptr<wxImage> mItemImage;
-
-    /// The Bitmap for the Item
-    wxGraphicsBitmap mItemBitmap;
-
 public:
     double GetX() const;
     double GetY() const;
 
-    virtual void Draw(wxGraphicsContext *graphics);
+    /**
+     * Pure virtual function for drawing. Anything that is an
+     * item has to implement its own draw function
+     * @param graphics wxGraphicsContext object
+     */
+    virtual void Draw(wxGraphicsContext *graphics) = 0;
 
     /**
      * Set the Item Location
@@ -47,7 +46,14 @@ public:
      * Handle updates for animation
      * @param elapsed Time since last onDraw call
      */
-     virtual void Update(double elapsed) {}
+    virtual void Update(double elapsed) {}
+
+    /**
+     * Handle Mouse Move Event
+     * @param virtualX X coordinate in virtual pixels
+     * @param virtualY Y coordinate in virtual pixels
+     */
+    virtual void HandleMouseMove(double virtualX, double virtualY) {};
 
     /**
      * Deleted Default Constructor
@@ -65,9 +71,9 @@ public:
      * @param item
      */
     void operator=(const Item &item) = delete;
-protected:
 
-    Item(Game *game, const std::wstring &filename);
+protected:
+    Item(Game *game, double posX, double posY);
 };
 
 #endif //INC_335PROJECT1_ITEM_H

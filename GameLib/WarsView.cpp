@@ -25,15 +25,11 @@ void WarsView::Initialize(wxFrame* mainFrame)
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Bind(wxEVT_PAINT, &WarsView::OnPaint, this);
     Bind(wxEVT_TIMER, &WarsView::OnTimer, this);
+    Bind(wxEVT_MOTION, &WarsView::OnMouseMove, this);
 
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
     mStopWatch.Start();
-
-    /// Add Harold to the Screen
-    auto harold = std::make_shared<Harold>(&mGame);
-    harold->SetLocation(0, 800);
-    mGame.AddItem(harold);
 }
 
 /**
@@ -71,4 +67,13 @@ void WarsView::OnPaint(wxPaintEvent& event)
 void WarsView::OnTimer(wxTimerEvent& event)
 {
     Refresh();
+}
+
+/**
+ * Handler for Mouse Move
+ * @param event wxWidgets mouse move event
+ */
+void WarsView::OnMouseMove(wxMouseEvent& event)
+{
+    mGame.OnMouseMove(event.GetX(), event.GetY());
 }

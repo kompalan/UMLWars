@@ -17,6 +17,9 @@ const std::wstring Filename = L"data/uml.xml";
  */
 Game::Game()
 {
+    /// Add Harold to the Screen
+    mHarold = std::make_shared<Harold>(this);
+    AddItem(mHarold);
 }
 
 /**
@@ -45,10 +48,6 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
     graphics->Translate(mXOffset, mYOffset);
     graphics->Scale(mScale, mScale);
 
-    //
-    // Draw in virtual pixels on the graphics context
-    //
-    // INSERT YOUR DRAWING CODE HERE
     for(auto item : mItems)
     {
         item->Draw(graphics);
@@ -76,4 +75,21 @@ void Game::Update(double elapsed)
 void Game::AddItem(std::shared_ptr<Item> item)
 {
     mItems.push_back(item);
+}
+
+/**
+ * Convert the X and Y pixel coordinates to virtual
+ * pixel coordinates and call each items respective handler
+ * @param mouseX X coordinate of Mouse
+ * @param mouseY Y coordinate of Mouse
+ */
+void Game::OnMouseMove(int mouseX, int mouseY)
+{
+    double virtualX = (mouseX - mXOffset) / mScale;
+    double virtualY = (mouseY - mYOffset) / mScale;
+
+    for(auto item : mItems)
+    {
+        item->HandleMouseMove(virtualX, virtualY);
+    }
 }

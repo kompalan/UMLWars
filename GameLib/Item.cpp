@@ -9,11 +9,13 @@
 /**
  * Constructor
  * @param game Game object for forward reference
- * @param filename filename of the image of the item
+ * @param posX Initial X position of the Item
+ * @param posY Initial Y position of the Item
  */
-Item::Item(Game* game, const std::wstring& filename) : mGame(game)
+Item::Item(Game* game, double posX, double posY) : mGame(game)
 {
-    mItemImage = std::make_unique<wxImage>(filename, wxBITMAP_TYPE_ANY);
+    mX = posX;
+    mY = posY;
 }
 
 /**
@@ -33,27 +35,3 @@ double Item::GetY() const
 {
     return mY;
 }
-
-/**
- * Virtual Function that Draws the item on the screen
- * @param graphics wxGraphicsContext
- */
-void Item::Draw(wxGraphicsContext* graphics)
-{
-    if(mItemBitmap.IsNull())
-    {
-        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
-    }
-
-    double width = mItemImage->GetWidth();
-    double height = mItemImage->GetHeight();
-
-    graphics->DrawBitmap(mItemBitmap,
-            GetX(),
-            GetY(),
-            width,
-            height);
-}
-
-
-
