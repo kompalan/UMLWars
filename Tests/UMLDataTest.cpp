@@ -6,6 +6,7 @@
 #include <pch.h>
 #include "gtest/gtest.h"
 #include <UMLData.h>
+#include <Game.h>
 
 using namespace std;
 
@@ -14,13 +15,17 @@ const std::wstring Filename = L"data/uml.xml";
 
 TEST(UMLDataTest, Constructor)
 {
-    UMLData data;
+    Game game;
+    UMLData data(&game);
 }
 
 TEST(UMLDataTest, LoadFile)
 {
+    // Create a game for the data
+    Game game;
+
     // Load the UML data
-    UMLData data;
+    UMLData data(&game);
     data.LoadData(Filename);
 
     // Get the good and bad class names from the data

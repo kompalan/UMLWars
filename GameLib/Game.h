@@ -23,8 +23,8 @@ private:
     /// Collection of items holding everything on the screen
     std::vector<std::shared_ptr<Item>> mItems;
 
-    /// UML data from XML file
-    UMLData *mData;
+    /// UML data for the game
+    std::shared_ptr<UMLData> mData;
 
 public:
     /// Game area in virtual pixels

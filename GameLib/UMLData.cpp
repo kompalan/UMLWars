@@ -9,6 +9,15 @@
 using namespace std;
 
 /**
+ * Constructor
+ * @param game The game the UMLData is stored in
+ */
+UMLData::UMLData(Game* game) : mGame(game)
+{
+
+}
+
+/**
  * Load the contents of an xml file into a UMLData object
  * @param filename The name of the file the data will be loaded from
  */
@@ -36,9 +45,6 @@ void UMLData::LoadData(const std::wstring &filename)
             for ( ; umlChild; umlChild=umlChild->GetNext())
             {
                 auto umlChildName = umlChild->GetName();
-
-                // If the umlChild information is bad store the reason, otherwise empty
-                wstring badReason = umlChild->GetAttribute(L"bad").ToStdWstring();
 
                 // Determine the type of uml class item
                 if (umlChildName == L"name")

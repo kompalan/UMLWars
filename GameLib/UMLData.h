@@ -18,6 +18,8 @@
 #include "BadInheritanceItem.h"
 #include <wx/xml/xml.h>
 
+class Game;
+
 /**
  * Class to store the data from the uml.xml file
  */
@@ -47,12 +49,26 @@ private:
     /// The list of bad inheritance relationships
     std::vector<std::shared_ptr<BadInheritanceItem>> mBadInheritances;
 
+    /// The game this data is stored in
+    Game *mGame;
+
     void XmlName(wxXmlNode *node);
     void XmlAttribute(wxXmlNode *node);
     void XmlOperation(wxXmlNode *node);
     void XmlInheritance(wxXmlNode *node);
 
 public:
+    /// Default constructor (disabled)
+    UMLData() = delete;
+
+    /// Copy constructor (disabled)
+    UMLData(const UMLData &) = delete;
+
+    /// Assignment operator
+    void operator=(const UMLData &) = delete;
+
+    UMLData(Game *game);
+
     void LoadData(const std::wstring &filename);
 
     /**

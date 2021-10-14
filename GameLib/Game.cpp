@@ -17,6 +17,10 @@ const std::wstring Filename = L"data/uml.xml";
  */
 Game::Game()
 {
+    /// Add and load the UML data
+    mData = std::make_shared<UMLData>(this);
+    mData->LoadData(Filename);
+
     ///Add Scoreboard to Game
     mScoreboard = std::make_shared<Scoreboard>(this);
     AddItem(mScoreboard);
