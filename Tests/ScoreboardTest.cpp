@@ -7,11 +7,8 @@
 #include <iostream>
 #include <Scoreboard.h>
 #include <Game.h>
-#include <wx/wx.h>
-#include <WarsView.h>
-#include <MainFrame.h>
-#include "../UMLWarsApp.h"
-#include "gtest/gtest.h"
+#include <gtest/gtest.h>
+
 
 TEST(ScoreboardTest, Constructor)
 {

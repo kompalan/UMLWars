@@ -3,6 +3,7 @@
  * @author Joe Getzen
  */
 
+#include "pch.h"
 #include "Scoreboard.h"
 /**
  * Constructor for the scoreboard

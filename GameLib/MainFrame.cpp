@@ -20,7 +20,7 @@ void MainFrame::Initialize()
     mGameView->Initialize(this);
 
     sizer->Add(mGameView, 1, wxEXPAND | wxALL);
-    sizer->Add(sizer);
+    SetSizer(sizer);
 
 
     Layout();
