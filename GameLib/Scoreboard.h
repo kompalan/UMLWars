@@ -10,6 +10,18 @@
 
 #include "Item.h"
 
+const wxFont smallFont(wxSize(0, 20),
+        wxFONTFAMILY_ROMAN,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+const wxFont bigFont(wxSize(0, 60),
+        wxFONTFAMILY_MODERN,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+const wxColour burntOrange= wxColour(255,140,0);
+
 class Scoreboard : public Item{
 private:
     ///Correct score
@@ -52,7 +64,7 @@ public:
      */
     int GetUnfair() {return mUnfair;}
 
-    void Update();
+    void Update(double elapsed) override;
 };
 
 #endif //INC_335PROJECT1_SCOREBOARD_H
