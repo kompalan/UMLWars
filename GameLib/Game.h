@@ -12,6 +12,7 @@
 #include "Harold.h"
 #include <wx/graphics.h>
 #include "UMLData.h"
+#include "Scoreboard.h"
 
 /**
  * Game Class that represents one Instance of the UML Wars
@@ -43,6 +44,9 @@ public:
 
     /// Pointer to Harold
     std::shared_ptr<Harold> mHarold;
+
+    /// Pointer to Scoreboard
+    std::shared_ptr<Scoreboard> mScoreboard;
 
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
