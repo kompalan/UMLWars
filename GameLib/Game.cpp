@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "Game.h"
 #include "Harold.h"
+#include "Pen.h"
 
 using namespace std;
 
@@ -28,6 +29,10 @@ Game::Game()
     /// Add Harold to the Screen
     mHarold = std::make_shared<Harold>(this);
     AddItem(mHarold);
+
+    ///Add Pen to the Screen
+    mPen = std::make_shared<Pen>(this);
+    AddItem(mPen);
 }
 
 /**
@@ -101,3 +106,4 @@ void Game::OnMouseMove(int mouseX, int mouseY)
         item->HandleMouseMove(virtualX, virtualY);
     }
 }
+

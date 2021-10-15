@@ -13,6 +13,7 @@
 #include <wx/graphics.h>
 #include "UMLData.h"
 #include "Scoreboard.h"
+#include "Pen.h"
 
 /**
  * Game Class that represents one Instance of the UML Wars
@@ -46,6 +47,9 @@ private:
 
     /// Pointer to Scoreboard
     std::shared_ptr<Scoreboard> mScoreboard;
+
+    /// Pointer to Pen
+    std::shared_ptr<Pen> mPen;
 
 public:
     Game();
