@@ -31,6 +31,7 @@ Harold::Harold(Game* game) : Item(game, InitialPosition.X(), InitialPosition.Y()
  */
 void Harold::Draw(wxGraphicsContext* graphics)
 {
+    graphics->PushState();
     graphics->Translate(GetX(), GetY());
     graphics->Rotate(mRotation);
     if(mItemBitmap.IsNull())
@@ -43,6 +44,7 @@ void Harold::Draw(wxGraphicsContext* graphics)
             -GetHeight()/2,
             GetWidth(),
             GetHeight());
+    graphics->PopState();
 }
 
 /**

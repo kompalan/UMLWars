@@ -21,6 +21,7 @@ void Scoreboard::Draw(wxGraphicsContext* graphics)
     mGraphics = graphics;
     double wid, hit;
 
+    graphics->PushState();
     //Categories
     graphics->SetFont(smallFont, burntOrange);
 
@@ -43,7 +44,7 @@ void Scoreboard::Draw(wxGraphicsContext* graphics)
 
     graphics->GetTextExtent(std::to_string(mCorrect), &wid, &hit);
     graphics->DrawText(std::to_string(mCorrect), -300 - wid/2, 100 - hit/2);
-
+    graphics->PopState();
 }
 /**
  * General update function to redraw scores
