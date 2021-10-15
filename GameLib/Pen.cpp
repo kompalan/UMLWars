@@ -26,7 +26,7 @@ Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
 }
 
 /**
- * Draw Harold On the Screen and Handle his Rotation
+ * Draw Pen On the Screen and Handle his Rotation
  * using wxGraphicsContext
  * @param graphics wxGraphicsContext object
  */
@@ -59,7 +59,7 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
         double diffX = virtualX - (GetX());
         double diffY = virtualY - (GetY());
 
-        // Rotate the Image to Point Harolds Hand Towards the Mouse
+        // Rotate the Image to Point Pen Hand Towards the Mouse
         double angle = atan2(diffY, diffX);
         mVelocity.SetX(Velocity *cos(angle));
         mVelocity.SetY(Velocity *sin(angle));

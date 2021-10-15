@@ -5,14 +5,15 @@
  *
  */
 
-#include "Item.h"
-#include "Vector.h"
 #ifndef INC_335PROJECT1_PEN_H
 #define INC_335PROJECT1_PEN_H
 
+#include "Item.h"
+#include "Vector.h"
+
 class Pen : public Item {
 private:
-    ///< Rotation angle in radians for Harold
+    ///< Rotation angle in radians for Pen
     double mRotation;
 
     /// The Item Image
