@@ -9,6 +9,7 @@
 #define INC_335PROJECT1_ITEM_H
 
 #include <wx/graphics.h>
+#include "ItemVisitor.h"
 
 class Game; ///< Forward Reference to the Game Class
 
@@ -71,6 +72,12 @@ public:
      * @param item
      */
     void operator=(const Item &item) = delete;
+
+    /**
+     * Accept visitor
+     * @param visitor visitor that's accepted
+     */
+    virtual void Accept(ItemVisitor* visitor) = 0;
 
 protected:
     Item(Game *game, double posX, double posY);

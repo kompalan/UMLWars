@@ -49,6 +49,12 @@ public:
      * @return Image Width for Harold
      */
     double GetWidth() const { return mItemImage->GetWidth(); }
+
+    /**
+     * Accept visitor
+     * @param visitor visitor that's accepted
+     */
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitHarold(this); }
 };
 
 #endif //INC_335PROJECT1_HAROLD_H
