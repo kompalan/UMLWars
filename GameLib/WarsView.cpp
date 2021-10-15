@@ -21,7 +21,7 @@ const int FrameDuration = 30;
  */
 void WarsView::Initialize(wxFrame* mainFrame)
 {
-    Create(mainFrame, wxID_ANY);
+    Create(mainFrame, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE);
     SetBackgroundStyle(wxBG_STYLE_PAINT);
     Bind(wxEVT_PAINT, &WarsView::OnPaint, this);
     Bind(wxEVT_TIMER, &WarsView::OnTimer, this);

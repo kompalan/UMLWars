@@ -26,7 +26,6 @@ private:
     /// UML data for the game
     std::shared_ptr<UMLData> mData;
 
-public:
     /// Game area in virtual pixels
     const static int Width = 1250;
 
@@ -48,6 +47,7 @@ public:
     /// Pointer to Scoreboard
     std::shared_ptr<Scoreboard> mScoreboard;
 
+public:
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
     void Update(double elapsed);
