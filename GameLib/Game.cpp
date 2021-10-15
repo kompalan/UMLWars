@@ -31,8 +31,7 @@ Game::Game()
     AddItem(mHarold);
 
     ///Add Pen to the Screen
-    mPen = std::make_shared<Pen>(this);
-    AddItem(mPen);
+    AddItem(std::make_shared<Pen>(this));
 }
 
 /**

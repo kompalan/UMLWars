@@ -48,9 +48,6 @@ private:
     /// Pointer to Scoreboard
     std::shared_ptr<Scoreboard> mScoreboard;
 
-    /// Pointer to Pen
-    std::shared_ptr<Pen> mPen;
-
 public:
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
