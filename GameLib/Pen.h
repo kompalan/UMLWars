@@ -37,6 +37,7 @@ public:
      */
     double GetWidth() const { return mItemImage->GetWidth(); }
 
+    void Accept(ItemVisitor* visitor) override {};
 };
 
 #endif //INC_335PROJECT1_PEN_H
