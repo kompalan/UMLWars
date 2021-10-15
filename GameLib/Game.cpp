@@ -107,3 +107,14 @@ void Game::OnMouseMove(int mouseX, int mouseY)
     }
 }
 
+void Game::OnLeftDown(int mouseX, int mouseY)
+{
+    double virtualX = (mouseX - mXOffset) / mScale;
+    double virtualY = (mouseY - mYOffset) / mScale;
+
+    for(auto item : mItems)
+    {
+        item->HandleMouseDown(virtualX, virtualY);
+    }
+}
+

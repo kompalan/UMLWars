@@ -26,6 +26,7 @@ void WarsView::Initialize(wxFrame* mainFrame)
     Bind(wxEVT_PAINT, &WarsView::OnPaint, this);
     Bind(wxEVT_TIMER, &WarsView::OnTimer, this);
     Bind(wxEVT_MOTION, &WarsView::OnMouseMove, this);
+    Bind(wxEVT_LEFT_DOWN, &WarsView::OnLeftDown,this);
 
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
@@ -76,4 +77,9 @@ void WarsView::OnTimer(wxTimerEvent& event)
 void WarsView::OnMouseMove(wxMouseEvent& event)
 {
     mGame.OnMouseMove(event.GetX(), event.GetY());
+}
+
+void WarsView::OnLeftDown(wxMouseEvent& event)
+{
+    mGame.OnLeftDown(event.GetX(), event.GetY());
 }

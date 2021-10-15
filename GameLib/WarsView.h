@@ -31,6 +31,7 @@ private:
     void OnPaint(wxPaintEvent& event);
     void OnTimer(wxTimerEvent& event);
     void OnMouseMove(wxMouseEvent &event);
+    void OnLeftDown(wxMouseEvent &event);
 public:
     void Initialize(wxFrame *mainFrame);
 

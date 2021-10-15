@@ -56,6 +56,8 @@ public:
      */
     virtual void HandleMouseMove(double virtualX, double virtualY) {};
 
+    virtual void HandleMouseDown(double virtualX, double virtualY) {};
+
     /**
      * Deleted Default Constructor
      */

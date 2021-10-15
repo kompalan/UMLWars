@@ -14,6 +14,8 @@ const double PenAngle = 1;
 /// Pen's Initial Position on the Screen
 cse335::Vector InitialPos = cse335::Vector(10, 800);
 
+const double Velocity = 500;
+
 /**
  * Constructor
  * @param game Game object for forward reference
@@ -31,17 +33,38 @@ Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
 void Pen::Draw(wxGraphicsContext* graphics)
 {
     graphics->PushState();
-    graphics->Translate(GetX(), GetY());
-    graphics->Rotate(PenAngle);
     if(mItemBitmap.IsNull())
     {
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
     graphics->DrawBitmap(mItemBitmap,
-            GetWidth()/2,
-            GetHeight()/2,
+            GetX(),
+            GetY(),
             GetWidth(),
             GetHeight());
     graphics->PopState();
+}
+
+void Pen::HandleMouseDown(double virtualX, double virtualY)
+{
+    if (!isThrown)
+    {
+        double diffX = virtualX - (GetX());
+        double diffY = virtualY - (GetY());
+
+        // Rotate the Image to Point Harolds Hand Towards the Mouse
+        double angle = atan2(diffY, diffX);
+        mVelocity.SetX(Velocity *cos(angle));
+        mVelocity.SetY(Velocity *sin(angle));
+
+        isThrown = true;
+    }
+}
+
+void Pen::Update(double elapsed)
+{
+    double newX = GetX() + mVelocity.X() * elapsed;
+    double newY = GetY() + mVelocity.Y() * elapsed;
+    SetLocation(newX, newY);
 }

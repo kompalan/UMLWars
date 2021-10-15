@@ -58,6 +58,7 @@ public:
 
     void OnMouseMove(int mouseX, int mouseY);
 
+    void OnLeftDown(int mouseX, int mouseY);
     void AddItem(std::shared_ptr<Item> item);
 };
 

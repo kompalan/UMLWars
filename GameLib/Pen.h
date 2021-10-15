@@ -21,6 +21,10 @@ private:
     /// The Bitmap for the Item
     wxGraphicsBitmap mItemBitmap;
 
+    cse335::Vector mVelocity = cse335::Vector();
+
+    bool isThrown = false;
+
 public:
     Pen(Game *game);
     void Draw(wxGraphicsContext *graphics) override;
@@ -37,7 +41,12 @@ public:
      */
     double GetWidth() const { return mItemImage->GetWidth(); }
 
+    void HandleMouseDown(double virtualX, double virtualY) override;
     void Accept(ItemVisitor* visitor) override {};
+
+    void Update(double elapsed) override;
+
+//    void Accept(ItemVisitor* visitor) override {};
 };
 
 #endif //INC_335PROJECT1_PEN_H
