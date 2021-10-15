@@ -107,6 +107,11 @@ void Game::OnMouseMove(int mouseX, int mouseY)
     }
 }
 
+/**
+ * Define the mose left down operation
+ * @param mouseX X coordinate of Mouse
+ * @param mouseY Y coordinate of Mouse
+ */
 void Game::OnLeftDown(int mouseX, int mouseY)
 {
     double virtualX = (mouseX - mXOffset) / mScale;

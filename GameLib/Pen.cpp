@@ -46,8 +46,14 @@ void Pen::Draw(wxGraphicsContext* graphics)
     graphics->PopState();
 }
 
+/**
+ * Handler to act the mouse click operation
+ * @param virtualX X coordinate of the mouse in virtual pixels
+ * @param virtualY Y coordinate of the mouse in virtual pixels
+ */
 void Pen::HandleMouseDown(double virtualX, double virtualY)
 {
+    /// determine if the pen has been thrown
     if (!isThrown)
     {
         double diffX = virtualX - (GetX());
@@ -62,6 +68,11 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
     }
 }
 
+/**
+ * Update Pen On the Screen and Handle its moving
+ * using wxGraphicsContext
+ * @param elapsed elapsed value to update
+ */
 void Pen::Update(double elapsed)
 {
     double newX = GetX() + mVelocity.X() * elapsed;

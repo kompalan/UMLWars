@@ -79,6 +79,10 @@ void WarsView::OnMouseMove(wxMouseEvent& event)
     mGame.OnMouseMove(event.GetX(), event.GetY());
 }
 
+/**
+ * Handler for Mouse click
+ * @param event wxWidgets mouse move event
+ */
 void WarsView::OnLeftDown(wxMouseEvent& event)
 {
     mGame.OnLeftDown(event.GetX(), event.GetY());

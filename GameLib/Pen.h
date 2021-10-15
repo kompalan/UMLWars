@@ -21,8 +21,10 @@ private:
     /// The Bitmap for the Item
     wxGraphicsBitmap mItemBitmap;
 
+    /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
 
+    /// Determiane if Harold firstly throws
     bool isThrown = false;
 
 public:
@@ -41,12 +43,13 @@ public:
      */
     double GetWidth() const { return mItemImage->GetWidth(); }
 
+
     void HandleMouseDown(double virtualX, double virtualY) override;
+
+    /// Accept function
     void Accept(ItemVisitor* visitor) override {};
 
     void Update(double elapsed) override;
-
-//    void Accept(ItemVisitor* visitor) override {};
 };
 
 #endif //INC_335PROJECT1_PEN_H
