@@ -5,6 +5,8 @@
  *
  */
 
+#pragma once
+
 #ifndef INC_335PROJECT1_SCOREBOARD_H
 #define INC_335PROJECT1_SCOREBOARD_H
 
@@ -65,6 +67,12 @@ public:
     int GetUnfair() {return mUnfair;}
 
     void Update(double elapsed) override;
+
+    /**
+     * Accept visitor
+     * @param visitor visitor that's accepted
+     */
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitScoreboard(this); }
 };
 
 #endif //INC_335PROJECT1_SCOREBOARD_H
