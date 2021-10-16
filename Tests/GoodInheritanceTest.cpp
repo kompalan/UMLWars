@@ -8,14 +8,13 @@
 #include <GoodInheritance.h>
 #include <Game.h>
 #include <GoodClassUML.h>
-#include <BadClassUML.h>
 
 using namespace std;
 
 TEST(GoodInheritanceTest, Construct)
 {
     Game game;
-    wstring name = L"";
+    auto name = make_shared<GoodUMLName>(L"");
     vector<shared_ptr<UMLAttribute>> attributes;
     vector<shared_ptr<UMLOperation>> operations;
 

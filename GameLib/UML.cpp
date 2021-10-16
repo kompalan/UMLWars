@@ -15,7 +15,7 @@ using namespace std;
  * @param attributes the attributes of the UML object
  * @param operations the operations of the UML object
  */
-UML::UML(Game *game, std::wstring name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+UML::UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
         std::vector<std::shared_ptr<UMLOperation>> operations) : Item(game)
 {
     mName = name;

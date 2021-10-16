@@ -183,7 +183,7 @@ void UMLData::XmlInheritance(wxXmlNode *node)
  */
 shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML()
 {
-    wstring name = L"";
+    auto name = make_shared<GoodUMLName>(L"");
     vector<shared_ptr<UMLAttribute>> attributes;
     vector<shared_ptr<UMLOperation>> operations;
 
@@ -196,7 +196,7 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML()
  */
 std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
 {
-    wstring name = L"";
+    auto name = make_shared<GoodUMLName>(L"");
     vector<shared_ptr<UMLAttribute>> attributes;
     vector<shared_ptr<UMLOperation>> operations;
     wstring reason = L"";

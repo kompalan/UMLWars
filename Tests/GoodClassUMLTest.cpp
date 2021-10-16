@@ -13,7 +13,7 @@ using namespace std;
 TEST(GoodClassUMLTest, Construct)
 {
    Game game;
-   wstring name;
+   auto name = make_shared<GoodUMLName>(L"");
    vector<shared_ptr<UMLAttribute>> attributes;
    vector<shared_ptr<UMLOperation>> operations;
 

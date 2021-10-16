@@ -25,9 +25,8 @@ public:
     
     /// Assignment operator
     void operator=(const GoodClassUML &) = delete;
-    
-    
-    GoodClassUML(Game *game, std::wstring name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+
+    GoodClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);
 };
 

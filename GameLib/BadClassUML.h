@@ -29,7 +29,7 @@ public:
     void operator=(const BadClassUML &) = delete;
     
     
-    BadClassUML(Game *game, std::wstring name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+    BadClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations, std::wstring reason);
 };
 

@@ -11,6 +11,7 @@
 #define INC_335PROJECT1_UML_H
 
 #include "Item.h"
+#include "UMLName.h"
 #include "UMLAttribute.h"
 #include "UMLOperation.h"
 
@@ -20,7 +21,7 @@
 class UML : public Item {
 private:
     /// Name of UML Item
-    std::wstring mName;
+    std::shared_ptr<UMLName> mName;
 
     /// The list of attributes of the UML object
     std::vector<std::shared_ptr<UMLAttribute>> mAttributes;
@@ -29,7 +30,7 @@ private:
     std::vector<std::shared_ptr<UMLOperation>> mOperations;
 
 protected:
-    UML(Game *game, std::wstring name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+    UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);
 public:
     /// Default constructor (disabled)

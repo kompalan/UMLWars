@@ -15,7 +15,7 @@ using namespace std;
 TEST(BadInheritanceTest, Construct)
 {
     Game game;
-    wstring name = L"";
+    auto name = make_shared<GoodUMLName>(L"");
     vector<shared_ptr<UMLAttribute>> attributes;
     vector<shared_ptr<UMLOperation>> operations;
 
