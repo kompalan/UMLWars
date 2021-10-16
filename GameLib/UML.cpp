@@ -23,6 +23,10 @@ UML::UML(Game *game, std::wstring name, std::vector<std::shared_ptr<UMLAttribute
     mOperations = operations;
 }
 
+/**
+ * Draw the class UML object on the screen
+ * @param graphics wxGraphicsContext object
+ */
 void UML::Draw(wxGraphicsContext *graphics)
 {
 

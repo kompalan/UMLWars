@@ -176,3 +176,57 @@ void UMLData::XmlInheritance(wxXmlNode *node)
         mGoodInheritances.push_back(umlInheritance);
     }
 }
+
+/**
+ * Creates a good class UML object
+ * @return a good class UML object
+ */
+shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML()
+{
+    wstring name = L"";
+    vector<shared_ptr<UMLAttribute>> attributes;
+    vector<shared_ptr<UMLOperation>> operations;
+
+    return make_shared<GoodClassUML>(mGame, name, attributes, operations);
+}
+
+/**
+ * Creates a bad class UML object
+ * @return a bad class UML object
+ */
+std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
+{
+    wstring name = L"";
+    vector<shared_ptr<UMLAttribute>> attributes;
+    vector<shared_ptr<UMLOperation>> operations;
+    wstring reason = L"";
+
+    return make_shared<BadClassUML>(mGame, name, attributes, operations, reason);
+}
+
+/**
+ * Creates a good inheritance object
+ * @return a good inheritance object
+ */
+std::shared_ptr<GoodInheritance> UMLData::GenerateGoodInheritance()
+{
+    shared_ptr<GoodClassUML> goodUml1 = GenerateGoodClassUML();
+    shared_ptr<GoodClassUML> goodUml2 = GenerateGoodClassUML();
+
+    return make_shared<GoodInheritance>(mGame, goodUml1, goodUml2);
+}
+
+/**
+ * Creates a bad inheritance object
+ * @return a bad inheritance object
+ */
+std::shared_ptr<BadInheritance> UMLData::GenerateBadInheritance()
+{
+    std::shared_ptr<GoodClassUML> goodUml1 = GenerateGoodClassUML();
+    std::shared_ptr<GoodClassUML> goodUml2 = GenerateGoodClassUML();
+
+    wstring reason = L"";
+    bool down;
+
+    return make_shared<BadInheritance>(mGame, goodUml1, goodUml2, reason, down);
+}

@@ -16,6 +16,10 @@
 #include "BadUMLOperation.h"
 #include "GoodInheritanceItem.h"
 #include "BadInheritanceItem.h"
+#include "GoodClassUML.h"
+#include "BadClassUML.h"
+#include "GoodInheritance.h"
+#include "BadInheritance.h"
 #include <wx/xml/xml.h>
 
 class Game;
@@ -70,6 +74,14 @@ public:
     UMLData(Game *game);
 
     void LoadData(const std::wstring &filename);
+
+    std::shared_ptr<GoodClassUML> GenerateGoodClassUML();
+
+    std::shared_ptr<BadClassUML> GenerateBadClassUML();
+
+    std::shared_ptr<GoodInheritance> GenerateGoodInheritance();
+
+    std::shared_ptr<BadInheritance> GenerateBadInheritance();
 
     /**
      * Getter for the list of bad UML class names

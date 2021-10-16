@@ -20,6 +20,10 @@ Inheritance::Inheritance(Game* game, std::shared_ptr<UML> base, std::shared_ptr<
     mDerived = derived;
 }
 
+/**
+ * Draw the inheritance object on the screen
+ * @param graphics wxGraphicsContext object
+ */
 void Inheritance::Draw(wxGraphicsContext *graphics)
 {
 
