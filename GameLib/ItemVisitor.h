@@ -14,6 +14,7 @@
 class Harold;
 class Scoreboard;
 class UML;
+class Inheritance;
 
 /** Item visitor base class */
 class ItemVisitor {
@@ -33,10 +34,16 @@ public:
     virtual void VisitScoreboard(Scoreboard* scoreboard) {}
 
     /**
-     * Visit UML object
+     * Visit class UML object
      * @param uml UML object we are visitng
      */
     virtual void VisitUML(UML* uml) {}
+
+    /**
+     * Visit Inheritance object
+     * @param uml Inheritance UML object we are visitng
+     */
+    virtual void VisitInheritance(Inheritance* uml) {}
 
 };
 

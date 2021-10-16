@@ -19,6 +19,15 @@ Item::Item(Game* game, double posX, double posY) : mGame(game)
 }
 
 /**
+ * Constructor for items without x and y positions
+ * @param game Game object for forward reference
+ */
+Item::Item(Game* game) : mGame(game)
+{
+
+}
+
+/**
  * Returns the X position of the item
  * @return X position
  */

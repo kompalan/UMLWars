@@ -22,8 +22,8 @@ private:
     /// Reference to game object for forward reference
     Game *mGame;
 
-    double mX; ///< X location for the center of the item in virtual pixels
-    double mY; ///< Y location for the center of the item in virtual pixels
+    double mX = 0; ///< X location for the center of the item in virtual pixels
+    double mY = 0; ///< Y location for the center of the item in virtual pixels
 
 public:
     double GetX() const;
@@ -83,6 +83,7 @@ public:
 
 protected:
     Item(Game *game, double posX, double posY);
+    Item(Game *game);
 };
 
 #endif //INC_335PROJECT1_ITEM_H
