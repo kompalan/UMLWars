@@ -32,6 +32,10 @@ Game::Game()
 
     ///Add Pen to the Screen
     AddItem(std::make_shared<Pen>(this));
+
+    /// Instantiate random device for the game
+    std::random_device rd;
+    mRandom.seed(rd());
 }
 
 /**

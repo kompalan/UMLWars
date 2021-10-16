@@ -14,6 +14,7 @@
 #include "UMLData.h"
 #include "Scoreboard.h"
 #include "Pen.h"
+#include <random>
 
 /**
  * Game Class that represents one Instance of the UML Wars
@@ -48,6 +49,9 @@ private:
     /// Pointer to Scoreboard
     std::shared_ptr<Scoreboard> mScoreboard;
 
+    /// Random number generator
+    std::mt19937 mRandom;
+
 public:
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
@@ -57,6 +61,12 @@ public:
 
     void OnLeftDown(int mouseX, int mouseY);
     void AddItem(std::shared_ptr<Item> item);
+
+    /**
+     * Get the random number generator
+     * @return Pointer to the random number generator
+     */
+    std::mt19937 &GetRandom() {return mRandom;}
 };
 
 #endif //INC_335PROJECT1_GAME_H
