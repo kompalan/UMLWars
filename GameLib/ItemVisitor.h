@@ -15,6 +15,7 @@ class Harold;
 class Scoreboard;
 class UML;
 class Inheritance;
+class GoodClassUML;
 
 /** Item visitor base class */
 class ItemVisitor {
@@ -38,6 +39,12 @@ public:
      * @param uml Inheritance UML object we are visitng
      */
     virtual void VisitInheritance(Inheritance* uml) {}
+
+    /**
+     * Visit Good UML object
+     * @param goodUML GoodClassUML object being visited
+     */
+     virtual void VisitGoodUML(GoodClassUML* goodUML) {}
 
 };
 

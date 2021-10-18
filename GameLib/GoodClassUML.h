@@ -28,6 +28,8 @@ public:
 
     GoodClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);
+
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitGoodUML(this); }
 };
 
 #endif //INC_335PROJECT1_GOODCLASSUML_H
