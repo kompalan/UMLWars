@@ -12,11 +12,13 @@
 
 TEST(ScoreboardTest, Constructor)
 {
+    Game game = Game();
     Scoreboard sb = Scoreboard();
 }
 
 TEST(ScoreboardText, IncFunctions)
 {
+    Game game = Game();
     Scoreboard sb = Scoreboard();
     sb.IncCorrect();
     ASSERT_TRUE(sb.GetCorrect()==1);

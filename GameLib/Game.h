@@ -67,6 +67,8 @@ public:
      * @return Pointer to the random number generator
      */
     std::mt19937 &GetRandom() {return mRandom;}
+
+    bool HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item>);
 };
 
 #endif //INC_335PROJECT1_GAME_H
