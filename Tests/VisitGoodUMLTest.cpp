@@ -95,4 +95,10 @@ TEST(VisitGoodUMLTest, VisitIsGood)
 
     ASSERT_TRUE(realBad.IsGood());
     ASSERT_TRUE(testBad.IsGood());
+
+    BCUML.Accept(&realBad);
+    BCUML.Accept(&testBad);
+
+    ASSERT_TRUE(realBad.IsGood());
+    ASSERT_TRUE(testBad.IsGood());
 }
