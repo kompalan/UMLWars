@@ -18,9 +18,6 @@ private:
     /// The reason the inheritance relationship is bad
     std::wstring mReason;
 
-    /// If the inheritance is upside down
-    bool mDown;
-
 public:
     /// Default constructor (disabled)
     BadInheritance() = delete;

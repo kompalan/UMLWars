@@ -13,6 +13,9 @@ using namespace std;
 /// XML file to read the UML data from
 const std::wstring Filename = L"data/uml.xml";
 
+/// Seed for the random number generator being used
+const unsigned int RandomSeed = 12345;
+
 TEST(UMLDataTest, Constructor)
 {
     Game game;
@@ -229,4 +232,56 @@ TEST(UMLDataTest, LoadFile)
         ASSERT_EQ(goodInheritanceBase, testGoodInheritanceBase);
         ASSERT_EQ(goodInheritanceDerived, testGoodInheritanceDerived);
     }
+}
+
+TEST(UMLDataTest, GenerateGoodClassUML)
+{
+    Game game;
+
+    game.GetRandom().seed(RandomSeed); //< set seed for consistent results when testing
+
+    // Load the UML data
+    UMLData data(&game);
+    data.LoadData(Filename);
+
+    auto uml = data.GenerateGoodClassUML();
+}
+
+TEST(UMLDataTest, GenerateGoodInheritance)
+{
+    Game game;
+
+    game.GetRandom().seed(RandomSeed); //< set seed for consistent results when testing
+
+    // Load the UML data
+    UMLData data(&game);
+    data.LoadData(Filename);
+
+    auto uml = data.GenerateGoodInheritance();
+}
+
+TEST(UMLDataTest, GenerateBadInheritance)
+{
+    Game game;
+
+    game.GetRandom().seed(RandomSeed); //< set seed for consistent results when testing
+
+    // Load the UML data
+    UMLData data(&game);
+    data.LoadData(Filename);
+
+    auto uml = data.GenerateBadInheritance();
+}
+
+TEST(UMLDataTest, GenerateBadClassUML)
+{
+    Game game;
+
+    game.GetRandom().seed(RandomSeed); //< set seed for consistent results when testing
+
+    // Load the UML data
+    UMLData data(&game);
+    data.LoadData(Filename);
+
+    auto uml = data.GenerateBadClassUML();
 }

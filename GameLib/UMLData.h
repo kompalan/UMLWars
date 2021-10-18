@@ -75,13 +75,19 @@ public:
 
     void LoadData(const std::wstring &filename);
 
-    std::shared_ptr<GoodClassUML> GenerateGoodClassUML();
+    std::shared_ptr<GoodClassUML> GenerateGoodClassUML(std::wstring name = L"");
 
     std::shared_ptr<BadClassUML> GenerateBadClassUML();
 
     std::shared_ptr<GoodInheritance> GenerateGoodInheritance();
 
     std::shared_ptr<BadInheritance> GenerateBadInheritance();
+
+    std::shared_ptr<BadClassUML> MakeUMLWithBadName(int numAttributes, int numOperations);
+
+    std::shared_ptr<BadClassUML> MakeUMLWithBadAttribute(int numAttributes, int numOperations);
+
+    std::shared_ptr<BadClassUML> MakeUMLWithBadOperation(int numAttributes, int numOperations);
 
     /**
      * Getter for the list of bad UML class names
