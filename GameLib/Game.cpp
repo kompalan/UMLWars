@@ -127,3 +127,25 @@ void Game::OnLeftDown(int mouseX, int mouseY)
     }
 }
 
+bool Game::HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item> obj)
+{
+    double penX=pen->GetX();
+    double penY=pen->GetY();
+
+    double objX=obj->GetX();
+    double objY=obj->GetY();
+    //Set as static values for now, unsure if UML class will calculate wid and hit for draw since no mBitmap
+    //TA item should be able to use GetWidth() and GetHeight on its bitmap
+    double objWidth=300;
+    double objHight=100;
+
+    //HitTest using center point of pen against range of tested object's dimensions
+    if((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
+    (penY>=(objY-objHight/2) && penY<=(objY+objHight/2)))
+    {
+        return true;
+    }
+
+    return false;
+}
+
