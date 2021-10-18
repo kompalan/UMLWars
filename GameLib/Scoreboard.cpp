@@ -5,11 +5,30 @@
 
 #include "pch.h"
 #include "Scoreboard.h"
+#include "Vector.h"
+
+/// Font of the categories
+const wxFont smallFont(wxSize(0, 20),
+        wxFONTFAMILY_ROMAN,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+/// Font of the Scoreboard
+const wxFont bigFont(wxSize(0, 60),
+        wxFONTFAMILY_MODERN,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_BOLD);
+
+/// Color of the Scoreboard
+const wxColour burntOrange = wxColour(255,140,0);
+
+/// Position of the Scoreboard
+const cse335::Vector Position = cse335::Vector(0, 100);
+
 /**
  * Constructor for the scoreboard
- * @param game provided for reference
  */
-Scoreboard::Scoreboard(Game* game) : Item(game, 0, 100 )
+Scoreboard::Scoreboard()
 {
 }
 /**
@@ -18,7 +37,6 @@ Scoreboard::Scoreboard(Game* game) : Item(game, 0, 100 )
  */
 void Scoreboard::Draw(wxGraphicsContext* graphics)
 {
-    mGraphics = graphics;
     double wid, hit;
 
     graphics->PushState();
@@ -45,24 +63,4 @@ void Scoreboard::Draw(wxGraphicsContext* graphics)
     graphics->GetTextExtent(std::to_string(mCorrect), &wid, &hit);
     graphics->DrawText(std::to_string(mCorrect), -300 - wid/2, 100 - hit/2);
     graphics->PopState();
-}
-/**
- * General update function to redraw scores
- */
-void Scoreboard::Update(double elapsed)
-{
-    if (!mGraphics)
-    {
-        double wid, hit;
-        mGraphics->SetFont(smallFont, burntOrange);
-
-        mGraphics->GetTextExtent(std::to_string(mUnfair), &wid, &hit);
-        mGraphics->DrawText(std::to_string(mUnfair), 300 - wid/2, 100 - hit/2);
-
-        mGraphics->GetTextExtent(std::to_string(mMissed), &wid, &hit);
-        mGraphics->DrawText(std::to_string(mMissed), 0 - wid/2, 100 - hit/2);
-
-        mGraphics->GetTextExtent(std::to_string(mCorrect), &wid, &hit);
-        mGraphics->DrawText(std::to_string(mCorrect), -300 - wid/2, 100 - hit/2);
-    }
 }

@@ -28,12 +28,6 @@ public:
     virtual void VisitHarold(Harold* harold) {}
 
     /**
-     * Visit Scoreboard object
-     * @param scoreboard Scoreboard object we are visiting
-     */
-    virtual void VisitScoreboard(Scoreboard* scoreboard) {}
-
-    /**
      * Visit class UML object
      * @param uml UML object we are visitng
      */

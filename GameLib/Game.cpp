@@ -23,8 +23,7 @@ Game::Game()
     mData->LoadData(Filename);
 
     ///Add Scoreboard to Game
-    mScoreboard = std::make_shared<Scoreboard>(this);
-    AddItem(mScoreboard);
+    mScoreboard = std::make_shared<Scoreboard>();
 
     /// Add Harold to the Screen
     mHarold = std::make_shared<Harold>(this);
@@ -68,6 +67,8 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
     {
         item->Draw(graphics);
     }
+
+    mScoreboard->Draw(graphics);
 
     graphics->PopState();
 }
