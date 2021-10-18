@@ -25,11 +25,6 @@ private:
 public:
     Scoreboard();
 
-    /**
-     * Draw function, draws the scoreboard
-     * to the screen
-     * @param graphics
-     */
     void Draw(wxGraphicsContext* graphics);
 
     /**
