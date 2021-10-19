@@ -29,6 +29,8 @@ public:
     double GetX() const;
     double GetY() const;
 
+    virtual double GetWidth() const {return 0;}
+    virtual double GetHeight() const {return 0;}
     /**
      * Pure virtual function for drawing. Anything that is an
      * item has to implement its own draw function

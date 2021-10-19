@@ -60,13 +60,13 @@ public:
      * Get the width of the UML object in pixels
      * @return the width of the UML object in pixels
      */
-    double GetWidth() { return mWidth; }
+    virtual double GetWidth() const override { return mWidth; }
 
     /**
      * Get the height of the UML object in pixels
      * @return the height of the UML object in pixels
      */
-    double GetHeight() { return mHeight; }
+    virtual double GetHeight() const override { return mHeight; }
 };
 
 #endif //INC_335PROJECT1_UML_H

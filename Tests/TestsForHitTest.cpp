@@ -41,20 +41,20 @@ TEST(HitTest, TestingHitTest)
     ASSERT_TRUE(game.HitTest(pen,uml));
     uml->SetLocation(0,151);
     ASSERT_TRUE(!game.HitTest(pen,uml));
-    uml->SetLocation(150,150);
+    uml->SetLocation(50,150);
     ASSERT_TRUE(game.HitTest(pen,uml));
-    uml->SetLocation(151,150);
+    uml->SetLocation(51,150);
     ASSERT_TRUE(!game.HitTest(pen,uml));
-    uml->SetLocation(-150,150);
+    uml->SetLocation(-50,150);
     ASSERT_TRUE(game.HitTest(pen,uml));
-    uml->SetLocation(-151,150);
+    uml->SetLocation(-51,150);
     ASSERT_TRUE(!game.HitTest(pen,uml));
-    uml->SetLocation(150,50);
+    uml->SetLocation(50,50);
     ASSERT_TRUE(game.HitTest(pen,uml));
-    uml->SetLocation(150,49);
+    uml->SetLocation(50,49);
     ASSERT_TRUE(!game.HitTest(pen,uml));
-    uml->SetLocation(-150,50);
+    uml->SetLocation(-50,50);
     ASSERT_TRUE(game.HitTest(pen,uml));
-    uml->SetLocation(-150,49);
+    uml->SetLocation(-50,49);
     ASSERT_TRUE(!game.HitTest(pen,uml));
 }
