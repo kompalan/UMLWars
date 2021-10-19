@@ -28,8 +28,15 @@ private:
 public:
     double GetX() const;
     double GetY() const;
-
+    /**
+     * Getter for Item Width
+     * @return double for Width or 0 if not applicable
+     */
     virtual double GetWidth() const {return 0;}
+    /**
+    * Getter for Item Height
+    * @return double for Height or 0 if not applicable
+    */
     virtual double GetHeight() const {return 0;}
     /**
      * Pure virtual function for drawing. Anything that is an

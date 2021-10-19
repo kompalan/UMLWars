@@ -2,7 +2,7 @@
  * @file Emitter.cpp
  * @author Anurag Kompalli
  */
-
+#include "pch.h"
 #include "Emitter.h"
 #include "GoodUMLName.h"
 #include "GoodClassUML.h"

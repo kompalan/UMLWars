@@ -135,7 +135,12 @@ void Game::OnLeftDown(int mouseX, int mouseY)
         item->HandleMouseDown(virtualX, virtualY);
     }
 }
-
+/**
+ * HitTest using center point of pen against range of tested object's dimensions
+ * @param pen Pen object, center point used
+ * @param obj Tested object, dimensions tested
+ * @return bool true if collision occurs
+ */
 bool Game::HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item> obj)
 {
     double penX=pen->GetX();
@@ -156,7 +161,11 @@ bool Game::HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item> obj)
 
     return false;
 }
-
+/**
+ * Tests an item against the bounds of the screen
+ * @param item Item object being tested
+ * @return bool true if item passes bounds of screen
+ */
 bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
 {
     double xVal = item->GetX();
