@@ -28,11 +28,11 @@ private:
     /// UML data for the game
     std::shared_ptr<UMLData> mData;
 
-    /// Game area in virtual pixels
-    const static int Width = 1250;
+    /// Game area width in virtual pixels
+    const static int mWidth = 1250;
 
     /// Game area height in virtual pixels
-    const static int Height = 1000;
+    const static int mHeight = 1000;
 
     /// X Offset to reposition the drawing to
     double mXOffset;
@@ -69,6 +69,12 @@ public:
     std::mt19937 &GetRandom() {return mRandom;}
 
     bool HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item>);
+
+    /**
+     * Check if item is still in screen and delete it if not
+     * @return Whether item is in screen or not
+     */
+    bool CheckItemOnScreen(std::shared_ptr<Item> item);
 };
 
 #endif //INC_335PROJECT1_GAME_H

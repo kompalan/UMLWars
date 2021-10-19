@@ -48,14 +48,14 @@ void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
     //
     // Automatic Scaling
     //
-    auto scaleX = double(width) / double(Width);
-    auto scaleY = double(height) / double(Height);
+    auto scaleX = double(width) / double(mWidth);
+    auto scaleY = double(height) / double(mHeight);
     mScale = min(scaleX, scaleY);
 
     mXOffset = width / 2;
     mYOffset = 0;
-    if (height > Height * mScale) {
-        mYOffset = (float)((height - Height * mScale) / 2);
+    if (height > mHeight * mScale) {
+        mYOffset = (float)((height - mHeight * mScale) / 2);
     }
 
     graphics->PushState();
@@ -149,3 +149,17 @@ bool Game::HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item> obj)
     return false;
 }
 
+bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
+{
+    double xVal = item->GetX();
+    double yVal = item->GetY();
+    vector<std::shared_ptr<Item>>::iterator out;
+    if((xVal > mHeight) || (xVal < -10)){
+        out = remove(mItems.begin(), mItems.end(), item);
+        return false;
+    } else if ((yVal > mWidth) || (yVal < 0)){
+        out = remove(mItems.begin(), mItems.end(), item);
+        return false;
+    }
+    return true;
+}
