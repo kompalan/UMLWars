@@ -17,7 +17,7 @@ class Game;
 class Emitter {
 private:
     /// Overall elapsed time. Used to decide whether to generate UML
-    double mTotalElapsed = 0;
+    double mCreateTime = 0;
 
     std::shared_ptr<UMLData> mData;
 

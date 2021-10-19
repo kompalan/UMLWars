@@ -32,10 +32,10 @@ Emitter::Emitter(Game *game, std::shared_ptr<UMLData> data) : mGame(game)
  */
 std::shared_ptr<Item> Emitter::Create(double elapsed)
 {
-    mTotalElapsed += elapsed;
+    mCreateTime += elapsed;
 
-    if(mTotalElapsed > 2) {
-        mTotalElapsed = 0;
+    if(mCreateTime > 2) {
+        mCreateTime = 0;
         std::shared_ptr<Item> uml = Emit(mDistributionGood(mRandomGood), mDistribution(mRandomInheritance));
 
         if (mBadThreshold < 50) {
