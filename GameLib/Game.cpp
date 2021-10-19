@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "Harold.h"
 #include "Pen.h"
+#include "Emitter.h"
 
 using namespace std;
 
@@ -35,6 +36,8 @@ Game::Game()
     /// Instantiate random device for the game
     std::random_device rd;
     mRandom.seed(rd());
+
+    mEmitter = std::make_shared<Emitter>(this, mData);
 }
 
 /**
@@ -82,6 +85,12 @@ void Game::Update(double elapsed)
     for(auto item : mItems)
     {
         item->Update(elapsed);
+    }
+
+    auto uml = mEmitter->Create(elapsed);
+    if (uml != nullptr)
+    {
+        AddItem(uml);
     }
 }
 

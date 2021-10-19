@@ -14,6 +14,7 @@
 #include "UMLData.h"
 #include "Scoreboard.h"
 #include "Pen.h"
+#include "Emitter.h"
 #include <random>
 
 /**
@@ -52,6 +53,9 @@ private:
     /// Random number generator
     std::mt19937 mRandom;
 
+    /// Pointer to an Emitter
+    std::shared_ptr<Emitter> mEmitter;
+
 public:
     Game();
     void OnDraw(wxGraphicsContext *graphics, int width, int height);
@@ -75,6 +79,8 @@ public:
      * @return Whether item is in screen or not
      */
     bool CheckItemOnScreen(std::shared_ptr<Item> item);
+
+    int GetSize() const {return mItems.size();}
 };
 
 #endif //INC_335PROJECT1_GAME_H

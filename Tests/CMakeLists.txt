@@ -2,7 +2,7 @@ project(Tests)
 
 set(TEST_FILES
     gtest_main.cpp
-    EmptyTest.cpp UMLDataTest.cpp HaroldTest.cpp ScoreboardTest.cpp GoodClassUMLTest.cpp BadClassUMLTest.cpp GoodInheritanceTest.cpp BadInheritanceTest.cpp VisitGoodUMLTest.cpp TestsForHitTest.cpp)
+    EmptyTest.cpp UMLDataTest.cpp HaroldTest.cpp ScoreboardTest.cpp GoodClassUMLTest.cpp BadClassUMLTest.cpp GoodInheritanceTest.cpp BadInheritanceTest.cpp VisitGoodUMLTest.cpp TestsForHitTest.cpp EmitterTest.cpp)
 
 # Get Google Tests
 include(FetchContent)
