@@ -30,7 +30,7 @@ Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
  * using wxGraphicsContext
  * @param graphics wxGraphicsContext object
  */
-void Pen::Draw(wxGraphicsContext* graphics)
+void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
     if(mItemBitmap.IsNull())

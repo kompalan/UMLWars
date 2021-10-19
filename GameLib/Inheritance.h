@@ -28,7 +28,7 @@ private:
     /// The width of the inheritance object
     double mWidth = 100;
 
-    /// The height of the     /// The width of the inheritance object object
+    /// The height of the inheritance object object
     double mHeight = 100;
 
 protected:
@@ -51,19 +51,19 @@ public:
      */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitInheritance(this); }
 
-    void Draw(wxGraphicsContext *graphics);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
      * Get the width of the inheritance object in pixels
      * @return the width of the inheritance object in pixels
      */
-    double GetWidth() { return mWidth; }
+    double GetWidth() const override { return mWidth; }
 
     /**
      * Get the height of the inheritance object in pixels
      * @return the height of the inheritance object in pixels
      */
-    double GetHeight() { return mHeight; }
+    double GetHeight() const override { return mHeight; }
 };
 
 #endif //INC_335PROJECT1_INHERITANCE_H

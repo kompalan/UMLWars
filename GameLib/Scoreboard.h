@@ -25,7 +25,7 @@ private:
 public:
     Scoreboard();
 
-    void Draw(wxGraphicsContext* graphics);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
     * Increments the Correct score by 1

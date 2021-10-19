@@ -38,7 +38,7 @@ Inheritance::Inheritance(Game* game, std::shared_ptr<UML> base, std::shared_ptr<
  * Draw the inheritance object on the screen
  * @param graphics wxGraphicsContext object
  */
-void Inheritance::Draw(wxGraphicsContext *graphics)
+void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 {
 
 }

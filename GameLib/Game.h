@@ -58,7 +58,7 @@ private:
 
 public:
     Game();
-    void OnDraw(wxGraphicsContext *graphics, int width, int height);
+    void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
     void Update(double elapsed);
 
     void OnMouseMove(int mouseX, int mouseY);

@@ -54,7 +54,7 @@ public:
      */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitUML(this); }
 
-    void Draw(wxGraphicsContext *graphics);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
      * Get the width of the UML object in pixels

@@ -35,7 +35,7 @@ Scoreboard::Scoreboard()
  * Draws the scoreboard on screen with GraphicsContext
  * @param graphics Context
  */
-void Scoreboard::Draw(wxGraphicsContext* graphics)
+void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     double wid, hit;
 

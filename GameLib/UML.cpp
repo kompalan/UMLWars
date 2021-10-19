@@ -27,7 +27,7 @@ UML::UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<
  * Draw the class UML object on the screen
  * @param graphics wxGraphicsContext object
  */
-void UML::Draw(wxGraphicsContext *graphics)
+void UML::Draw(shared_ptr<wxGraphicsContext> graphics)
 {
 
 }

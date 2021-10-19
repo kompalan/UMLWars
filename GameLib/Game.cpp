@@ -46,7 +46,7 @@ Game::Game()
  * @param width Height of the Window
  * @param height Width of the Window
  */
-void Game::OnDraw(wxGraphicsContext *graphics, int width, int height)
+void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 {
     //
     // Automatic Scaling

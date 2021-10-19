@@ -29,7 +29,7 @@ Harold::Harold(Game* game) : Item(game, InitialPosition.X(), InitialPosition.Y()
  * using wxGraphicsContext
  * @param graphics wxGraphicsContext object
  */
-void Harold::Draw(wxGraphicsContext* graphics)
+void Harold::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
     graphics->Translate(GetX(), GetY());

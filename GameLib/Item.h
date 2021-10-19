@@ -43,7 +43,7 @@ public:
      * item has to implement its own draw function
      * @param graphics wxGraphicsContext object
      */
-    virtual void Draw(wxGraphicsContext *graphics) = 0;
+    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics) = 0;
 
     /**
      * Set the Item Location

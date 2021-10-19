@@ -31,7 +31,7 @@ private:
 
 public:
     Pen(Game *game);
-    void Draw(wxGraphicsContext *graphics) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
     /**
      * Get the Height of the Image for Pen

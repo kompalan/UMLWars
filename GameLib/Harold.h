@@ -29,7 +29,7 @@ private:
 
 public:
     Harold(Game *game);
-    void Draw(wxGraphicsContext *graphics) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void HandleMouseMove(double virtualX, double virtualY) override;
 
     /**
