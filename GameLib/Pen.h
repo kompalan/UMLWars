@@ -52,6 +52,8 @@ public:
     void Accept(ItemVisitor* visitor) override {};
 
     void Update(double elapsed) override;
+
+    void SetLocation(double x, double y) override;
 };
 
 #endif //INC_335PROJECT1_PEN_H

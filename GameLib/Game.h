@@ -81,6 +81,19 @@ public:
     bool CheckItemOnScreen(std::shared_ptr<Item> item);
 
     int GetSize() const {return mItems.size();}
+
+    /**
+     * Get screen height
+     * @return height value
+     */
+    int GetHeight() {return mHeight;}
+
+    /**
+     * Get screen width
+     * @return width value
+     */
+    int GetWidth() {return mWidth;}
+
 };
 
 #endif //INC_335PROJECT1_GAME_H

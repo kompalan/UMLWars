@@ -50,7 +50,7 @@ public:
      * @param x X location in virtual pixels
      * @param y Y location in virtual pixels
      */
-    void SetLocation(double x, double y) { mX = x; mY = y; }
+    virtual void SetLocation(double x, double y) { mX = x; mY = y; }
 
     /**
      * Handle updates for animation
@@ -90,6 +90,18 @@ public:
      */
     virtual void Accept(ItemVisitor* visitor) = 0;
 
+    /**
+     * Get mGame object that can be used to get the bound
+     * @return mGame object
+     */
+    Game* GetGame() {return mGame;}
+
+    /**
+     * second Set function the Item Location
+     * @param x X location in virtual pixels
+     * @param y Y location in virtual pixels
+     */
+    void AdditonalSet(double x, double y)  {mX = x; mY = y;}
 protected:
     Item(Game *game, double posX, double posY);
     Item(Game *game);

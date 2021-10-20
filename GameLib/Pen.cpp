@@ -79,3 +79,23 @@ void Pen::Update(double elapsed)
     double newY = GetY() + mVelocity.Y() * elapsed;
     SetLocation(newX, newY);
 }
+
+/**
+ * When Pen goes out of the Screen and Handle its resetting
+ * @param x position x on screen
+ * @param y position y on screen
+ */
+void Pen::SetLocation(double x, double y)
+{
+    auto tempGame = GetGame();
+    int bound_height = tempGame->GetHeight();
+    int bound_width = tempGame->GetWidth();
+    if(x > bound_width || y > bound_height || x < -1* bound_width || y < -1*bound_height)
+    {
+        mVelocity = cse335::Vector();
+        x = InitialPos.X();
+        y = InitialPos.Y();
+        isThrown = false;
+    }
+    AdditonalSet(x,y);
+}

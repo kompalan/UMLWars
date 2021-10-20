@@ -171,10 +171,12 @@ bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
     double xVal = item->GetX();
     double yVal = item->GetY();
     vector<std::shared_ptr<Item>>::iterator out;
-    if((xVal > mHeight) || (xVal < -10)){
+    if((xVal > mHeight) || (xVal < -10))
+    {
         out = remove(mItems.begin(), mItems.end(), item);
         return false;
-    } else if ((yVal > mWidth) || (yVal < 0)){
+    }
+    else if ((yVal > mWidth) || (yVal < 0)){
         out = remove(mItems.begin(), mItems.end(), item);
         return false;
     }
