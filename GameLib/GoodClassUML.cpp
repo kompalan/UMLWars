@@ -20,3 +20,18 @@ GoodClassUML::GoodClassUML(Game* game, std::shared_ptr<UMLName> name, std::vecto
 {
 
 }
+
+/**
+ * Constructor
+ * @param game the game the UML object is a part of
+ * @param name the name of the UML object
+ * @param attributes the attributes of the UML object
+ * @param operations the operations of the UML object
+ * @param partOfInheritance if the class UML is a part of an inheritance relationship
+ */
+GoodClassUML::GoodClassUML(Game* game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+        std::vector<std::shared_ptr<UMLOperation>> operations, bool partOfInheritance)
+        : UML(game, name, attributes, operations, partOfInheritance)
+{
+
+}

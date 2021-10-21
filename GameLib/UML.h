@@ -1,7 +1,7 @@
 /**
  * @file UML.h
  * @author Kristian Rica
- *
+ * @author Ian Byram
  *
  */
 
@@ -14,6 +14,7 @@
 #include "UMLName.h"
 #include "UMLAttribute.h"
 #include "UMLOperation.h"
+#include "Vector.h"
 
 /**
  * Class storing basic UML object and its properties
@@ -29,15 +30,24 @@ private:
     /// The list of operations of the UML object
     std::vector<std::shared_ptr<UMLOperation>> mOperations;
 
-    /// The width of the UML object
-    double mWidth = 100;
+    /// The width of the UML object in pixels
+    double mWidth = 0;
 
-    /// The height of the UML object
-    double mHeight = 100;
+    /// The height of the UML object in pixels
+    double mHeight = 0;
+
+    /// If the appropriate dimensions of the UML object have been calculated
+    bool mDimensionCalculated = false;
+
+    /// If the UML is a part of an inheritance relationship
+    bool mPartOfInheritance = false;
 
 protected:
     UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);
+
+    UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
+            std::vector<std::shared_ptr<UMLOperation>> operations, bool partOfInheritance);
 public:
     /// Default constructor (disabled)
     UML() = delete;
@@ -55,6 +65,8 @@ public:
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitUML(this); }
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    void Update(double elapsed);
+    void CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
      * Get the width of the UML object in pixels

@@ -19,10 +19,10 @@ TEST(GoodInheritanceTest, Construct)
     vector<shared_ptr<UMLOperation>> operations;
 
     shared_ptr<GoodClassUML> goodUml1;
-    goodUml1 = make_shared<GoodClassUML>(&game, name, attributes, operations);
+    goodUml1 = make_shared<GoodClassUML>(&game, name, attributes, operations, true);
 
     shared_ptr<GoodClassUML> goodUml2;
-    goodUml2 = make_shared<GoodClassUML>(&game, name, attributes, operations);
+    goodUml2 = make_shared<GoodClassUML>(&game, name, attributes, operations, true);
 
     GoodInheritance inheritance(&game, goodUml1, goodUml2);
 }

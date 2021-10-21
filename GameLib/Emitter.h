@@ -19,6 +19,13 @@ private:
     /// Overall elapsed time. Used to decide whether to generate UML
     double mCreateTime = 0;
 
+    /// The time since the speed of objects being emitted was increased
+    double mIncreaseSpeedTime = 0;
+
+    /// The y speed of the objects being emitted
+    double mYSpeed;
+
+    /// The UML data object
     std::shared_ptr<UMLData> mData;
 
     /// Random Variable to decide whether a good UML should be emitted
@@ -43,10 +50,10 @@ private:
     std::uniform_real_distribution<> mDistributionGood = std::uniform_real_distribution<>(0, 100);
 public:
     Emitter(Game *game, std::shared_ptr<UMLData> data);
-    std::shared_ptr<Item> Create(double elapsed);
-    std::shared_ptr<Item> Emit(double good, double inheritance);
-    std::shared_ptr<Item> MakeInheritance(double good);
-    std::shared_ptr<Item> MakeClass(double good);
+    void Create(double elapsed);
+    void Emit(double good, double inheritance);
+    std::shared_ptr<Inheritance> MakeInheritance(double good);
+    std::shared_ptr<UML> MakeClass(double good);
 
     /**
      * Get The Good Random Variable

@@ -75,7 +75,7 @@ public:
 
     void LoadData(const std::wstring &filename);
 
-    std::shared_ptr<GoodClassUML> GenerateGoodClassUML(std::wstring name = L"");
+    std::shared_ptr<GoodClassUML> GenerateGoodClassUML(std::wstring name = L"", bool partOfInheritance = false);
 
     std::shared_ptr<BadClassUML> GenerateBadClassUML();
 

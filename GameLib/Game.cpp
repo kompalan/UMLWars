@@ -87,11 +87,7 @@ void Game::Update(double elapsed)
         item->Update(elapsed);
     }
 
-    auto uml = mEmitter->Create(elapsed);
-    if (uml != nullptr)
-    {
-        AddItem(uml);
-    }
+    mEmitter->Create(elapsed);
 }
 
 /**

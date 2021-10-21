@@ -25,11 +25,14 @@ private:
     /// If the inheritance relationship is upside down
     bool mDown = false;
 
-    /// The width of the inheritance object
+    /// The width of the inheritance object in pixels
     double mWidth = 100;
 
-    /// The height of the inheritance object object
+    /// The height of the inheritance object object in pixels
     double mHeight = 100;
+
+    /// If the appropriate dimensions of the UML object have been calculated
+    bool mDimensionCalculated = false;
 
 protected:
     Inheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived);
@@ -52,6 +55,7 @@ public:
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitInheritance(this); }
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    void Update(double elapsed);
 
     /**
      * Get the width of the inheritance object in pixels
