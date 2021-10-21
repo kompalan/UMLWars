@@ -110,10 +110,12 @@ void Pen::Update(double elapsed)
         else {
             SetLocation(newX, newY);
         }
+        mGame->RemoveOnHit(this);
     }
     else
     {
         SetLocation(mHarold->GetX()+29, mHarold->GetY()-56);
+
     }
 
 }
