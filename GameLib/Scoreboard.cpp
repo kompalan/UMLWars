@@ -8,19 +8,19 @@
 #include "Vector.h"
 
 /// Font of the categories
-const wxFont smallFont(wxSize(0, 20),
-        wxFONTFAMILY_ROMAN,
+const wxFont smallFont(wxSize(0, 40),
+        wxFONTFAMILY_DEFAULT,
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_BOLD);
 
 /// Font of the Scoreboard
-const wxFont bigFont(wxSize(0, 60),
-        wxFONTFAMILY_MODERN,
+const wxFont bigFont(wxSize(0, 85),
+        wxFONTFAMILY_DEFAULT,
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_BOLD);
 
 /// Color of the Scoreboard
-const wxColour burntOrange = wxColour(255,140,0);
+const wxColour cyanBlue = wxColour(0,200,200);
 
 /// Position of the Scoreboard
 const cse335::Vector Position = cse335::Vector(0, 100);
@@ -41,7 +41,7 @@ void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     graphics->PushState();
     //Categories
-    graphics->SetFont(smallFont, burntOrange);
+    graphics->SetFont(smallFont, cyanBlue);
 
     graphics->GetTextExtent(L"Unfair", &wid, &hit);
     graphics->DrawText(L"Unfair", 300 - wid/2, 150 - hit/2);
@@ -52,7 +52,7 @@ void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->GetTextExtent(L"Correct", &wid, &hit);
     graphics->DrawText(L"Correct", -300 - wid/2, 150 - hit/2);
     //Scores
-    graphics->SetFont(bigFont, burntOrange);
+    graphics->SetFont(bigFont, cyanBlue);
 
     graphics->GetTextExtent(std::to_string(mUnfair), &wid, &hit);
     graphics->DrawText(std::to_string(mUnfair), 300 - wid/2, 100 - hit/2);
