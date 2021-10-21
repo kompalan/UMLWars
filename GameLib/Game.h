@@ -107,6 +107,8 @@ public:
      */
     int GetWidth() {return mWidth;}
 
+    std::shared_ptr<Harold> GetHarold() {return mHarold;}
+
 };
 
 #endif //INC_335PROJECT1_GAME_H

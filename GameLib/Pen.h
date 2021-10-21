@@ -30,6 +30,8 @@ private:
     bool isThrown = false;
 
     Game *mGame;
+
+    std::shared_ptr<Harold> mHarold;
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
@@ -56,7 +58,7 @@ public:
 
     void Update(double elapsed) override;
 
-    void SetLocation(double x, double y) override;
+    void HandleMouseMove(double virtualX, double virtualY) override;
 };
 
 #endif //INC_335PROJECT1_PEN_H

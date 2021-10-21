@@ -54,7 +54,7 @@ public:
      * @param x X location in virtual pixels
      * @param y Y location in virtual pixels
      */
-    virtual void SetLocation(double x, double y) { mX = x; mY = y; }
+    void SetLocation(double x, double y) { mX = x; mY = y; }
 
     /**
      * Handle updates for animation
@@ -99,13 +99,6 @@ public:
      * @return mGame object
      */
     Game* GetGame() {return mGame;}
-
-    /**
-     * second Set function the Item Location
-     * @param x X location in virtual pixels
-     * @param y Y location in virtual pixels
-     */
-    void AdditonalSet(double x, double y)  {mX = x; mY = y;}
 
     /**
      * Set the x and y speed of the item

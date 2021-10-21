@@ -12,7 +12,7 @@ const std::wstring PenImageName = L"images/redpen.png";
 const double PenAngle = 1;
 
 /// Pen's Initial Position on the Screen
-cse335::Vector InitialPos = cse335::Vector(3, 850);
+cse335::Vector InitialPos = cse335::Vector(0, 850);
 
 const double Velocity = 500;
 
@@ -24,6 +24,7 @@ Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
 {
     mItemImage = std::make_unique<wxImage>(PenImageName, wxBITMAP_TYPE_ANY);
     mGame = game;
+    mHarold = game->GetHarold();
 }
 
 /**
@@ -35,16 +36,33 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
+    if(!isThrown)
+    {
+        graphics->Translate(mHarold->GetX(), mHarold->GetY());
+        graphics->Rotate(mRotation + 1.57);
+    }
+
     if(mItemBitmap.IsNull())
     {
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
-    graphics->DrawBitmap(mItemBitmap,
-            GetX(),
-            GetY(),
-            GetWidth(),
-            GetHeight());
+    if(!isThrown)
+    {
+        graphics->DrawBitmap(mItemBitmap,
+                -GetWidth()/2+15,
+                -GetHeight()/2-65,
+                GetWidth(),
+                GetHeight());
+    }
+    else
+    {
+        graphics->DrawBitmap(mItemBitmap,
+                GetX(),
+                GetY(),
+                GetWidth(),
+                GetHeight());
+    }
     graphics->PopState();
 }
 
@@ -77,32 +95,41 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
  */
 void Pen::Update(double elapsed)
 {
-    double newX = GetX() + mVelocity.X() * elapsed;
-    double newY = GetY() + mVelocity.Y() * elapsed;
-    SetLocation(newX, newY);
+    if(isThrown) {
+        double newX = GetX()+mVelocity.X()*elapsed;
+        double newY = GetY()+mVelocity.Y()*elapsed;
+
+        auto tempGame = GetGame();
+        int bound_height = tempGame->GetHeight();
+        int bound_width = tempGame->GetWidth();
+        if (GetX()>bound_width || GetY()>bound_height || GetX()<-1*bound_width || GetY()<-1*bound_height) {
+            mVelocity = cse335::Vector();
+            SetLocation(mHarold->GetX(), mHarold->GetY());
+            isThrown = false;
+        }
+        else {
+            SetLocation(newX, newY);
+        }
+    }
+    else
+    {
+        SetLocation(mHarold->GetX()+29, mHarold->GetY()-56);
+    }
+
 }
 
-/**
- * When Pen goes out of the Screen and Handle its resetting
- * @param x position x on screen
- * @param y position y on screen
- */
-void Pen::SetLocation(double x, double y)
+void Pen::HandleMouseMove(double virtualX, double virtualY)
 {
-    auto tempGame = GetGame();
-    int bound_height = tempGame->GetHeight();
-    int bound_width = tempGame->GetWidth();
-    if(x > bound_width || y > bound_height || x < -1* bound_width || y < -1*bound_height)
+    if (!isThrown)
     {
-        mVelocity = cse335::Vector();
-        x = InitialPos.X();
-        y = InitialPos.Y();
-        isThrown = false;
-    }
-    AdditonalSet(x,y);
+        double diffX = virtualX - (mHarold->GetX()) - 100;
+        double diffY = virtualY - (mHarold->GetY()) - 100;
 
-    if(isThrown) {
-        mGame->RemoveOnHit(this);
+        mRotation =atan2(diffY, diffX);
+    }
+    else
+    {
+        mRotation = 0;
     }
 }
 
