@@ -11,6 +11,8 @@
 #include <GoodClassUML.h>
 #include <BadClassUML.h>
 #include <GoodUMLVisitor.h>
+#include <GoodInheritanceItem.h>
+#include <BadInheritanceItem.h>
 
 
 const std::wstring Filename = L"data/uml.xml";
@@ -103,4 +105,30 @@ TEST(VisitGoodUMLTest, VisitIsGood)
 
     ASSERT_TRUE(!(realBad.IsGood()));
     ASSERT_TRUE(!(testBad.IsGood()));
+}
+TEST(VisitGoodUMLTest, VisitInheritance)
+{
+    Game game;
+    UMLData data(&game);
+    data.LoadData(Filename);
+
+    std::shared_ptr<UMLName> name;
+    std::vector<std::shared_ptr<UMLAttribute>> attributes;
+    std::vector<std::shared_ptr<UMLOperation>> operations;
+
+    GoodUMLVisitor real;
+
+    std::shared_ptr<GoodClassUML> GoodUml= std::make_shared<GoodClassUML>(&game,name,attributes,operations);
+    wstring reason;
+
+    GoodInheritance goodInheritance(&game,GoodUml,GoodUml);
+    BadInheritance badInheritance(&game, GoodUml, GoodUml, reason, false);
+
+    ASSERT_FALSE(real.IsGood());
+    goodInheritance.Accept(&real);
+    ASSERT_TRUE(real.IsGood());
+    badInheritance.Accept(&real);
+    ASSERT_FALSE(real.IsGood());
+    GoodUml->Accept(&real);
+    ASSERT_TRUE(real.IsGood());
 }

@@ -27,6 +27,8 @@ public:
     void operator=(const GoodInheritance &) = delete;
 
     GoodInheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived);
+
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitGoodInheritance(this); }
 };
 
 #endif //INC_335PROJECT1_GOODINHERITANCE_H

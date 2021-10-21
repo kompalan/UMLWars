@@ -18,7 +18,8 @@ class UML;
 class Inheritance;
 class GoodClassUML;
 class BadClassUML;
-
+class GoodInheritance;
+class BadInheritance;
 /** Item visitor base class */
 class ItemVisitor {
 public:
@@ -53,6 +54,17 @@ public:
      * @param badUML BadClassUML object being visited
      */
     virtual void VisitBadUML(BadClassUML* badUML) {}
+    /**
+    * Visit Good Inheritance UML object
+    * @param badUML GoodInheritanceItem object being visited
+    */
+    virtual void VisitGoodInheritance(GoodInheritance* goodUML) {}
+    /**
+    * Visit Good Inheritance UML object
+    * @param badUML GoodInheritanceItem object being visited
+    */
+    virtual void VisitBadInheritance(BadInheritance* badUML) {}
+
 
 };
 
