@@ -34,6 +34,8 @@ private:
     /// If the appropriate dimensions of the UML object have been calculated
     bool mDimensionCalculated = false;
 
+    bool mIsHit = false;
+
 protected:
     Inheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived);
 
@@ -57,6 +59,7 @@ public:
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
     void Update(double elapsed);
 
+    void SetOnHit(bool isHit) { mIsHit = isHit; }
     /**
      * Get the width of the inheritance object in pixels
      * @return the width of the inheritance object in pixels

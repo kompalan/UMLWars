@@ -12,7 +12,7 @@ const std::wstring PenImageName = L"images/redpen.png";
 const double PenAngle = 1;
 
 /// Pen's Initial Position on the Screen
-cse335::Vector InitialPos = cse335::Vector(10, 800);
+cse335::Vector InitialPos = cse335::Vector(3, 850);
 
 const double Velocity = 500;
 
@@ -23,6 +23,7 @@ const double Velocity = 500;
 Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
 {
     mItemImage = std::make_unique<wxImage>(PenImageName, wxBITMAP_TYPE_ANY);
+    mGame = game;
 }
 
 /**
@@ -33,6 +34,7 @@ Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
 void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
+
     if(mItemBitmap.IsNull())
     {
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
@@ -98,4 +100,19 @@ void Pen::SetLocation(double x, double y)
         isThrown = false;
     }
     AdditonalSet(x,y);
+
+    if(isThrown) {
+        mGame->RemoveOnHit(this);
+    }
+}
+
+/**
+ * Patch Fix to Return Pen To Harold After Pen Hit
+ * Something
+ */
+void Pen::ReturnToHarold()
+{
+    SetLocation(InitialPos.X(), InitialPos.Y());
+    mVelocity = cse335::Vector();
+    isThrown = false;
 }

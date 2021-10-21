@@ -82,10 +82,10 @@ void UML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     // Check if the UML object is a part of an inheritance to avoid translating
     // the graphics context twice when drawing inheritance UML
-    if (!mPartOfInheritance)
-    {
-        graphics->Translate(GetX(), GetY());
-    }
+//    if (!mPartOfInheritance)
+//    {
+//        graphics->Translate(GetX(), GetY());
+//    }
 
     // Check if the width and height of the UML has been calculated already
     if (!mDimensionCalculated)

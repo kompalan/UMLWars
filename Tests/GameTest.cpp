@@ -23,25 +23,25 @@ TEST(GameTest, HitTest)
     std::shared_ptr<GoodClassUML> uml= std::make_shared<GoodClassUML>(&game,name,attributes,operations);
 
     uml->SetLocation(0,100);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(0,110);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(0,111);
-    ASSERT_TRUE(!game.HitTest(pen,uml));
+    ASSERT_TRUE(!game.HitTest(pen.get(),uml));
     uml->SetLocation(50,110);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(51,110);
-    ASSERT_TRUE(!game.HitTest(pen,uml));
+    ASSERT_TRUE(!game.HitTest(pen.get(),uml));
     uml->SetLocation(-50,110);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(-51,110);
-    ASSERT_TRUE(!game.HitTest(pen,uml));
+    ASSERT_TRUE(!game.HitTest(pen.get(),uml));
     uml->SetLocation(50,90);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(50,89);
-    ASSERT_TRUE(!game.HitTest(pen,uml));
+    ASSERT_TRUE(!game.HitTest(pen.get(),uml));
     uml->SetLocation(-50,90);
-    ASSERT_TRUE(game.HitTest(pen,uml));
+    ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(-50,89);
-    ASSERT_TRUE(!game.HitTest(pen,uml));
+    ASSERT_TRUE(!game.HitTest(pen.get(),uml));
 }

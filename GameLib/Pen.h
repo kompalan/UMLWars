@@ -15,7 +15,7 @@
 class Pen : public Item {
 private:
     ///< Rotation angle in radians for Pen
-    double mRotation;
+    double mRotation = 0.0;
 
     /// The Item Image
     std::unique_ptr<wxImage> mItemImage;
@@ -29,6 +29,7 @@ private:
     /// Determiane if Harold firstly throws
     bool isThrown = false;
 
+    Game *mGame;
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
@@ -47,6 +48,8 @@ public:
 
 
     void HandleMouseDown(double virtualX, double virtualY) override;
+
+    void ReturnToHarold();
 
     /// Accept function
     void Accept(ItemVisitor* visitor) override {};

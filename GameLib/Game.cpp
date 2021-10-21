@@ -8,6 +8,7 @@
 #include "Harold.h"
 #include "Pen.h"
 #include "Emitter.h"
+#include "GoodUMLVisitor.h"
 
 using namespace std;
 
@@ -82,9 +83,10 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
  */
 void Game::Update(double elapsed)
 {
-    for(auto item : mItems)
-    {
-        item->Update(elapsed);
+    int index = 0;
+    while (index < mItems.size()) {
+        mItems.at(index)->Update(elapsed);
+        ++index;
     }
 
     mEmitter->Create(elapsed);
@@ -137,7 +139,7 @@ void Game::OnLeftDown(int mouseX, int mouseY)
  * @param obj Tested object, dimensions tested
  * @return bool true if collision occurs
  */
-bool Game::HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item> obj)
+bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 {
     double penX=pen->GetX();
     double penY=pen->GetY();
@@ -178,3 +180,48 @@ bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
     }
     return true;
 }
+
+/**
+ * Given a pen, iterate through the items and remove
+ * all items that return true with hittest. Run a visitor
+ * on the item to figure out how to update the scoreboard
+ *
+ * @param pen Pen pointer
+ */
+void Game::RemoveOnHit(Pen *pen)
+{
+    for(auto item : mItems)
+    {
+        if (item.get() == pen|| item.get() == mHarold.get()) {
+
+            continue;
+        }
+
+        GoodUMLVisitor visitor;
+
+        if (HitTest(pen, item))
+        {
+            auto loc = find(mItems.begin(), mItems.end(), item);
+
+            if (loc != mItems.end())
+            {
+
+                item->Accept(&visitor);
+
+
+                mItems.erase(loc);
+                pen->ReturnToHarold();
+
+                if(visitor.IsGood()) {
+                    mScoreboard->IncUnfair();
+                } else {
+                    mScoreboard->IncCorrect();
+                }
+
+
+                return;
+            }
+        }
+    }
+}
+

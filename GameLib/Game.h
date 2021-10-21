@@ -72,7 +72,20 @@ public:
      */
     std::mt19937 &GetRandom() {return mRandom;}
 
-    bool HitTest(std::shared_ptr<Pen> pen, std::shared_ptr<Item>);
+    bool HitTest(Pen* pen, std::shared_ptr<Item>);
+
+    /**
+     * Remove all items overlapped by Pen
+     * @param pen
+     */
+    void RemoveOnHit(Pen* pen);
+
+    /**
+     * Remove a given UML from the screen using
+     * HitTest using the animation
+     * @param item Item to destroy
+     */
+    void KillUML(Item *item);
 
     /**
      * Check if item is still in screen and delete it if not
