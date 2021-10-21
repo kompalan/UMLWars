@@ -39,15 +39,10 @@ private:
     /// If the appropriate dimensions of the UML object have been calculated
     bool mDimensionCalculated = false;
 
-    /// If the UML is a part of an inheritance relationship
-    bool mPartOfInheritance = false;
-
 protected:
     UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);
 
-    UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
-            std::vector<std::shared_ptr<UMLOperation>> operations, bool partOfInheritance);
 public:
     /// Default constructor (disabled)
     UML() = delete;

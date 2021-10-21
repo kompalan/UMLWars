@@ -54,38 +54,12 @@ UML::UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<
 }
 
 /**
- * Constructor
- * @param game the game the UML object is a part of
- * @param name the name of the UML object
- * @param attributes the attributes of the UML object
- * @param operations the operations of the UML object
- * @param partOfInheritance if the class UML is a part of an inheritance relationship
- */
-UML::UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
-        std::vector<std::shared_ptr<UMLOperation>> operations, bool partOfInheritance) : Item(game)
-{
-    mName = name;
-    mAttributes = attributes;
-    mOperations = operations;
-    mWidth = MinWidth;
-    mHeight = MinHeight;
-    mPartOfInheritance = partOfInheritance;
-}
-
-/**
  * Draw the class UML object on the screen
  * @param graphics wxGraphicsContext object
  */
 void UML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
-
-    // Check if the UML object is a part of an inheritance to avoid translating
-    // the graphics context twice when drawing inheritance UML
-//    if (!mPartOfInheritance)
-//    {
-//        graphics->Translate(GetX(), GetY());
-//    }
 
     // Check if the width and height of the UML has been calculated already
     if (!mDimensionCalculated)

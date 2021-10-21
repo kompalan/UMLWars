@@ -192,7 +192,7 @@ void UMLData::XmlInheritance(wxXmlNode *node)
  * @param partOfInheritance optional boolean of if the class UML is a part of an inheritance relationship
  * @return a good class UML object
  */
-shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name, bool partOfInheritance)
+shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
 {
     // Random number distribution between the min and max number of items for a UML object
     std::uniform_int_distribution<> DistributionItems(MinItems, MaxItems);
@@ -231,7 +231,7 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name, bool p
     }
 
     // Make a good class UML object from the selected name, attributes, and operations
-    auto goodUml = make_shared<GoodClassUML>(mGame, umlName, attributes, operations, partOfInheritance);
+    auto goodUml = make_shared<GoodClassUML>(mGame, umlName, attributes, operations);
 
     return goodUml;
 }
@@ -334,8 +334,8 @@ std::shared_ptr<GoodInheritance> UMLData::GenerateGoodInheritance()
 
     // Create two good UML classes to be the base and derived classes of the inheritance
     // Make the second parameter true to indicate that the generated classes are part of an inheritance
-    shared_ptr<GoodClassUML> baseClass = GenerateGoodClassUML(inheritance->GetBase(), true);
-    shared_ptr<GoodClassUML> derivedClass = GenerateGoodClassUML(inheritance->GetDerived(), true);
+    shared_ptr<GoodClassUML> baseClass = GenerateGoodClassUML(inheritance->GetBase());
+    shared_ptr<GoodClassUML> derivedClass = GenerateGoodClassUML(inheritance->GetDerived());
 
     // Make a good inheritance object from the created base and derived classes
     auto goodInheritance = make_shared<GoodInheritance>(mGame, baseClass, derivedClass);
@@ -355,8 +355,8 @@ std::shared_ptr<BadInheritance> UMLData::GenerateBadInheritance()
 
     // Create two good UML classes to be the base and derived classes of the inheritance
     // Make the second parameter true to indicate that the generated classes are part of an inheritance
-    shared_ptr<GoodClassUML> baseClass = GenerateGoodClassUML(inheritance->GetBase(), true);
-    shared_ptr<GoodClassUML> derivedClass = GenerateGoodClassUML(inheritance->GetDerived(), true);
+    shared_ptr<GoodClassUML> baseClass = GenerateGoodClassUML(inheritance->GetBase());
+    shared_ptr<GoodClassUML> derivedClass = GenerateGoodClassUML(inheritance->GetDerived());
 
 
     wstring reason = inheritance->GetReason(); //< get the reason the inheritance is bad

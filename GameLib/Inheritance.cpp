@@ -51,7 +51,6 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 {
 
     graphics->PushState();
-    //graphics->Translate(GetX(),GetY()); //< Translate the graphics context
 
     // Check if the width and height of the inheritance have already been calculated to avoid recalculating them
     if (!mDimensionCalculated)

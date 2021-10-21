@@ -12,13 +12,13 @@
 const double MinSpeedX = 0;
 
 /// The maximum x speed of the objects being emitted
-const double MaxSpeedX = 30;
+const double MaxSpeedX = 50;
 
 /// The initial y speed of the objects being emitted
-const double InitialSpeedY = 30;
+const double InitialSpeedY = 40;
 
 /// The maximum y speed of the objects being emitted
-const double MaxSpeedY = 70;
+const double MaxSpeedY = 100;
 
 /// The amount to increase the y speed each time
 const double SpeedYIncrement = 5;
@@ -33,10 +33,10 @@ const double TimeToIncreaseSpeed = 30;
 const double EmitPositionY = 0;
 
 /// The minimum x coordinate the objects are emitted at
-const double MinEmitPositionX = -200;
+const double MinEmitPositionX = -300;
 
 /// The maximum x coordinate the objects are emitted at
-const double MaxEmitPositionX = 200;
+const double MaxEmitPositionX = 300;
 
 /**
  * Constructor for Emitter
