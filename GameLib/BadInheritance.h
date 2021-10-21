@@ -30,6 +30,7 @@ public:
 
     BadInheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived, std::wstring reason, bool down);
 
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitBadInheritance(this); }
 };
 
 #endif //INC_335PROJECT1_BADINHERITANCE_H
