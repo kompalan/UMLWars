@@ -22,6 +22,8 @@ class TestVisitor : public ItemVisitor
 public:
     virtual void VisitGoodUML(GoodClassUML* goodUML) override { mIsGood=true; }
 
+    virtual void VisitBadUML(BadClassUML* badUML) override { mIsGood=false; }
+
     bool mIsGood=false;
 
     bool IsGood() {return mIsGood;}
@@ -99,6 +101,6 @@ TEST(VisitGoodUMLTest, VisitIsGood)
     BCUML.Accept(&realBad);
     BCUML.Accept(&testBad);
 
-    ASSERT_TRUE(realBad.IsGood());
-    ASSERT_TRUE(testBad.IsGood());
+    ASSERT_TRUE(!(realBad.IsGood()));
+    ASSERT_TRUE(!(testBad.IsGood()));
 }

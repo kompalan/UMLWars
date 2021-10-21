@@ -33,6 +33,7 @@ public:
             std::vector<std::shared_ptr<UMLOperation>> operations, bool partOfInheritance);
 
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitGoodUML(this); }
+
 };
 
 #endif //INC_335PROJECT1_GOODCLASSUML_H
