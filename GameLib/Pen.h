@@ -37,6 +37,7 @@ private:
     double mTime = 0;
 
     bool mRecord = false;
+
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
