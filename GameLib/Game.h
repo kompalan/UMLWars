@@ -59,6 +59,8 @@ private:
     /// The Threshold for stop for seconds
     double mTimeToReturn = 1.7;
 
+    bool noDelete = true;
+
 public:
     Game();
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
@@ -96,6 +98,8 @@ public:
      */
     bool CheckItemOnScreen(std::shared_ptr<Item> item);
 
+    void loopDelete();
+
     int GetSize() const {return mItems.size();}
 
     /**
@@ -109,6 +113,7 @@ public:
      * @return width value
      */
     int GetWidth() {return mWidth;}
+
 
     std::shared_ptr<Harold> GetHarold() {return mHarold;}
 

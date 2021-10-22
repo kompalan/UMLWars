@@ -9,6 +9,7 @@
 #include "Pen.h"
 #include "Emitter.h"
 #include "GoodUMLVisitor.h"
+#include "BadUMLVisitor.h"
 
 using namespace std;
 
@@ -86,6 +87,7 @@ void Game::Update(double elapsed)
     int index = 0;
     while (index < mItems.size()) {
         mItems.at(index)->Update(elapsed);
+        CheckItemOnScreen(mItems.at(index));
         ++index;
     }
 
@@ -168,18 +170,39 @@ bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
 {
     double xVal = item->GetX();
     double yVal = item->GetY();
+    bool good = true;
     vector<std::shared_ptr<Item>>::iterator out;
-    if((xVal > mHeight) || (xVal < -10))
-    {
-        out = remove(mItems.begin(), mItems.end(), item);
+    if(!item->deleteOffscreen()){
+        return true;
+    }
+    if(yVal > (mHeight + ((item->GetHeight())/2))) {
+        GoodUMLVisitor visitor;
+        item->Accept(&visitor);
+        good = visitor.IsGood();
+        if (!good) {
+            mScoreboard->IncMissed();
+        }
+        auto locItem = find(mItems.begin(), mItems.end(), item);
+        mItems.erase(locItem);
         return false;
     }
-    else if ((yVal > mWidth) || (yVal < 0)){
-        out = remove(mItems.begin(), mItems.end(), item);
+    else if ((xVal > (mWidth)) || (xVal < (-mWidth) + ((item->GetWidth())/2))){
+        auto locItem = find(mItems.begin(), mItems.end(), item);
+        mItems.erase(locItem);
         return false;
     }
     return true;
 }
+
+
+void Game::loopDelete(){
+    for(std::shared_ptr<Item> item : mItems){
+        if(item != NULL){
+            CheckItemOnScreen(item);
+            }
+        }
+    }
+
 
 /**
  * Given a pen, iterate through the items and remove
