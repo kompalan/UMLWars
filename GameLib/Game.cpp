@@ -194,16 +194,6 @@ bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
     return true;
 }
 
-
-void Game::loopDelete(){
-    for(std::shared_ptr<Item> item : mItems){
-        if(item != NULL){
-            CheckItemOnScreen(item);
-            }
-        }
-    }
-
-
 /**
  * Given a pen, iterate through the items and remove
  * all items that return true with hittest. Run a visitor
