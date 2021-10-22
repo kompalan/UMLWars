@@ -59,8 +59,8 @@ public:
      */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitUML(this); }
 
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics);
-    void Update(double elapsed);
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+    void Update(double elapsed) override;
     void CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
