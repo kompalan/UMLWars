@@ -141,8 +141,8 @@ void Game::OnLeftDown(int mouseX, int mouseY)
  */
 bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 {
-    double penX=pen->GetX();
-    double penY=pen->GetY();
+    double penX=pen->GetX()+(pen->GetWidth()/2);
+    double penY=pen->GetY()-(pen->GetHeight()/2);
 
     double objX=obj->GetX();
     double objY=obj->GetY();

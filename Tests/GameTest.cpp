@@ -21,26 +21,28 @@ TEST(GameTest, HitTest)
     std::shared_ptr<Pen> pen = std::make_shared<Pen>(&game);
     pen->SetLocation(0,100);
     std::shared_ptr<GoodClassUML> uml= std::make_shared<GoodClassUML>(&game,name,attributes,operations);
-
+    std::cout<<(pen->GetHeight())<<"\n";
+    std::cout<<(pen->GetWidth())<<"\n";
+    //Pen height is 7, Width is 50
     uml->SetLocation(0,100);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
-    uml->SetLocation(0,110);
+    uml->SetLocation(0,105);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(0,111);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
-    uml->SetLocation(50,110);
+    uml->SetLocation(5,105);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
-    uml->SetLocation(51,110);
+    uml->SetLocation(100,105);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
-    uml->SetLocation(-50,110);
+    uml->SetLocation(0,105);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(-51,110);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
     uml->SetLocation(50,90);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
-    uml->SetLocation(50,89);
+    uml->SetLocation(50,75);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
-    uml->SetLocation(-50,90);
+    uml->SetLocation(-25,90);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(-50,89);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
