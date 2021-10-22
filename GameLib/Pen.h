@@ -46,13 +46,13 @@ public:
      * Get the Height of the Image for Pen
      * @return Image Height for Pen
      */
-    double GetHeight() const { return mItemImage->GetHeight(); }
+    double GetHeight() const override { return mItemImage->GetHeight(); }
 
     /**
      * Get the Width of the Image for Pen
      * @return Image Width for Pen
      */
-    double GetWidth() const { return mItemImage->GetWidth(); }
+    double GetWidth() const override { return mItemImage->GetWidth(); }
 
 
     void HandleMouseDown(double virtualX, double virtualY) override;

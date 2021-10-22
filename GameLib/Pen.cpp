@@ -14,7 +14,7 @@ const double PenAngle = 1;
 /// Pen's Initial Position on the Screen
 cse335::Vector InitialPos = cse335::Vector(0, 850);
 
-const double Velocity = 500;
+const double Velocity = 1000;
 
 const double radius = 61.3;
 
@@ -106,7 +106,7 @@ void Pen::Update(double elapsed)
         auto tempGame = GetGame();
         int bound_height = tempGame->GetHeight();
         int bound_width = tempGame->GetWidth();
-        if (mTime > 2) {
+        if (mTime > 1) {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
             isThrown = false;
