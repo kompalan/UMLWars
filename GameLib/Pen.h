@@ -32,6 +32,8 @@ private:
     Game *mGame;
 
     std::shared_ptr<Harold> mHarold;
+
+    double mTime = 0;
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;

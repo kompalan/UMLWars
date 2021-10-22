@@ -16,6 +16,8 @@ cse335::Vector InitialPos = cse335::Vector(0, 850);
 
 const double Velocity = 500;
 
+const double radius = 61.3;
+
 /**
  * Constructor
  * @param game Game object for forward reference
@@ -39,7 +41,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(!isThrown)
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
-        graphics->Rotate(mRotation + 1.57);
+        graphics->Rotate(mRotation - 4.71);
     }
 
     if(mItemBitmap.IsNull())
@@ -50,8 +52,8 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(!isThrown)
     {
         graphics->DrawBitmap(mItemBitmap,
-                -GetWidth()/2+15,
-                -GetHeight()/2-65,
+                -GetWidth()-30,
+                -GetHeight()-30,
                 GetWidth(),
                 GetHeight());
     }
@@ -95,7 +97,8 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
  */
 void Pen::Update(double elapsed)
 {
-    if(isThrown) {
+    if(isThrown)
+    {
         double newX = GetX()+mVelocity.X()*elapsed;
         double newY = GetY()+mVelocity.Y()*elapsed;
 
@@ -114,25 +117,22 @@ void Pen::Update(double elapsed)
     }
     else
     {
-        SetLocation(mHarold->GetX()+29, mHarold->GetY()-56);
-
+        SetLocation(mHarold->GetX() + radius * cos(mRotation -1 ), mHarold->GetY() + radius * sin(mRotation - 1));
     }
+    mRotation = mHarold->GetRotation();
 
 }
 
 void Pen::HandleMouseMove(double virtualX, double virtualY)
 {
-    if (!isThrown)
-    {
-        double diffX = virtualX - (mHarold->GetX()) - 100;
-        double diffY = virtualY - (mHarold->GetY()) - 100;
-
-        mRotation =atan2(diffY, diffX);
-    }
-    else
-    {
-        mRotation = 0;
-    }
+//    if (!isThrown)
+//    {
+//        mRotation = mHarold->GetRotation();
+//    }
+//    else
+//    {
+//        mRotation = 0;
+//    }
 }
 
 /**
