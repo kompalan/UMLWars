@@ -99,25 +99,31 @@ void Pen::Update(double elapsed)
 {
     if(isThrown)
     {
+        mTime+=elapsed;
         double newX = GetX()+mVelocity.X()*elapsed;
         double newY = GetY()+mVelocity.Y()*elapsed;
 
         auto tempGame = GetGame();
         int bound_height = tempGame->GetHeight();
         int bound_width = tempGame->GetWidth();
-        if (GetX()>bound_width || GetY()>bound_height || GetX()<-1*bound_width || GetY()<-1*bound_height) {
+        if (mTime > 2) {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
             isThrown = false;
+            mTime = 0;
         }
         else {
             SetLocation(newX, newY);
         }
-        mGame->RemoveOnHit(this);
+        mGame->RemoveOnHit(this, mTime);
     }
     else
     {
         SetLocation(mHarold->GetX() + radius * cos(mRotation -1 ), mHarold->GetY() + radius * sin(mRotation - 1));
+    }
+    if (mRecord)
+    {
+        mTime += elapsed;
     }
     mRotation = mHarold->GetRotation();
 
@@ -144,4 +150,15 @@ void Pen::ReturnToHarold()
     SetLocation(InitialPos.X(), InitialPos.Y());
     mVelocity = cse335::Vector();
     isThrown = false;
+    mTime = 0;
+}
+
+/**
+ * When The pen hit the UML, make it stop there
+ * until the time is up, then return
+ */
+void Pen::Stop()
+{
+    mVelocity = cse335::Vector();
+    mRecord = false;
 }

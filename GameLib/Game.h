@@ -56,6 +56,9 @@ private:
     /// Pointer to an Emitter
     std::shared_ptr<Emitter> mEmitter;
 
+    /// The Threshold for stop for seconds
+    double mTimeToReturn = 1.7;
+
 public:
     Game();
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
@@ -78,7 +81,7 @@ public:
      * Remove all items overlapped by Pen
      * @param pen
      */
-    void RemoveOnHit(Pen* pen);
+    void RemoveOnHit(Pen* pen, double mRecordTime);
 
     /**
      * Remove a given UML from the screen using

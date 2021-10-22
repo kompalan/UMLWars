@@ -188,7 +188,7 @@ bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
  *
  * @param pen Pen pointer
  */
-void Game::RemoveOnHit(Pen *pen)
+void Game::RemoveOnHit(Pen *pen, double mTime)
 {
     for(auto item : mItems)
     {
@@ -201,6 +201,7 @@ void Game::RemoveOnHit(Pen *pen)
 
         if (HitTest(pen, item))
         {
+
             auto loc = find(mItems.begin(), mItems.end(), item);
 
             if (loc != mItems.end())
@@ -208,9 +209,7 @@ void Game::RemoveOnHit(Pen *pen)
 
                 item->Accept(&visitor);
 
-
                 mItems.erase(loc);
-                pen->ReturnToHarold();
 
                 if(visitor.IsGood()) {
                     mScoreboard->IncUnfair();
@@ -218,10 +217,17 @@ void Game::RemoveOnHit(Pen *pen)
                     mScoreboard->IncCorrect();
                 }
 
+                pen->SetRecord(true);
 
-                return;
+                pen->Stop();
+
+                break;
             }
         }
+    }
+    if (mTime > mTimeToReturn)
+    {
+        pen->ReturnToHarold();
     }
 }
 

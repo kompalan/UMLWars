@@ -33,7 +33,10 @@ private:
 
     std::shared_ptr<Harold> mHarold;
 
+    /// the time counter for pen
     double mTime = 0;
+
+    bool mRecord = false;
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
@@ -61,6 +64,10 @@ public:
     void Update(double elapsed) override;
 
     void HandleMouseMove(double virtualX, double virtualY) override;
+
+    void SetRecord(bool mIf) {mRecord = mIf;}
+
+    void Stop();
 };
 
 #endif //INC_335PROJECT1_PEN_H
