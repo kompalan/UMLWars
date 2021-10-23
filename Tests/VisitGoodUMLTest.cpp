@@ -7,7 +7,7 @@
 #include <Game.h>
 #include <Item.h>
 #include <ItemVisitor.h>
-#include <UML.h>
+#include <ClassUML.h>
 #include <GoodClassUML.h>
 #include <BadClassUML.h>
 #include <GoodUMLVisitor.h>

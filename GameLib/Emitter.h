@@ -9,7 +9,7 @@
 #define INC_335PROJECT1_EMITTER_H
 
 #include <random>
-#include "UML.h"
+#include "ClassUML.h"
 #include "UMLData.h"
 
 class Game;
@@ -53,7 +53,7 @@ public:
     void Create(double elapsed);
     void Emit(double good, double inheritance);
     std::shared_ptr<Inheritance> MakeInheritance(double good);
-    std::shared_ptr<UML> MakeClass(double good);
+    std::shared_ptr<ClassUML> MakeClass(double good);
 
     /**
      * Get The Good Random Variable

@@ -16,7 +16,7 @@ using namespace std;
  * @param reason the reason the inheritance is bad
  * @param down if the inheritance is upside down
  */
-BadInheritance::BadInheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived,
+BadInheritance::BadInheritance(Game *game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived,
         std::wstring reason, bool down) : Inheritance(game, base, derived, down)
 {
     mReason = reason;

@@ -98,8 +98,6 @@ public:
      */
     bool CheckItemOnScreen(std::shared_ptr<Item> item);
 
-    void loopDelete();
-
     int GetSize() const {return mItems.size();}
 
     /**

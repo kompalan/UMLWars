@@ -15,6 +15,7 @@
 class Harold;
 class Scoreboard;
 class UML;
+class ClassUML;
 class Inheritance;
 class GoodClassUML;
 class BadClassUML;
@@ -32,14 +33,20 @@ public:
     virtual void VisitHarold(Harold* harold) {}
 
     /**
-     * Visit class UML object
-     * @param uml UML object we are visitng
+     * Visit UML object
+     * @param uml UML object we are visiting
      */
     virtual void VisitUML(UML* uml) {}
 
     /**
+     * Visit class UML object
+     * @param uml class UML object we are visiting
+     */
+    virtual void VisitClassUML(ClassUML* uml) {}
+
+    /**
      * Visit Inheritance object
-     * @param uml Inheritance UML object we are visitng
+     * @param uml Inheritance UML object we are visiting
      */
     virtual void VisitInheritance(Inheritance* uml) {}
 

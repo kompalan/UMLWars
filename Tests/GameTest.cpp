@@ -21,6 +21,8 @@ TEST(GameTest, HitTest)
     std::shared_ptr<Pen> pen = std::make_shared<Pen>(&game);
     pen->SetLocation(0,100);
     std::shared_ptr<GoodClassUML> uml= std::make_shared<GoodClassUML>(&game,name,attributes,operations);
+    uml->SetHeight(20); //< Set UML height for testing
+    uml->SetWidth(100); //< Set UML width for testing
     std::cout<<(pen->GetHeight())<<"\n";
     std::cout<<(pen->GetWidth())<<"\n";
     //Pen height is 7, Width is 50

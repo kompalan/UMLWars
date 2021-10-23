@@ -23,7 +23,7 @@ const double ArrowTipWidth = 12;
  * @param base the base class of the inheritance
  * @param derived the derived class of the inheritance
  */
-Inheritance::Inheritance(Game* game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived) : Item(game)
+Inheritance::Inheritance(Game* game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived) : UML(game)
 {
     mBase = base;
     mDerived = derived;
@@ -36,7 +36,7 @@ Inheritance::Inheritance(Game* game, std::shared_ptr<UML> base, std::shared_ptr<
  * @param derived the derived class of the inheritance
  * @param down if the inheritance relationship is upside down
  */
-Inheritance::Inheritance(Game* game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived, bool down) : Item(game)
+Inheritance::Inheritance(Game* game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived, bool down) : UML(game)
 {
     mBase = base;
     mDerived = derived;
@@ -53,17 +53,9 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
 
     // Check if the width and height of the inheritance have already been calculated to avoid recalculating them
-    if (!mDimensionCalculated)
+    if (!GetDimensionsCalculated())
     {
-        mBase->CalculateDimensions(graphics); //< Calculate dimensions of the base class
-        mDerived->CalculateDimensions(graphics); //< Calculate dimensions of the derived class
-
-        // Set the width and height of the inheritance object to be and the max of the two widths and
-        // the sum of all the heights (including the arrow parts)
-        mHeight = mBase->GetHeight() + mDerived->GetHeight() + ArrowLineLength + ArrowTipHeight;
-        mWidth = max(mBase->GetWidth(), mDerived->GetWidth());
-
-        mDimensionCalculated = true; //< Set to true to avoid recalculating dimensions each time the object is drawn
+        CalculateDimensions(graphics);
     }
 
     // X and Y centers for the base and derived classes
@@ -75,12 +67,12 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
     {
         // Calculates the X and Y value for the derived class and sets its location there
         derivedX = GetX();
-        derivedY = GetY() - mHeight/2 + mDerived->GetHeight()/2;
+        derivedY = GetY() - GetHeight()/2 + mDerived->GetHeight()/2;
         mDerived->SetLocation(derivedX, derivedY);
 
         // Calculates the X and Y value for the base class and sets its location there
         baseX = GetX();
-        baseY = GetY() + mHeight/2 - mBase->GetHeight()/2;
+        baseY = GetY() + GetHeight()/2 - mBase->GetHeight()/2;
         mBase->SetLocation(baseX, baseY);
 
         // Draws the base and derived class at their calculated X and Y values
@@ -108,12 +100,12 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
     {
         // Calculates the X and Y value for the base class and sets its location there
         baseX = GetX();
-        baseY = GetY() - mHeight/2 + mBase->GetHeight()/2;
+        baseY = GetY() - GetHeight()/2 + mBase->GetHeight()/2;
         mBase->SetLocation(baseX, baseY);
 
         // Calculates the X and Y value for the derived class and sets its location there
         derivedX = GetX();
-        derivedY = GetY() + mHeight/2 - mDerived->GetHeight()/2;
+        derivedY = GetY() + GetHeight()/2 - mDerived->GetHeight()/2;
         mDerived->SetLocation(derivedX, derivedY);
 
         // Draws the base and derived class at their calculated X and Y values
@@ -140,12 +132,22 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 }
 
 /**
- * Updates the position of the inheritance object
- * @param elapsed the time since the last update
+ * Calculates the required width and height of an Inheritance object
+ * @param graphics wxGraphicsContext object
  */
-void Inheritance::Update(double elapsed)
+void Inheritance::CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    double newX = GetX() + GetVelocity().X() * elapsed;
-    double newY = GetY() + GetVelocity().Y() * elapsed;
-    SetLocation(newX, newY);
+    mBase->CalculateDimensions(graphics); //< Calculate dimensions of the base class
+    mDerived->CalculateDimensions(graphics); //< Calculate dimensions of the derived class
+
+    // Set the width and height of the inheritance object to be and the max of the two widths and
+    // the sum of all the heights (including the arrow parts)
+    double height = mBase->GetHeight() + mDerived->GetHeight() + ArrowLineLength + ArrowTipHeight;
+    double width = max(mBase->GetWidth(), mDerived->GetWidth());
+
+    // Set the width and height of the inheritance to the calculated values
+    SetWidth(width);
+    SetHeight(height);
+
+    SetDimensionsCalculated(true); //< Set to true to avoid recalculating dimensions each time the object is drawn
 }

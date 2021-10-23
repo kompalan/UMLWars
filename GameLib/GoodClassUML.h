@@ -8,12 +8,12 @@
 #ifndef INC_335PROJECT1_GOODCLASSUML_H
 #define INC_335PROJECT1_GOODCLASSUML_H
 
-#include "UML.h"
+#include "ClassUML.h"
 
 /**
  * Class for good UML class objects
  */
-class GoodClassUML : public UML {
+class GoodClassUML : public ClassUML {
 private:
 
 public:

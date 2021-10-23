@@ -189,7 +189,6 @@ void UMLData::XmlInheritance(wxXmlNode *node)
 /**
  * Creates a good class UML object
  * @param name optional name to make the good class UML with
- * @param partOfInheritance optional boolean of if the class UML is a part of an inheritance relationship
  * @return a good class UML object
  */
 shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)

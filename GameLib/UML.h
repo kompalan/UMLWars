@@ -1,35 +1,20 @@
 /**
  * @file UML.h
- * @author Kristian Rica
  * @author Ian Byram
  *
+ * Base class for all UML objects
  */
-
-#pragma once
 
 #ifndef INC_335PROJECT1_UML_H
 #define INC_335PROJECT1_UML_H
 
 #include "Item.h"
-#include "UMLName.h"
-#include "UMLAttribute.h"
-#include "UMLOperation.h"
-#include "Vector.h"
 
 /**
- * Class storing basic UML object and its properties
+ * Base class for all UML objects
  */
 class UML : public Item {
 private:
-    /// Name of UML Item
-    std::shared_ptr<UMLName> mName;
-
-    /// The list of attributes of the UML object
-    std::vector<std::shared_ptr<UMLAttribute>> mAttributes;
-
-    /// The list of operations of the UML object
-    std::vector<std::shared_ptr<UMLOperation>> mOperations;
-
     /// The width of the UML object in pixels
     double mWidth = 0;
 
@@ -40,8 +25,7 @@ private:
     bool mDimensionCalculated = false;
 
 protected:
-    UML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
-            std::vector<std::shared_ptr<UMLOperation>> operations);
+    UML(Game *game);
 
 public:
     /// Default constructor (disabled)
@@ -54,16 +38,6 @@ public:
     void operator=(const UML &) = delete;
 
     /**
-     * Accept visitor
-     * @param visitor visitor that's accepted
-     */
-    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitUML(this); }
-
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
-    void Update(double elapsed) override;
-    void CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics);
-
-    /**
      * Get the width of the UML object in pixels
      * @return the width of the UML object in pixels
      */
@@ -74,6 +48,50 @@ public:
      * @return the height of the UML object in pixels
      */
     virtual double GetHeight() const override { return mHeight; }
+
+    /**
+     * Sets the width of the UML object
+     * @param width the width of the UML object
+     */
+    void SetWidth(double width) { mWidth = width; }
+
+    /**
+     * Sets the height of the UML object
+     * @param height the width of the UML object
+     */
+    void SetHeight(double height) { mHeight = height; }
+
+    /**
+     * Gets if the dimensions of the UML are calculated
+     * @return if the dimensions of the UML are calculated
+     */
+    bool GetDimensionsCalculated() { return mDimensionCalculated; }
+
+    /**
+     * Sets if the dimensions of the UML are calculated
+     * @param isCalculated
+     */
+    void SetDimensionsCalculated(bool isCalculated) { mDimensionCalculated = isCalculated; }
+
+    /**
+     * Calculates the dimensions of a UML object
+     * @param graphics wxGraphicsContext object
+     */
+    virtual void CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics) {}
+
+    /**
+     * Draws a UML object
+     * @param graphics wxGraphicsContext object
+     */
+    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics) override {}
+
+    void Update(double elapsed) override;
+
+    /**
+     * Accept visitor
+     * @param visitor visitor that's accepted
+     */
+    virtual void Accept(ItemVisitor* visitor) override { visitor->VisitUML(this); }
 };
 
 #endif //INC_335PROJECT1_UML_H

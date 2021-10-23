@@ -8,12 +8,12 @@
 #ifndef INC_335PROJECT1_BADCLASSUML_H
 #define INC_335PROJECT1_BADCLASSUML_H
 
-#include "UML.h"
+#include "ClassUML.h"
 
 /**
  * Class for bad UML class objects
  */
-class BadClassUML : public UML {
+class BadClassUML : public ClassUML {
 private:
     /// The reason the class UML is bad
     std::wstring mReason;

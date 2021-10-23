@@ -16,7 +16,7 @@ using namespace std;
  * @param operations the operations of the UML object
  */
 GoodClassUML::GoodClassUML(Game* game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
-        std::vector<std::shared_ptr<UMLOperation>> operations) : UML(game, name, attributes, operations)
+        std::vector<std::shared_ptr<UMLOperation>> operations) : ClassUML(game, name, attributes, operations)
 {
 
 }

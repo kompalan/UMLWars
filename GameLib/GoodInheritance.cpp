@@ -14,7 +14,7 @@ using namespace std;
  * @param base the base class of the inheritance
  * @param derived the derived class of the inheritance
  */
-GoodInheritance::GoodInheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived)
+GoodInheritance::GoodInheritance(Game *game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived)
             : Inheritance(game, base, derived)
 {
 

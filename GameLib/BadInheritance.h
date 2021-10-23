@@ -28,7 +28,7 @@ public:
     /// Assignment operator
     void operator=(const BadInheritance &) = delete;
 
-    BadInheritance(Game *game, std::shared_ptr<UML> base, std::shared_ptr<UML> derived, std::wstring reason, bool down);
+    BadInheritance(Game *game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived, std::wstring reason, bool down);
 
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitBadInheritance(this); }
 };

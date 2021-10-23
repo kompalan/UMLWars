@@ -133,9 +133,9 @@ void Emitter::Emit(double good, double inheritance)
  * @param good Random variable
  * @return a UML class object
  */
-std::shared_ptr<UML> Emitter::MakeClass(double good)
+std::shared_ptr<ClassUML> Emitter::MakeClass(double good)
 {
-    std::shared_ptr<UML> uml;
+    std::shared_ptr<ClassUML> uml;
     if (good > mBadThreshold)
     {
         /// Make Bad Class

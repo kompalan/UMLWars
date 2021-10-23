@@ -17,7 +17,7 @@ using namespace std;
  * @param reason the reason the UML object is bad
  */
 BadClassUML::BadClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
-        std::vector<std::shared_ptr<UMLOperation>> operations, std::wstring reason) : UML(game, name, attributes, operations)
+        std::vector<std::shared_ptr<UMLOperation>> operations, std::wstring reason) : ClassUML(game, name, attributes, operations)
 {
     mReason = reason;
 }
