@@ -33,6 +33,12 @@ public:
             std::vector<std::shared_ptr<UMLOperation>> operations, std::wstring reason);
 
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitBadUML(this); }
+
+    /**
+     * Get the reason the class UML is bad
+     * @return the reason the class UML is bad
+     */
+    std::wstring GetReason() { return mReason; }
 };
 
 #endif //INC_335PROJECT1_BADCLASSUML_H

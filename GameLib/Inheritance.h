@@ -25,8 +25,6 @@ private:
     /// If the inheritance relationship is upside down
     bool mDown = false;
 
-    bool mIsHit = false;
-
 protected:
     Inheritance(Game *game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived);
 
@@ -49,8 +47,6 @@ public:
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void CalculateDimensions(std::shared_ptr<wxGraphicsContext> graphics) override;
-
-    void SetOnHit(bool isHit) { mIsHit = isHit; }
 
 };
 

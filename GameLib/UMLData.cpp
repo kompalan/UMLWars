@@ -17,6 +17,8 @@ const int MinItems = 0;
 /// Maximum number of attributes or operations in a UML object
 const int MaxItems = 3;
 
+const wstring GoodUMLMessage = L"Unfair!";
+
 /**
  * Constructor
  * @param game The game the UMLData is stored in
@@ -232,6 +234,8 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
     // Make a good class UML object from the selected name, attributes, and operations
     auto goodUml = make_shared<GoodClassUML>(mGame, umlName, attributes, operations);
 
+    goodUml->SetMessage(GoodUMLMessage);
+
     return goodUml;
 }
 
@@ -318,6 +322,8 @@ std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
         badUml = MakeUMLWithBadName(numAttributes, numOperations);
     }
 
+    badUml->SetMessage(badUml->GetReason());
+
     return badUml;
 }
 
@@ -338,6 +344,8 @@ std::shared_ptr<GoodInheritance> UMLData::GenerateGoodInheritance()
 
     // Make a good inheritance object from the created base and derived classes
     auto goodInheritance = make_shared<GoodInheritance>(mGame, baseClass, derivedClass);
+
+    goodInheritance->SetMessage(GoodUMLMessage);
 
     return goodInheritance;
 }
@@ -363,6 +371,8 @@ std::shared_ptr<BadInheritance> UMLData::GenerateBadInheritance()
 
     // Make a bad inheritance object from the created base and derived classes
     auto badInheritance = make_shared<BadInheritance>(mGame, baseClass, derivedClass, reason, down);
+
+    badInheritance->SetMessage(badInheritance->GetReason());
 
     return badInheritance;
 }

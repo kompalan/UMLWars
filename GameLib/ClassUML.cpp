@@ -6,17 +6,24 @@
 
 #include "pch.h"
 #include "ClassUML.h"
+#include "GoodUMLVisitor.h"
 
 using namespace std;
 
 /// The font for class names
-const wxFont nameFont(wxSize(0,15),
+const wxFont NameFont(wxSize(0,15),
         wxFONTFAMILY_SWISS,
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_NORMAL);
 
 /// The font for attributes and operations
-const wxFont normalFont(wxSize(0,15),
+const wxFont NormalFont(wxSize(0,15),
+        wxFONTFAMILY_SWISS,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_NORMAL);
+
+/// The font for displaying the message after UML is hit
+const wxFont DisplayFont(wxSize(0,30),
         wxFONTFAMILY_SWISS,
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_NORMAL);
@@ -79,7 +86,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->DrawRectangle(GetX()-GetWidth()/2, currentY, GetWidth(), GetHeight());
 
     // Draw the class name at centered at the top of the rectangle
-    graphics->SetFont(nameFont, *wxBLACK);
+    graphics->SetFont(NameFont, *wxBLACK);
     graphics->GetTextExtent(mName->GetItem(), &wid, &hit);
     graphics->DrawText(mName->GetItem(), GetX() - wid/2, currentY);
 
@@ -91,7 +98,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     // Go through each attribute in the UML object and draw the text left justified in the rectangle
     if (mAttributes.size() != 0)
     {
-        graphics->SetFont(normalFont, *wxBLACK);
+        graphics->SetFont(NormalFont, *wxBLACK);
         for (auto attribute : mAttributes)
         {
             graphics->GetTextExtent(attribute->GetItem(), &wid, &hit);
@@ -104,13 +111,32 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if (mOperations.size() != 0)
     {
         graphics->StrokeLine(GetX() - GetWidth()/2, currentY, GetX() + GetWidth()/2, currentY);
-        graphics->SetFont(normalFont, *wxBLACK);
+        graphics->SetFont(NormalFont, *wxBLACK);
         for (auto operation : mOperations)
         {
             graphics->GetTextExtent(operation->GetItem(), &wid, &hit);
             graphics->DrawText(operation->GetItem(), GetX() - GetWidth()/2 + LeftRightPadding, currentY);
             currentY += hit; //< Increment the current y value
         }
+    }
+
+    if (IsHit())
+    {
+        GoodUMLVisitor visitor;
+
+        Accept(&visitor);
+
+        if (visitor.IsGood())
+        {
+            graphics->SetFont(DisplayFont, *wxRED);
+        }
+        else
+        {
+            graphics->SetFont(DisplayFont, wxColour(44, 117, 36));
+        }
+
+        graphics->GetTextExtent(GetMessage(), &wid, &hit);
+        graphics->DrawText(GetMessage(), GetX()-wid/2, GetY()-hit/2);
     }
 
     graphics->PopState();
@@ -122,7 +148,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
 {
-    graphics->SetFont(nameFont, *wxBLACK);
+    graphics->SetFont(NameFont, *wxBLACK);
 
     double wid, hit; //< Width and height variables to store GetTextExtent return values in
 
@@ -131,7 +157,7 @@ void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
     double height = hit;
     double width = wid;
 
-    graphics->SetFont(normalFont, *wxBLACK);
+    graphics->SetFont(NormalFont, *wxBLACK);
 
     // Go through each attribute in the UML object and add the required height to the UML height and check if
     // the UML width needs to be replaced with a larger value to accommodate wider text

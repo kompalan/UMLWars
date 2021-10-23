@@ -68,7 +68,7 @@ public:
     virtual void VisitGoodInheritance(GoodInheritance* goodUML) {}
     /**
     * Visit Good Inheritance UML object
-    * @param badUML GoodInheritanceItem object being visited
+    * @param badUML BadInheritanceItem object being visited
     */
     virtual void VisitBadInheritance(BadInheritance* badUML) {}
 

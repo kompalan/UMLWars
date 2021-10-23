@@ -5,8 +5,15 @@
 
 #include "pch.h"
 #include "Inheritance.h"
+#include "GoodUMLVisitor.h"
 
 using namespace std;
+
+/// The font for displaying the message after UML is hit
+const wxFont DisplayFont(wxSize(0,30),
+        wxFONTFAMILY_SWISS,
+        wxFONTSTYLE_NORMAL,
+        wxFONTWEIGHT_NORMAL);
 
 /// The length of the arrow line between classes in pixels
 const double ArrowLineLength = 16;
@@ -128,6 +135,26 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
         graphics->StrokeLine(GetX(), derivedY - mDerived->GetHeight()/2 - ArrowLineLength - ArrowTipHeight,
                 GetX() - ArrowTipWidth/2, derivedY - mDerived->GetHeight()/2 - ArrowLineLength);
     }
+    if (IsHit())
+    {
+        GoodUMLVisitor visitor;
+
+        Accept(&visitor);
+
+        if (visitor.IsGood())
+        {
+            graphics->SetFont(DisplayFont, *wxRED);
+        }
+        else
+        {
+            graphics->SetFont(DisplayFont, wxColour(44, 117, 36));
+        }
+        double wid, hit;
+
+        graphics->GetTextExtent(GetMessage(), &wid, &hit);
+        graphics->DrawText(GetMessage(), GetX()-wid/2, GetY()-hit/2);
+    }
+
     graphics->PopState();
 }
 

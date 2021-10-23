@@ -10,6 +10,8 @@
 #include "Emitter.h"
 #include "GoodUMLVisitor.h"
 #include "BadUMLVisitor.h"
+#include "UMLHitVisitor.h"
+#include "DeleteUMLVisitor.h"
 
 using namespace std;
 
@@ -85,11 +87,17 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 void Game::Update(double elapsed)
 {
     int index = 0;
+
+    DeleteUMLVisitor deleteVisitor;
+
     while (index < mItems.size()) {
         mItems.at(index)->Update(elapsed);
         CheckItemOnScreen(mItems.at(index));
+        mItems.at(index)->Accept(&deleteVisitor);
         ++index;
     }
+    std::vector<UML*> toDelete = deleteVisitor.GetToDelete();
+    DeleteUML(toDelete);
 
     mEmitter->Create(elapsed);
 }
@@ -214,6 +222,9 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
 
         if (HitTest(pen, item))
         {
+            UMLHitVisitor hitVisitor;
+
+            item->Accept(&hitVisitor);
 
             auto loc = find(mItems.begin(), mItems.end(), item);
 
@@ -221,8 +232,6 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             {
 
                 item->Accept(&visitor);
-
-                mItems.erase(loc);
 
                 if(visitor.IsGood()) {
                     mScoreboard->IncUnfair();
@@ -241,6 +250,19 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
     if (mTime > mTimeToReturn)
     {
         pen->ReturnToHarold();
+    }
+}
+
+void Game::DeleteUML(std::vector<UML*> toDelete)
+{
+    for (auto uml : toDelete)
+    {
+        auto loc = find_if(mItems.begin(), mItems.end(), [&uml] (auto &item) { return item.get() == uml; });
+
+        if (loc != mItems.end())
+        {
+            mItems.erase(loc);
+        }
     }
 }
 

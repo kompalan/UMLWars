@@ -23,6 +23,12 @@ UML::UML(Game *game) : Item(game)
  */
 void UML::Update(double elapsed)
 {
+    if (mIsHit)
+    {
+        mTimeHit += elapsed;
+        SetSpeed(0,0);
+    }
+
     double newX = GetX() + GetVelocity().X() * elapsed;
     double newY = GetY() + GetVelocity().Y() * elapsed;
     SetLocation(newX, newY);
