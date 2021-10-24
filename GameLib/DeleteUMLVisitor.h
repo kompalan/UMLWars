@@ -10,6 +10,10 @@
 
 #include "ItemVisitor.h"
 #include "UML.h"
+#include "BadClassUML.h"
+#include "GoodClassUML.h"
+#include "BadInheritance.h"
+#include "GoodInheritance.h"
 
 /**
  * Visitor class to keep track of UML that should be deleted
@@ -17,6 +21,7 @@
 class DeleteUMLVisitor : public ItemVisitor {
 private:
     std::vector<UML*> mToDelete;
+
 public:
 
     /**
@@ -25,10 +30,12 @@ public:
      */
     std::vector<UML*> GetToDelete() { return mToDelete; }
 
-    void VisitBadUML(BadClassUML* uml);
-    void VisitGoodUML(GoodClassUML* uml);
-    void VisitBadInheritance(BadInheritance* uml);
-    void VisitGoodInheritance(GoodInheritance* uml);
+    void VisitBadUML(BadClassUML* uml) { CheckDeleteUML(uml); }
+    void VisitGoodUML(GoodClassUML* uml) { CheckDeleteUML(uml); }
+    void VisitBadInheritance(BadInheritance* uml) { CheckDeleteUML(uml); }
+    void VisitGoodInheritance(GoodInheritance* uml) { CheckDeleteUML(uml); }
+
+    void CheckDeleteUML(UML* uml);
 };
 
 #endif //INC_335PROJECT1_DELETEUMLVISITOR_H

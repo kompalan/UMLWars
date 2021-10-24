@@ -69,8 +69,6 @@ public:
     void SetRecord(bool mIf) {mRecord = mIf;}
 
     void Stop();
-
-    virtual bool deleteOffscreen() override { return false; }
 };
 
 #endif //INC_335PROJECT1_PEN_H

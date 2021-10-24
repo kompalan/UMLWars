@@ -113,12 +113,6 @@ public:
      */
     const cse335::Vector& GetVelocity() const { return mVelocity; }
 
-    /**
-     * Function to determine if item should be deleted once offscreen
-     * @return Delete or not
-     */
-    virtual bool deleteOffscreen() { return true; }
-
 protected:
     Item(Game *game, double posX, double posY);
     Item(Game *game);

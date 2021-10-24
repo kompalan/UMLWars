@@ -137,6 +137,8 @@ public:
      * @param time the time the UML has been hit for
      */
     void SetTimeHit(double time) { mTimeHit = time; }
+
+    bool CheckOnScreen();
 };
 
 #endif //INC_335PROJECT1_UML_H

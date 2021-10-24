@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "UML.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -32,4 +33,16 @@ void UML::Update(double elapsed)
     double newX = GetX() + GetVelocity().X() * elapsed;
     double newY = GetY() + GetVelocity().Y() * elapsed;
     SetLocation(newX, newY);
+}
+
+bool UML::CheckOnScreen()
+{
+    double gameWidth = GetGame()->GetWidth();
+    double gameHeight = GetGame()->GetHeight();
+
+    if (GetX() < -gameWidth/2 - mWidth || GetX() > gameWidth/2 + mWidth || GetY() > gameHeight + mHeight/2)
+    {
+        return false;
+    }
+    return true;
 }

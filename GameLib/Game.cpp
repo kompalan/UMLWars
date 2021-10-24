@@ -12,6 +12,7 @@
 #include "BadUMLVisitor.h"
 #include "UMLHitVisitor.h"
 #include "DeleteUMLVisitor.h"
+#include "UMLOnScreenVisitor.h"
 
 using namespace std;
 
@@ -90,14 +91,15 @@ void Game::Update(double elapsed)
 
     DeleteUMLVisitor deleteVisitor;
 
-    while (index < mItems.size()) {
+    while (index < mItems.size())
+    {
         mItems.at(index)->Update(elapsed);
         CheckItemOnScreen(mItems.at(index));
         mItems.at(index)->Accept(&deleteVisitor);
         ++index;
     }
-    std::vector<UML*> toDelete = deleteVisitor.GetToDelete();
-    DeleteUML(toDelete);
+
+    DeleteUML(deleteVisitor.GetToDelete());
 
     mEmitter->Create(elapsed);
 }
@@ -169,37 +171,25 @@ bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 
     return false;
 }
+
 /**
  * Tests an item against the bounds of the screen
  * @param item Item object being tested
  * @return bool true if item passes bounds of screen
  */
-bool Game::CheckItemOnScreen(std::shared_ptr<Item> item)
+void Game::CheckItemOnScreen(std::shared_ptr<Item> item)
 {
-    double xVal = item->GetX();
-    double yVal = item->GetY();
-    bool good = true;
-    vector<std::shared_ptr<Item>>::iterator out;
-    if(!item->deleteOffscreen()){
-        return true;
-    }
-    if(yVal > (mHeight + ((item->GetHeight())/2))) {
-        GoodUMLVisitor visitor;
-        item->Accept(&visitor);
-        good = visitor.IsGood();
-        if (!good) {
+    UMLOnScreenVisitor onScreenVisitor;
+    item->Accept(&onScreenVisitor);
+    if (!onScreenVisitor.IsOnScreen())
+    {
+        GoodUMLVisitor goodVisitor;
+        item->Accept(&goodVisitor);
+        if (!goodVisitor.IsGood())
+        {
             mScoreboard->IncMissed();
         }
-        auto locItem = find(mItems.begin(), mItems.end(), item);
-        mItems.erase(locItem);
-        return false;
     }
-    else if ((xVal > (mWidth)) || (xVal < (-mWidth) + ((item->GetWidth())/2))){
-        auto locItem = find(mItems.begin(), mItems.end(), item);
-        mItems.erase(locItem);
-        return false;
-    }
-    return true;
 }
 
 /**
@@ -218,7 +208,7 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             continue;
         }
 
-        GoodUMLVisitor visitor;
+        GoodUMLVisitor goodVisitor;
 
         if (HitTest(pen, item))
         {
@@ -231,9 +221,9 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             if (loc != mItems.end())
             {
 
-                item->Accept(&visitor);
+                item->Accept(&goodVisitor);
 
-                if(visitor.IsGood()) {
+                if(goodVisitor.IsGood()) {
                     mScoreboard->IncUnfair();
                 } else {
                     mScoreboard->IncCorrect();

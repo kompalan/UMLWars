@@ -98,7 +98,7 @@ public:
      * Check if item is still in screen and delete it if not
      * @return Whether item is in screen or not
      */
-    bool CheckItemOnScreen(std::shared_ptr<Item> item);
+    void CheckItemOnScreen(std::shared_ptr<Item> item);
 
     int GetSize() const {return mItems.size();}
 
