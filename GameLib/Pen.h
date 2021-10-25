@@ -33,6 +33,15 @@ private:
 
     std::shared_ptr<Harold> mHarold;
 
+    enum class PenState
+    {
+        Held,
+        Thrown,
+        Hit
+    };
+
+    PenState mPenState = PenState::Held;
+
     /// the time counter for pen
     double mTime = 0;
 
@@ -75,6 +84,12 @@ public:
     void SetRecord(bool mIf) {mRecord = mIf;}
 
     void Stop();
+
+    void ThrowPen() {mPenState=PenState::Thrown;}
+
+    void HasHit() {mPenState=PenState::Hit;}
+
+    bool IsThrown () {return (mPenState==PenState::Thrown);}
 };
 
 #endif //INC_335PROJECT1_PEN_H

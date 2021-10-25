@@ -156,20 +156,21 @@ void Game::OnLeftDown(int mouseX, int mouseY)
  */
 bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 {
-    double penX=pen->GetX()+(pen->GetWidth()/2);
-    double penY=pen->GetY()-(pen->GetHeight()/2);
+    if (pen->IsThrown()) {
+        double penX = pen->GetX()+(pen->GetWidth()/2);
+        double penY = pen->GetY()-(pen->GetHeight()/2);
 
-    double objX=obj->GetX();
-    double objY=obj->GetY();
-    //TA item should be able to use GetWidth() and GetHeight on its bitmap
-    double objWidth=obj->GetWidth();
-    double objHeight=obj->GetHeight();
+        double objX = obj->GetX();
+        double objY = obj->GetY();
+        //TA item should be able to use GetWidth() and GetHeight on its bitmap
+        double objWidth = obj->GetWidth();
+        double objHeight = obj->GetHeight();
 
-    //HitTest using center point of pen against range of tested object's dimensions
-    if((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
-    (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2)))
-    {
-        return true;
+        //HitTest using center point of pen against range of tested object's dimensions
+        if ((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
+                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))) {
+            return true;
+        }
     }
 
     return false;

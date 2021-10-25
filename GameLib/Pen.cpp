@@ -38,7 +38,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
-    if(!isThrown)
+    if((mPenState==PenState::Held))
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
         graphics->Rotate(mRotation - 4.71);
@@ -49,7 +49,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
-    if (mClean)
+    if (mPenState==PenState::Hit)
     {
         graphics->DrawBitmap(mItemBitmap,
                 0,
@@ -59,7 +59,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mClean = false;
     }
 
-    else if(!isThrown)
+    else if((mPenState==PenState::Held))
     {
         graphics->DrawBitmap(mItemBitmap,
                 -GetWidth()-30,
@@ -86,7 +86,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 void Pen::HandleMouseDown(double virtualX, double virtualY)
 {
     /// determine if the pen has been thrown
-    if (!isThrown)
+    if (!(mPenState==PenState::Thrown))
     {
         double diffX = virtualX - (GetX());
         double diffY = virtualY - (GetY());
@@ -96,7 +96,7 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
         mVelocity.SetX(Velocity *cos(angle));
         mVelocity.SetY(Velocity *sin(angle));
 
-        isThrown = true;
+        mPenState=PenState::Thrown;
     }
 }
 
@@ -107,7 +107,7 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
  */
 void Pen::Update(double elapsed)
 {
-    if(isThrown)
+    if((mPenState==PenState::Thrown || mPenState==PenState::Hit))
     {
         mTime+=elapsed;
         if(variantSelected) {
@@ -117,10 +117,10 @@ void Pen::Update(double elapsed)
         double newY = GetY()+mVelocity.Y()*elapsed;
 
         auto tempGame = GetGame();
-        if (mTime > 1) {
+        if (mTime > 1 && mPenState==PenState::Hit) {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
-            isThrown = false;
+            mPenState=PenState::Held;
             mTime = 0;
         }
         else {
@@ -169,7 +169,7 @@ void Pen::ReturnToHarold()
 {
     SetLocation(InitialPos.X(), InitialPos.Y());
     mVelocity = cse335::Vector();
-    isThrown = false;
+    mPenState=PenState::Held;
     mTime = 0;
 }
 
@@ -179,6 +179,7 @@ void Pen::ReturnToHarold()
  */
 void Pen::Stop()
 {
+    mPenState = PenState::Hit;
     mVelocity = cse335::Vector();
     mRecord = false;
     mClean = true;
