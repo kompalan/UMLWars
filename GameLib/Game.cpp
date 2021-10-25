@@ -171,8 +171,11 @@ bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
         double objHeight = obj->GetHeight();
 
         //HitTest using center point of pen against range of tested object's dimensions
-        if ((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
-                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))) {
+        if (((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
+                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))) ||
+                ((penX-50>=(objX-objWidth/2) && penX-50<=(objX+objWidth/2)) &&
+                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2)))
+                ) {
             return true;
         }
     }

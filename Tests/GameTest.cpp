@@ -46,8 +46,8 @@ TEST(GameTest, HitTest)
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(50,75);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
-    uml->SetLocation(-25,90);
+    uml->SetLocation(-75,89);
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
-    uml->SetLocation(-50,89);
+    uml->SetLocation(-76,89);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
 }
