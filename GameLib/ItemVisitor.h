@@ -21,6 +21,7 @@ class GoodClassUML;
 class BadClassUML;
 class GoodInheritance;
 class BadInheritance;
+class TA;
 /** Item visitor base class */
 class ItemVisitor {
 public:
@@ -72,7 +73,7 @@ public:
     */
     virtual void VisitBadInheritance(BadInheritance* badUML) {}
 
-
+    virtual void VisitTA(TA* ta) {}
 };
 
 #endif //INC_335PROJECT1_ITEMVISITOR_H

@@ -13,6 +13,7 @@
 #include "UMLHitVisitor.h"
 #include "DeleteUMLVisitor.h"
 #include "UMLOnScreenVisitor.h"
+#include "TAScoreVisitor.h"
 
 using namespace std;
 
@@ -43,6 +44,9 @@ Game::Game()
     mRandom.seed(rd());
 
     mEmitter = std::make_shared<Emitter>(this, mData);
+
+    auto ta = std::make_shared<TA>(this);
+    AddItem(ta);
 }
 
 /**
@@ -221,7 +225,6 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             item->Accept(&hitVisitor);
 
             auto loc = find(mItems.begin(), mItems.end(), item);
-
             if (loc != mItems.end())
             {
 
@@ -231,13 +234,16 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
                     mScoreboard->IncUnfair();
                 } else {
                     mScoreboard->IncCorrect();
+
+                    for (auto item : mItems) {
+                        TAScoreVisitor ta;
+                        item->Accept(&ta);
+                    }
                 }
 
                 pen->SetRecord(true);
 
                 pen->Stop();
-
-                break;
             }
         }
     }
