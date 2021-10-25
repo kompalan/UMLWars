@@ -71,6 +71,9 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
     graphics->Translate(mXOffset, mYOffset);
     graphics->Scale(mScale, mScale);
 
+    graphics->SetBrush(wxBrush(*wxWHITE_BRUSH));
+    graphics->DrawRectangle(-mWidth/2, 0, mWidth, mHeight);
+
     for(auto item : mItems)
     {
         item->Draw(graphics);

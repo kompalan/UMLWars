@@ -48,7 +48,7 @@ void WarsView::OnPaint(wxPaintEvent& event)
     wxAutoBufferedPaintDC dc(this);
 
     // Clear the image to black
-    wxBrush background(*wxWHITE);
+    wxBrush background(*wxBLACK);
     dc.SetBackground(background);
     dc.Clear();
 
