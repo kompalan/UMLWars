@@ -70,7 +70,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     else
     {
         graphics->Translate(GetX()-10, GetY()-10);
-        graphics->Rotate(1);
+        graphics->Rotate(mThrownRotation- 4.71);
         graphics->DrawBitmap(mItemBitmap,
                 0,
                 0,
