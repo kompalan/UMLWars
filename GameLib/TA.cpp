@@ -25,12 +25,15 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
-    if(mTAState == State::Spawned) {
+    if (mTAState == State::Spawned) {
         graphics->DrawBitmap(mItemBitmap,
                 GetX(),
                 GetY(),
                 GetWidth(),
                 GetHeight());
+    } else if (mTAState == State::Hit) {
+        SetLocation(InitialPosition.X(), InitialPosition.Y());
+        /// Call some function in game to remove all TA and switch the state to not spawned
     }
 
     graphics->PopState();
