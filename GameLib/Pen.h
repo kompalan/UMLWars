@@ -64,6 +64,8 @@ public:
 
     void Update(double elapsed) override;
 
+    void CheckBorder();
+
     void HandleMouseMove(double virtualX, double virtualY) override;
 
     void SetRecord(bool mIf) {mRecord = mIf;}
