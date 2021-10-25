@@ -86,7 +86,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 void Pen::HandleMouseDown(double virtualX, double virtualY)
 {
     /// determine if the pen has been thrown
-    if (!(mPenState==PenState::Thrown))
+    if (mPenState==PenState::Held)
     {
         double diffX = virtualX - (GetX());
         double diffY = virtualY - (GetY());
@@ -97,6 +97,7 @@ void Pen::HandleMouseDown(double virtualX, double virtualY)
         mVelocity.SetY(Velocity *sin(angle));
 
         mPenState=PenState::Thrown;
+        mThrownRotation=mRotation;
     }
 }
 

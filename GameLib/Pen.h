@@ -16,6 +16,8 @@ class Pen : public Item {
 private:
     ///< Rotation angle in radians for Pen
     double mRotation = 0.0;
+    /// Stored rotation angle in radians for Pen while Thrown
+    double mThrownRotation = 0.0;
 
     /// The Item Image
     std::unique_ptr<wxImage> mItemImage;
