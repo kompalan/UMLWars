@@ -134,7 +134,7 @@ void Pen::CheckBorder(){
     if((GetY() < 0) || (GetY() > mGame->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
     }
-    if((GetX() < (-mGame->GetWidth())) || ((GetX() > mGame->GetWidth()))){
+    if((GetX() < (-mGame->GetWidth()/2)) || ((GetX() > (mGame->GetWidth()/2)))){
         mVelocity.SetX(-mVelocity.X());
     }
 }
