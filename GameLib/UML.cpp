@@ -40,7 +40,7 @@ bool UML::CheckOnScreen()
     double gameWidth = GetGame()->GetWidth();
     double gameHeight = GetGame()->GetHeight();
 
-    if (GetX() < -gameWidth/2 - mWidth || GetX() > gameWidth/2 + mWidth || GetY() > gameHeight + mHeight/2)
+    if (GetX() < -gameWidth/2 - mWidth/2 || GetX() > gameWidth/2 + mWidth/2 || GetY() > gameHeight + mHeight/2)
     {
         return false;
     }

@@ -100,7 +100,9 @@ void Pen::Update(double elapsed)
     if(isThrown)
     {
         mTime+=elapsed;
-        CheckBorder();
+        if(variantSelected) {
+            CheckBorder();
+        }
         double newX = GetX()+mVelocity.X()*elapsed;
         double newY = GetY()+mVelocity.Y()*elapsed;
 
@@ -134,7 +136,7 @@ void Pen::CheckBorder(){
     if((GetY() < 0) || (GetY() > mGame->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
     }
-    if((GetX() < (-mGame->GetWidth()/2)) || ((GetX() > (mGame->GetWidth()/2)))){
+    if((GetX() < (-mGame->GetWidth()/2)) || (GetX() > (mGame->GetWidth()/2))){
         mVelocity.SetX(-mVelocity.X());
     }
 }
