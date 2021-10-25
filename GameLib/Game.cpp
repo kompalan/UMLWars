@@ -14,6 +14,7 @@
 #include "DeleteUMLVisitor.h"
 #include "UMLOnScreenVisitor.h"
 #include "TAScoreVisitor.h"
+#include "TAHitVisitor.h"
 
 using namespace std;
 
@@ -226,6 +227,9 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             UMLHitVisitor hitVisitor;
 
             item->Accept(&hitVisitor);
+
+            TAHitVisitor taHitVisitor;
+            item->Accept(&taHitVisitor);
 
             auto loc = find(mItems.begin(), mItems.end(), item);
             if (loc != mItems.end())

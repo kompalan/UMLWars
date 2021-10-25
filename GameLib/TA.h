@@ -35,6 +35,7 @@ public:
     void Update(double elapsed) override;
     State GetState() const { return mTAState; }
     void SetState(State state) { mTAState = state; }
+    void SetHitState() { mTAState = State::Hit; }
     void IncrementScoreCount() { mScoreCount++; }
 
     /**
