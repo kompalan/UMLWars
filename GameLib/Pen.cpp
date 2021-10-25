@@ -69,9 +69,11 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     }
     else
     {
+        graphics->Translate(GetX()-10, GetY()-10);
+        graphics->Rotate(1);
         graphics->DrawBitmap(mItemBitmap,
-                GetX(),
-                GetY(),
+                0,
+                0,
                 GetWidth(),
                 GetHeight());
     }
