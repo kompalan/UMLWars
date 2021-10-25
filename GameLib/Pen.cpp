@@ -49,7 +49,17 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
-    if(!isThrown)
+    if (mClean)
+    {
+        graphics->DrawBitmap(mItemBitmap,
+                0,
+                0,
+                0,
+                0);
+        mClean = false;
+    }
+
+    else if(!isThrown)
     {
         graphics->DrawBitmap(mItemBitmap,
                 -GetWidth()-30,
@@ -107,8 +117,6 @@ void Pen::Update(double elapsed)
         double newY = GetY()+mVelocity.Y()*elapsed;
 
         auto tempGame = GetGame();
-        int bound_height = tempGame->GetHeight();
-        int bound_width = tempGame->GetWidth();
         if (mTime > 1) {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
@@ -173,4 +181,5 @@ void Pen::Stop()
 {
     mVelocity = cse335::Vector();
     mRecord = false;
+    mClean = true;
 }

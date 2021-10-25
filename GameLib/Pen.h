@@ -40,6 +40,8 @@ private:
 
     bool variantSelected = false;
 
+    bool mClean = false;
+
 public:
     Pen(Game *game);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
