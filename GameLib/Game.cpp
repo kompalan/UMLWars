@@ -46,8 +46,10 @@ Game::Game()
 
     mEmitter = std::make_shared<Emitter>(this, mData);
 
-    auto ta = std::make_shared<TA>(this);
-    AddItem(ta);
+    if(customVariant) {
+        mTA = std::make_shared<TA>(this);
+        AddItem(mTA);
+    }
 }
 
 /**

@@ -6,6 +6,7 @@
 
 #include "pch.h"
 #include "WarsView.h"
+#include "ids.h"
 
 #include <wx/dcbuffer.h>
 
@@ -31,6 +32,16 @@ void WarsView::Initialize(wxFrame* mainFrame)
     mTimer.SetOwner(this);
     mTimer.Start(FrameDuration);
     mStopWatch.Start();
+}
+
+void WarsView::AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar)
+{
+    auto variantMenu = new wxMenu();
+    variantMenu->AppendRadioItem(IDM_VARIANT_ORIGINAL, L"&Original", L"Original Variant");
+    variantMenu->AppendRadioItem(IDM_VARIANT_CUSTOM, L"&Custom", L"Custom Variant");
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED, &WarsView::OnOriginalVariant, this, IDM_VARIANT_ORIGINAL);
+    mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED, &WarsView::OnCustomVariant, this, IDM_VARIANT_CUSTOM);
+    menuBar->Append(variantMenu, "&Variant");
 }
 
 /**
@@ -86,4 +97,14 @@ void WarsView::OnMouseMove(wxMouseEvent& event)
 void WarsView::OnLeftDown(wxMouseEvent& event)
 {
     mGame.OnLeftDown(event.GetX(), event.GetY());
+}
+
+void WarsView::OnOriginalVariant(wxCommandEvent& WXUNUSED(event))
+{
+    mGame.switchVariant(false);
+}
+
+void WarsView::OnCustomVariant(wxCommandEvent& WXUNUSED(event))
+{
+    mGame.switchVariant(true);
 }

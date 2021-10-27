@@ -28,15 +28,21 @@ private:
     /// The last stopwatch time
     long mTime = 0;
 
+    int variantSelected = 0;
+
     void OnPaint(wxPaintEvent& event);
     void OnTimer(wxTimerEvent& event);
     void OnMouseMove(wxMouseEvent &event);
     void OnLeftDown(wxMouseEvent &event);
+    void OnOriginalVariant(wxCommandEvent&);
+    void OnCustomVariant(wxCommandEvent&);
 public:
     void Initialize(wxFrame *mainFrame);
 
     /// Stop Timer After Close
     void Stop() {mTimer.Stop();}
+
+    void AddMenus(wxFrame* mainFrame, wxMenuBar* menuBar);
 };
 
 #endif //INC_335PROJECT1_WARSVIEW_H

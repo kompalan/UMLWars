@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "MainFrame.h"
 #include "WarsView.h"
+#include "ids.h"
 
 using namespace std;
 /**
@@ -33,6 +34,7 @@ void MainFrame::Initialize()
     auto helpMenu = new wxMenu();
 
     menuBar->Append(fileMenu, L"&File" );
+    mGameView->AddMenus(this, menuBar);
     menuBar->Append(helpMenu, L"&Help");
 
     fileMenu->Append(wxID_EXIT, "E&xit\tAlt-X", "Quit the program");
@@ -75,7 +77,4 @@ void MainFrame::OnClose(wxCloseEvent& event)
     mGameView->Stop();
     Destroy();
 }
-
-
-
 

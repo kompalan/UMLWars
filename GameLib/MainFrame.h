@@ -20,13 +20,14 @@ private:
     /// The WarsView Object
     WarsView *mGameView;
 
+    int variantSelected = 0;
+
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent&);
     void OnClose(wxCloseEvent &event);
 
 public:
     void Initialize();
-
 };
 
 #endif //INC_335PROJECT1_MAINFRAME_H

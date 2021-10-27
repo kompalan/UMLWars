@@ -59,7 +59,12 @@ private:
     /// The Threshold for stop for seconds
     double mTimeToReturn = 1.7;
 
+    /// Pointer to TA
+    std::shared_ptr<TA> mTA;
+
     bool noDelete = true;
+
+    bool customVariant = false;
 
 public:
     Game();
@@ -116,6 +121,10 @@ public:
 
 
     std::shared_ptr<Harold> GetHarold() {return mHarold;}
+
+    void switchVariant(bool custom) { customVariant = custom; }
+
+    bool customSelected() { return customVariant; }
 
 };
 

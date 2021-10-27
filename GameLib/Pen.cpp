@@ -113,6 +113,7 @@ void Pen::Update(double elapsed)
     if((mPenState==PenState::Thrown || mPenState==PenState::Hit))
     {
         mTime+=elapsed;
+        variantSelected = mGame->customSelected();
         if(variantSelected) {
             CheckBorder();
         }
@@ -147,7 +148,7 @@ void Pen::CheckBorder(){
     if((GetY() < 0) || (GetY() > mGame->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
     }
-    if((GetX() < (-mGame->GetWidth()/2)) || (GetX() > (mGame->GetWidth()/2))){
+    if((GetX() < ((-mGame->GetWidth()/2) + GetWidth()/2)) || (GetX() > (mGame->GetWidth()/2))){
         mVelocity.SetX(-mVelocity.X());
     }
 }
