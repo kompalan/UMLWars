@@ -10,26 +10,6 @@
 
 using namespace std;
 
-/// The font for class names
-wxFont NameFont(wxSize(0,15),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The font for attributes and operations
-wxFont NormalFont(wxSize(0,15),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The font for displaying the message after UML is hit
-wxFont DisplayFont(wxSize(0,30),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The light yellow color of the UML rectangle
-wxColour LightYellow = wxColour(255, 255, 193);
 
 /// The minimum width the UML object can be in pixels
 const double MinWidth = 100;
@@ -66,6 +46,27 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
+    /// The font for class names
+    const wxFont NameFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The font for attributes and operations
+    const wxFont NormalFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The font for displaying the message after UML is hit
+    const wxFont DisplayFont(wxSize(0,30),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The light yellow color of the UML rectangle
+    const wxColour lightYellow = wxColour(255, 255, 193);
+
     // Check if the width and height of the UML has been calculated already
     if (!GetDimensionsCalculated())
     {
@@ -77,7 +78,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     double currentY = GetY() - GetHeight()/2; //< The current y value things are being drawn at
 
     // Set the brush and pen to draw the light yellow rectangle of the UML
-    wxBrush rectBrush(LightYellow);
+    wxBrush rectBrush(lightYellow);
     graphics->SetBrush(rectBrush);
     wxPen pen(*wxBLACK);
     graphics->SetPen(pen);
@@ -148,6 +149,27 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
 {
+    /// The font for class names
+    const wxFont NameFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The font for attributes and operations
+    const wxFont NormalFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The font for displaying the message after UML is hit
+    const wxFont DisplayFont(wxSize(0,30),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    /// The light yellow color of the UML rectangle
+    const wxColour lightYellow = wxColour(255, 255, 193);
+
     graphics->SetFont(NameFont, *wxBLACK);
 
     double wid, hit; //< Width and height variables to store GetTextExtent return values in

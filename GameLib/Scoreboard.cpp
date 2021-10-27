@@ -7,20 +7,7 @@
 #include "Scoreboard.h"
 #include "Vector.h"
 
-/// Font of the categories
-wxFont SmallFont(wxSize(0, 40),
-        wxFONTFAMILY_DEFAULT,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_BOLD);
 
-/// Font of the Scoreboard
-wxFont BigFont(wxSize(0, 85),
-        wxFONTFAMILY_DEFAULT,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_BOLD);
-
-/// Color of the Scoreboard
-wxColour CyanBlue = wxColour(0,200,200);
 
 /// Position of the Scoreboard
 const cse335::Vector Position = cse335::Vector(0, 100);
@@ -40,6 +27,22 @@ void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     double wid, hit;
 
     graphics->PushState();
+
+    /// Font of the categories
+    wxFont SmallFont(wxSize(0, 40),
+            wxFONTFAMILY_DEFAULT,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+
+    /// Font of the Scoreboard
+    wxFont BigFont(wxSize(0, 85),
+            wxFONTFAMILY_DEFAULT,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+
+    /// Color of the Scoreboard
+    wxColour CyanBlue = wxColour(0,200,200);
+
     //Categories
     graphics->SetFont(SmallFont, CyanBlue);
 
