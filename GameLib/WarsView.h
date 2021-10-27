@@ -28,8 +28,6 @@ private:
     /// The last stopwatch time
     long mTime = 0;
 
-    int variantSelected = 0;
-
     void OnPaint(wxPaintEvent& event);
     void OnTimer(wxTimerEvent& event);
     void OnMouseMove(wxMouseEvent &event);

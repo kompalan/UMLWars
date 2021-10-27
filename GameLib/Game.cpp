@@ -46,8 +46,8 @@ Game::Game()
 
     mEmitter = std::make_shared<Emitter>(this, mData);
 
-    mTA = std::make_shared<TA>(this);
-    AddItem(mTA);
+    auto ta = std::make_shared<TA>(this);
+    AddItem(ta);
 }
 
 /**
@@ -98,16 +98,6 @@ void Game::Update(double elapsed)
     int index = 0;
 
     DeleteUMLVisitor deleteVisitor;
-
-    if(customVariant == 0){
-        if(find(mItems.begin(), mItems.end(), mTA) != mItems.end()){
-            mItems.erase(find(mItems.begin(), mItems.end(), mTA));
-        }
-    } else if (customVariant == 1){
-        if(find(mItems.begin(), mItems.end(), mTA) == mItems.end()){
-            AddItem(mTA);
-        }
-    }
 
     while (index < mItems.size())
     {

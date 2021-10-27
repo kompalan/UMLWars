@@ -49,8 +49,6 @@ private:
 
     bool mRecord = false;
 
-    bool variantSelected = false;
-
     bool mClean = false;
 
 public:

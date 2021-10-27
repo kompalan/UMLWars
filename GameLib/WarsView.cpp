@@ -101,10 +101,10 @@ void WarsView::OnLeftDown(wxMouseEvent& event)
 
 void WarsView::OnOriginalVariant(wxCommandEvent& WXUNUSED(event))
 {
-    mGame.switchVariant(false);
+    mGame.SwitchVariant(false);
 }
 
 void WarsView::OnCustomVariant(wxCommandEvent& WXUNUSED(event))
 {
-    mGame.switchVariant(true);
+    mGame.SwitchVariant(true);
 }

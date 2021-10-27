@@ -113,8 +113,8 @@ void Pen::Update(double elapsed)
     if((mPenState==PenState::Thrown || mPenState==PenState::Hit))
     {
         mTime+=elapsed;
-        variantSelected = mGame->customSelected();
-        if(variantSelected) {
+        if(mGame->IsCustomSelected())
+        {
             CheckBorder();
         }
         double newX = GetX()+mVelocity.X()*elapsed;
@@ -127,7 +127,8 @@ void Pen::Update(double elapsed)
             mPenState=PenState::Held;
             mTime = 0;
         }
-        else {
+        else
+        {
             SetLocation(newX, newY);
         }
         mGame->RemoveOnHit(this, mTime);
