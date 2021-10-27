@@ -29,22 +29,22 @@ void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
 
     /// Font of the categories
-    wxFont SmallFont(wxSize(0, 40),
+    wxFont smallFont(wxSize(0, 40),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
     /// Font of the Scoreboard
-    wxFont BigFont(wxSize(0, 85),
+    wxFont bigFont(wxSize(0, 85),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
     /// Color of the Scoreboard
-    wxColour CyanBlue = wxColour(0,200,200);
+    wxColour cyanBlue = wxColour(0,200,200);
 
     //Categories
-    graphics->SetFont(SmallFont, CyanBlue);
+    graphics->SetFont(smallFont, cyanBlue);
 
     graphics->GetTextExtent(L"Unfair", &wid, &hit);
     graphics->DrawText(L"Unfair", 300 - wid/2, 150 - hit/2);
@@ -55,7 +55,7 @@ void Scoreboard::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->GetTextExtent(L"Correct", &wid, &hit);
     graphics->DrawText(L"Correct", -300 - wid/2, 150 - hit/2);
     //Scores
-    graphics->SetFont(BigFont, CyanBlue);
+    graphics->SetFont(bigFont, cyanBlue);
 
     graphics->GetTextExtent(std::to_string(mUnfair), &wid, &hit);
     graphics->DrawText(std::to_string(mUnfair), 300 - wid/2, 100 - hit/2);

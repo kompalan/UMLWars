@@ -55,7 +55,7 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
 
     /// The font for displaying the message after UML is hit
-    wxFont DisplayFontInheritance(wxSize(0,30),
+    wxFont displayFontInheritance(wxSize(0,30),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
@@ -144,11 +144,11 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 
         if (visitor.IsGood())
         {
-            graphics->SetFont(DisplayFontInheritance, *wxRED);
+            graphics->SetFont(displayFontInheritance, *wxRED);
         }
         else
         {
-            graphics->SetFont(DisplayFontInheritance, wxColour(44, 117, 36));
+            graphics->SetFont(displayFontInheritance, wxColour(44, 117, 36));
         }
         double wid, hit;
 

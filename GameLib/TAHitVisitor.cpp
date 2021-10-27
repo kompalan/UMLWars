@@ -3,5 +3,6 @@
  * @author Anurag Kompalli
  */
 
+#include "pch.h"
 #include "TAHitVisitor.h"
 
