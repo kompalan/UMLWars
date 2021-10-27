@@ -19,7 +19,7 @@ TEST(EmitterTest, TestNothing) {
 
     game->Update(1);
     int size = game->GetSize();
-    ASSERT_TRUE(size == 2);
+    ASSERT_TRUE(size == 3);
 }
 
 TEST(EmitterTest, TestGoodClass) {
@@ -38,7 +38,7 @@ TEST(EmitterTest, TestGoodClass) {
     // Good Should Be Created
     game->Update(2.6);
 
-    ASSERT_TRUE(game->GetSize() == 3);
+    ASSERT_TRUE(game->GetSize() == 4);
 }
 
 TEST(EmitterTest, TestBadClass) {
@@ -57,7 +57,7 @@ TEST(EmitterTest, TestBadClass) {
     // Bad Class Should Be Created
     game->Update(2.6);
 
-    ASSERT_TRUE(game->GetSize() == 3);
+    ASSERT_TRUE(game->GetSize() == 4);
 }
 
 TEST(EmitterTest, TestGoodInheritance) {
@@ -76,7 +76,7 @@ TEST(EmitterTest, TestGoodInheritance) {
     // Good Inheritance Should Be Created
     game->Update(2.6);
 
-    ASSERT_TRUE(game->GetSize() == 3);
+    ASSERT_TRUE(game->GetSize() == 4);
 }
 
 TEST(EmitterTest, TestBadInheritance) {
@@ -95,6 +95,6 @@ TEST(EmitterTest, TestBadInheritance) {
     // Bad Inheritance Should Be Created
     game->Update(2.6);
 
-    ASSERT_TRUE(game->GetSize() == 3);
+    ASSERT_TRUE(game->GetSize() == 4);
 }
  
