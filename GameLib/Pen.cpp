@@ -16,7 +16,7 @@ cse335::Vector InitialPos = cse335::Vector(0, 850);
 
 const double Velocity = 1000;
 
-const double radius = 61.3;
+const double Radius = 61.3;
 
 /**
  * Constructor
@@ -133,7 +133,7 @@ void Pen::Update(double elapsed)
     }
     else
     {
-        SetLocation(mHarold->GetX() + radius * cos(mRotation -1 ), mHarold->GetY() + radius * sin(mRotation - 1));
+        SetLocation(mHarold->GetX() + Radius * cos(mRotation -1 ), mHarold->GetY() + Radius * sin(mRotation - 1));
     }
     if (mRecord)
     {

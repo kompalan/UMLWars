@@ -10,7 +10,7 @@
 using namespace std;
 
 /// The font for displaying the message after UML is hit
-const wxFont DisplayFont(wxSize(0,30),
+wxFont DisplayFontInheritance(wxSize(0,30),
         wxFONTFAMILY_SWISS,
         wxFONTSTYLE_NORMAL,
         wxFONTWEIGHT_NORMAL);
@@ -143,11 +143,11 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 
         if (visitor.IsGood())
         {
-            graphics->SetFont(DisplayFont, *wxRED);
+            graphics->SetFont(DisplayFontInheritance, *wxRED);
         }
         else
         {
-            graphics->SetFont(DisplayFont, wxColour(44, 117, 36));
+            graphics->SetFont(DisplayFontInheritance, wxColour(44, 117, 36));
         }
         double wid, hit;
 
