@@ -10,26 +10,6 @@
 
 using namespace std;
 
-/// The font for class names
-const wxFont NameFont(wxSize(0,15),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The font for attributes and operations
-const wxFont NormalFont(wxSize(0,15),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The font for displaying the message after UML is hit
-const wxFont DisplayFont(wxSize(0,30),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
-
-/// The light yellow color of the UML rectangle
-const wxColour lightYellow = wxColour(255, 255, 193);
 
 /// The minimum width the UML object can be in pixels
 const double MinWidth = 100;
@@ -66,6 +46,27 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
+    // The font for class names
+    wxFont nameFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    // The font for attributes and operations
+    wxFont normalFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    // The font for displaying the message after UML is hit
+    wxFont displayFont(wxSize(0,30),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    // The light yellow color of the UML rectangle
+    wxColour lightYellow = wxColour(255, 255, 193);
+
     // Check if the width and height of the UML has been calculated already
     if (!GetDimensionsCalculated())
     {
@@ -86,7 +87,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->DrawRectangle(GetX()-GetWidth()/2, currentY, GetWidth(), GetHeight());
 
     // Draw the class name at centered at the top of the rectangle
-    graphics->SetFont(NameFont, *wxBLACK);
+    graphics->SetFont(nameFont, *wxBLACK);
     graphics->GetTextExtent(mName->GetItem(), &wid, &hit);
     graphics->DrawText(mName->GetItem(), GetX() - wid/2, currentY);
 
@@ -98,7 +99,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     // Go through each attribute in the UML object and draw the text left justified in the rectangle
     if (mAttributes.size() != 0)
     {
-        graphics->SetFont(NormalFont, *wxBLACK);
+        graphics->SetFont(normalFont, *wxBLACK);
         for (auto attribute : mAttributes)
         {
             graphics->GetTextExtent(attribute->GetItem(), &wid, &hit);
@@ -111,7 +112,7 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if (mOperations.size() != 0)
     {
         graphics->StrokeLine(GetX() - GetWidth()/2, currentY, GetX() + GetWidth()/2, currentY);
-        graphics->SetFont(NormalFont, *wxBLACK);
+        graphics->SetFont(normalFont, *wxBLACK);
         for (auto operation : mOperations)
         {
             graphics->GetTextExtent(operation->GetItem(), &wid, &hit);
@@ -128,11 +129,11 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
         if (visitor.IsGood())
         {
-            graphics->SetFont(DisplayFont, *wxRED);
+            graphics->SetFont(displayFont, *wxRED);
         }
         else
         {
-            graphics->SetFont(DisplayFont, wxColour(44, 117, 36));
+            graphics->SetFont(displayFont, wxColour(44, 117, 36));
         }
 
         graphics->GetTextExtent(GetMessage(), &wid, &hit);
@@ -148,7 +149,19 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
 {
-    graphics->SetFont(NameFont, *wxBLACK);
+    // The font for class names
+    wxFont nameFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    // The font for attributes and operations
+    wxFont normalFont(wxSize(0,15),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
+
+    graphics->SetFont(nameFont, *wxBLACK);
 
     double wid, hit; //< Width and height variables to store GetTextExtent return values in
 
@@ -157,7 +170,7 @@ void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
     double height = hit;
     double width = wid;
 
-    graphics->SetFont(NormalFont, *wxBLACK);
+    graphics->SetFont(normalFont, *wxBLACK);
 
     // Go through each attribute in the UML object and add the required height to the UML height and check if
     // the UML width needs to be replaced with a larger value to accommodate wider text

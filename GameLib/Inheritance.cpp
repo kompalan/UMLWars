@@ -9,11 +9,6 @@
 
 using namespace std;
 
-/// The font for displaying the message after UML is hit
-const wxFont DisplayFont(wxSize(0,30),
-        wxFONTFAMILY_SWISS,
-        wxFONTSTYLE_NORMAL,
-        wxFONTWEIGHT_NORMAL);
 
 /// The length of the arrow line between classes in pixels
 const double ArrowLineLength = 16;
@@ -58,6 +53,12 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 {
 
     graphics->PushState();
+
+    /// The font for displaying the message after UML is hit
+    wxFont displayFontInheritance(wxSize(0,30),
+            wxFONTFAMILY_SWISS,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_NORMAL);
 
     // Check if the width and height of the inheritance have already been calculated to avoid recalculating them
     if (!GetDimensionsCalculated())
@@ -143,11 +144,11 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 
         if (visitor.IsGood())
         {
-            graphics->SetFont(DisplayFont, *wxRED);
+            graphics->SetFont(displayFontInheritance, *wxRED);
         }
         else
         {
-            graphics->SetFont(DisplayFont, wxColour(44, 117, 36));
+            graphics->SetFont(displayFontInheritance, wxColour(44, 117, 36));
         }
         double wid, hit;
 
