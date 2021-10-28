@@ -9,6 +9,7 @@
 #define INC_335PROJECT1_ITEMWITHIMAGE_H
 
 #pragma once
+#include "pch.h"
 #include "Item.h"
 
 class ItemWithImage : public Item{
