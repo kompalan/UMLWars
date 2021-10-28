@@ -38,7 +38,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
 
-    if((mPenState==PenState::Held))
+    if(mPenState==PenState::Held)
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
         graphics->Rotate(mRotation - 4.71);
@@ -59,7 +59,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mClean = false;
     }
 
-    else if((mPenState==PenState::Held))
+    else if(mPenState==PenState::Held)
     {
         graphics->DrawBitmap(mItemBitmap,
                 -GetWidth()-30,
@@ -156,14 +156,6 @@ void Pen::CheckBorder(){
 
 void Pen::HandleMouseMove(double virtualX, double virtualY)
 {
-//    if (!isThrown)
-//    {
-//        mRotation = mHarold->GetRotation();
-//    }
-//    else
-//    {
-//        mRotation = 0;
-//    }
 }
 
 /**
