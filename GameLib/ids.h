@@ -10,7 +10,7 @@
 
 enum IDs {
     /// Variant>Original menu option
-    IDM_VARIANT_ORIGINAL = wxID_HIGHEST + 1,
+    IDM_VARIANT_ORIGINAL,
 
     /// Variant>Custom menu option
     IDM_VARIANT_CUSTOM
