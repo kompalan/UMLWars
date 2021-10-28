@@ -4,4 +4,5 @@
  */
 
 #include "ItemWithImage.h"
+#include "pch.h"
 
