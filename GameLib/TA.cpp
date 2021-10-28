@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "TA.h"
+#include "Game.h"
 
 /// Sparty Filename
 const std::wstring TAImageName = L"images/sparty.png";
@@ -35,14 +36,17 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     } else if (mTAState == State::Hit) {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
         /// Call some function in game to remove all TA and switch the state to not spawned
+        mGame->DeleteAllUML();
+        mTAState = State::NotSpawned;
     }
+
 
     graphics->PopState();
 }
 
 void TA::Update(double elapsed)
 {
-    if (mScoreCount > 15) {
+    if (mScoreCount > 15 && mTAState == State::NotSpawned) {
         SetLocation(0, 200);
         mScoreCount = 0;
         mTAState = State::Spawned;

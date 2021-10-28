@@ -28,9 +28,6 @@ private:
     /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
 
-    /// Determiane if Harold firstly throws
-    bool isThrown = false;
-
     Game *mGame;
 
     std::shared_ptr<Harold> mHarold;

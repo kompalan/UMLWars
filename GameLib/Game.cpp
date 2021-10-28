@@ -273,3 +273,27 @@ void Game::DeleteUML(std::vector<UML*> toDelete)
     }
 }
 
+/**
+ * Deletes all UML from the Screen and Increments
+ * the Score by the Amount of UML Deleted
+ */
+void Game::DeleteAllUML() {
+    for(auto item : mItems)
+    {
+        GoodUMLVisitor goodVisitor;
+        UMLHitVisitor hitVisitor;
+
+        auto loc = find(mItems.begin(), mItems.end(), item);
+        if (loc != mItems.end())
+        {
+
+            item->Accept(&goodVisitor);
+
+
+            if(!goodVisitor.IsGood()) {
+                item->Accept(&hitVisitor);
+                mScoreboard->IncCorrect();
+            }
+        }
+    }
+}
