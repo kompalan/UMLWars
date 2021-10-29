@@ -122,6 +122,8 @@ public:
 
     bool IsCustomSelected() { return mCustomVariant; }
 
+    double GetScale() { return mScale; }
+
 };
 
 #endif //INC_335PROJECT1_GAME_H

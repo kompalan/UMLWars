@@ -63,11 +63,17 @@ void WarsView::OnPaint(wxPaintEvent& event)
     dc.SetBackground(background);
     dc.Clear();
 
+    // Tell the game class to draw
+    wxRect rect = GetRect();
+
+    dc.SetClippingRegion(rect.GetWidth()/2 - (mGame.GetWidth()/2 * mGame.GetScale()),
+            rect.GetHeight()/2 - (mGame.GetHeight()/2 * mGame.GetScale()),
+            mGame.GetWidth()*mGame.GetScale() ,mGame.GetHeight()*mGame.GetScale());
+
     // Create a graphics context
     auto gc = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
 
-    // Tell the game class to draw
-    wxRect rect = GetRect();
+
     mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 
 }
