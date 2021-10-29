@@ -1,45 +1,29 @@
 /**
  * @file BadUMLVisitor.h
- * @author Kristian Rica
+ * @author Joe Getzen
  *
- *
+ * Good UML visitor class derived from ItemVisitor
  */
 
 #ifndef INC_335PROJECT1_BADUMLVISITOR_H
 #define INC_335PROJECT1_BADUMLVISITOR_H
 
-/**
- * Implements visitor class to count all Bad UML objects
- */
-
 #include "ItemVisitor.h"
+#include "Item.h"
+#include "GoodClassUML.h"
+#include "BadClassUML.h"
+#include "GoodInheritance.h"
+#include "BadInheritance.h"
 
 class BadUMLVisitor : public ItemVisitor {
 private:
-    bool mIsGood=false;
-    int numBadUML = 0;
+    bool mIsBad = false;
 public:
-    /**
-     * Tell that UML visited is bad
-     * @return false if UML is bad
-     */
-    bool IsGood() { return mIsGood; }
-
-    /**
-     * Get the number of Bad UMLs
-     * @return Number of Bad UMLs
-     */
-    int getBadUMLnum() { return numBadUML; }
-
-    /**
-    * Visit a BadClassUML object
-    * @param UML Bad UML we are visiting
-    */
-    void visitBadUML(BadClassUML* UML)
-    {
-        numBadUML++;
-    }
-
+    bool IsBad() {return mIsBad;}
+    void VisitGoodUML(GoodClassUML* UML) override {mIsBad = false;}
+    void VisitBadUML(BadClassUML* UML) override {mIsBad = true;}
+    void VisitGoodInheritance(GoodInheritance* UML) override {mIsBad = false;}
+    void VisitBadInheritance(BadInheritance* UML) override {mIsBad = true;}
 };
 
 #endif //INC_335PROJECT1_BADUMLVISITOR_H

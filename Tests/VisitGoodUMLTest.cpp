@@ -10,7 +10,7 @@
 #include <ClassUML.h>
 #include <GoodClassUML.h>
 #include <BadClassUML.h>
-#include <GoodUMLVisitor.h>
+#include <BadUMLVisitor.h>
 #include <GoodInheritanceItem.h>
 #include <BadInheritanceItem.h>
 
@@ -22,18 +22,18 @@ using namespace std;
 class TestVisitor : public ItemVisitor
 {
 public:
-    virtual void VisitGoodUML(GoodClassUML* goodUML) override { mIsGood=true; }
+    virtual void VisitGoodUML(GoodClassUML* goodUML) override { mIsBad=false; }
 
-    virtual void VisitBadUML(BadClassUML* badUML) override { mIsGood=false; }
+    virtual void VisitBadUML(BadClassUML* badUML) override { mIsBad=true; }
 
-    bool mIsGood=false;
+    bool mIsBad=false;
 
-    bool IsGood() {return mIsGood;}
+    bool IsBad() {return mIsBad;}
 };
 
 TEST(VisitGoodUMLTest, Constructor)
 {
-   GoodUMLVisitor real;
+   BadUMLVisitor real;
    TestVisitor test;
 }
 
@@ -47,7 +47,7 @@ TEST(VisitGoodUMLTest, VisitAccept)
     std::vector<std::shared_ptr<UMLAttribute>> attributes;
     std::vector<std::shared_ptr<UMLOperation>> operations;
 
-    GoodUMLVisitor real;
+    BadUMLVisitor real;
     TestVisitor test;
 
     GoodClassUML GCUML(&game,name,attributes,operations);
@@ -65,47 +65,48 @@ TEST(VisitGoodUMLTest, VisitIsGood)
     std::vector<std::shared_ptr<UMLAttribute>> attributes;
     std::vector<std::shared_ptr<UMLOperation>> operations;
 
-    GoodUMLVisitor real;
+    BadUMLVisitor real;
     TestVisitor test;
 
     GoodClassUML GCUML(&game,name,attributes,operations);
 
-    ASSERT_TRUE(!real.IsGood());
-    ASSERT_TRUE(!test.IsGood());
+    ASSERT_TRUE(!real.IsBad());
+    ASSERT_TRUE(!test.IsBad());
 
     GCUML.Accept(&real);
     GCUML.Accept(&test);
 
-    ASSERT_TRUE(real.IsGood());
-    ASSERT_TRUE(test.IsGood());
+    ASSERT_TRUE(!real.IsBad());
+    ASSERT_TRUE(!test.IsBad());
 
     wstring reason;
     BadClassUML BCUML(&game,name,attributes,operations,reason);
 
-    GoodUMLVisitor realBad;
+    BadUMLVisitor realBad;
     TestVisitor testBad;
 
-    ASSERT_TRUE(!realBad.IsGood());
-    ASSERT_TRUE(!testBad.IsGood());
+    ASSERT_TRUE(!realBad.IsBad());
+    ASSERT_TRUE(!testBad.IsBad());
 
     BCUML.Accept(&realBad);
     BCUML.Accept(&testBad);
 
-    ASSERT_TRUE(!realBad.IsGood());
-    ASSERT_TRUE(!testBad.IsGood());
+    ASSERT_TRUE(realBad.IsBad());
+    ASSERT_TRUE(testBad.IsBad());
 
     GCUML.Accept(&realBad);
     GCUML.Accept(&testBad);
 
-    ASSERT_TRUE(realBad.IsGood());
-    ASSERT_TRUE(testBad.IsGood());
+    ASSERT_TRUE(!realBad.IsBad());
+    ASSERT_TRUE(!testBad.IsBad());
 
     BCUML.Accept(&realBad);
     BCUML.Accept(&testBad);
 
-    ASSERT_TRUE(!(realBad.IsGood()));
-    ASSERT_TRUE(!(testBad.IsGood()));
+    ASSERT_TRUE((realBad.IsBad()));
+    ASSERT_TRUE((testBad.IsBad()));
 }
+
 TEST(VisitGoodUMLTest, VisitInheritance)
 {
     Game game;
@@ -116,7 +117,7 @@ TEST(VisitGoodUMLTest, VisitInheritance)
     std::vector<std::shared_ptr<UMLAttribute>> attributes;
     std::vector<std::shared_ptr<UMLOperation>> operations;
 
-    GoodUMLVisitor real;
+    BadUMLVisitor real;
 
     std::shared_ptr<GoodClassUML> GoodUml= std::make_shared<GoodClassUML>(&game,name,attributes,operations);
     wstring reason;
@@ -124,11 +125,11 @@ TEST(VisitGoodUMLTest, VisitInheritance)
     GoodInheritance goodInheritance(&game,GoodUml,GoodUml);
     BadInheritance badInheritance(&game, GoodUml, GoodUml, reason, false);
 
-    ASSERT_FALSE(real.IsGood());
+    ASSERT_FALSE(real.IsBad());
     goodInheritance.Accept(&real);
-    ASSERT_TRUE(real.IsGood());
+    ASSERT_TRUE(!real.IsBad());
     badInheritance.Accept(&real);
-    ASSERT_FALSE(real.IsGood());
+    ASSERT_FALSE(!real.IsBad());
     GoodUml->Accept(&real);
-    ASSERT_TRUE(real.IsGood());
+    ASSERT_TRUE(!real.IsBad());
 }

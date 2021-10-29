@@ -5,7 +5,7 @@
 
 #include "pch.h"
 #include "Inheritance.h"
-#include "GoodUMLVisitor.h"
+#include "BadUMLVisitor.h"
 
 using namespace std;
 
@@ -138,11 +138,11 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
     }
     if (IsHit())
     {
-        GoodUMLVisitor visitor;
+        BadUMLVisitor visitor;
 
         Accept(&visitor);
 
-        if (visitor.IsGood())
+        if (!visitor.IsBad())
         {
             graphics->SetFont(displayFontInheritance, *wxRED);
         }

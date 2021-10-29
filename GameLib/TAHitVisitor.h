@@ -12,9 +12,25 @@
 
 class TAHitVisitor : public ItemVisitor {
 private:
-
+    bool mIsHit = false;
 public:
-    void VisitTA(TA* ta) override {  ta->SetHitState(); }
+    /**
+     * Visit the TA and Set the Hit State
+     * Accordingly
+     * @param ta TA Object
+     */
+    void VisitTA(TA* ta) override {
+        ta->SetHitState();
+        mIsHit = true;
+    }
+
+    /**
+     * Get whether the TA has been Hit
+     * @return
+     */
+    bool GetHit() const {
+        return mIsHit;
+    }
 };
 
 #endif //INC_335PROJECT1_TAHITVISITOR_H

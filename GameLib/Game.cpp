@@ -8,7 +8,6 @@
 #include "Harold.h"
 #include "Pen.h"
 #include "Emitter.h"
-#include "GoodUMLVisitor.h"
 #include "BadUMLVisitor.h"
 #include "UMLHitVisitor.h"
 #include "DeleteUMLVisitor.h"
@@ -195,9 +194,9 @@ void Game::CheckItemOnScreen(std::shared_ptr<Item> item)
     item->Accept(&onScreenVisitor);
     if (!onScreenVisitor.IsOnScreen())
     {
-        GoodUMLVisitor goodVisitor;
+        BadUMLVisitor goodVisitor;
         item->Accept(&goodVisitor);
-        if (!goodVisitor.IsGood())
+        if (goodVisitor.IsBad())
         {
             mScoreboard->IncMissed();
         }
@@ -220,12 +219,11 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             continue;
         }
 
-        GoodUMLVisitor goodVisitor;
+        BadUMLVisitor goodVisitor;
 
         if (HitTest(pen, item))
         {
             UMLHitVisitor hitVisitor;
-
             item->Accept(&hitVisitor);
 
             TAHitVisitor taHitVisitor;
@@ -237,20 +235,26 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
 
                 item->Accept(&goodVisitor);
 
-                if(goodVisitor.IsGood()) {
-                    mScoreboard->IncUnfair();
-                } else {
-                    mScoreboard->IncCorrect();
+                if (!taHitVisitor.GetHit()) {
+                    if(!goodVisitor.IsBad()) {
+                        mScoreboard->IncUnfair();
+                    } else {
+                        mScoreboard->IncCorrect();
 
-                    for (auto item : mItems) {
-                        TAScoreVisitor ta;
-                        item->Accept(&ta);
+                        for (auto item : mItems) {
+                            TAScoreVisitor ta;
+                            item->Accept(&ta);
+
+                        }
+
                     }
                 }
 
                 pen->SetRecord(true);
 
                 pen->Stop();
+
+                break;
             }
         }
     }
@@ -277,23 +281,23 @@ void Game::DeleteUML(std::vector<UML*> toDelete)
  * Deletes all UML from the Screen and Increments
  * the Score by the Amount of UML Deleted
  */
-void Game::DeleteAllUML() {
+void Game::DeleteAllUML(TA *ta) {
     for(auto item : mItems)
     {
-        GoodUMLVisitor goodVisitor;
+        if (item.get() == ta || item.get() == mHarold.get()) {
+            continue;
+        }
+
+        BadUMLVisitor goodVisitor;
         UMLHitVisitor hitVisitor;
 
-        auto loc = find(mItems.begin(), mItems.end(), item);
-        if (loc != mItems.end())
-        {
 
-            item->Accept(&goodVisitor);
+        item->Accept(&goodVisitor);
 
 
-            if(!goodVisitor.IsGood()) {
-                item->Accept(&hitVisitor);
-                mScoreboard->IncCorrect();
-            }
+        if(goodVisitor.IsBad()) {
+            item->Accept(&hitVisitor);
+            mScoreboard->IncCorrect();
         }
     }
 }

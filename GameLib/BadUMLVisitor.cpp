@@ -1,7 +1,8 @@
 /**
  * @file BadUMLVisitor.cpp
- * @author Kristi
+ * @author Joe Getzen
  */
+
 #include "pch.h"
 #include "BadUMLVisitor.h"
 

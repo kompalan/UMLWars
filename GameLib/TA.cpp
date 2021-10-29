@@ -13,12 +13,24 @@ const std::wstring TAImageName = L"images/sparty.png";
 /// Initial Position
 const cse335::Vector InitialPosition = cse335::Vector(0, -200);
 
+const int TAScoreThreshold = 15;
+
+/**
+ * Constructor
+ * @param game Game object to pass to item
+ */
 TA::TA(Game* game) :Item(game, InitialPosition.X(), InitialPosition.Y())
 {
     mItemImage = std::make_unique<wxImage>(TAImageName, wxBITMAP_TYPE_ANY);
     mGame = game;
 }
 
+/**
+ * Draws the TA On the Screen. Depending on the state
+ * of the TA, it could be at different places with different
+ * sizes
+ * @param graphics Graphics context object pointer
+ */
 void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
@@ -35,8 +47,13 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 GetHeight());
     } else if (mTAState == State::Hit) {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
+        graphics->DrawBitmap(mItemBitmap,
+                GetX(),
+                GetY(),
+                0,
+                0);
         /// Call some function in game to remove all TA and switch the state to not spawned
-        mGame->DeleteAllUML();
+        mGame->DeleteAllUML(this);
         mTAState = State::NotSpawned;
     }
 
@@ -44,9 +61,16 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PopState();
 }
 
+/**
+ * Update Function for the TA. Once the
+ * Cumulative Score Count is Above a Certain Value
+ * then transition the state to spawned and reset the score
+ * counter
+ * @param elapsed Time since last OnDraw Call in seconds
+ */
 void TA::Update(double elapsed)
 {
-    if (mScoreCount > 15 && mTAState == State::NotSpawned) {
+    if (mScoreCount > TAScoreThreshold && mTAState == State::NotSpawned) {
         SetLocation(0, 200);
         mScoreCount = 0;
         mTAState = State::Spawned;
