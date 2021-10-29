@@ -31,13 +31,13 @@ public:
     bool IsBad() {return mIsBad;}
 };
 
-TEST(VisitGoodUMLTest, Constructor)
+TEST(VisitBadUMLTest, Constructor)
 {
    BadUMLVisitor real;
    TestVisitor test;
 }
 
-TEST(VisitGoodUMLTest, VisitAccept)
+TEST(VisitBadUMLTest, VisitAccept)
 {
     Game game;
     UMLData data(&game);
@@ -55,7 +55,7 @@ TEST(VisitGoodUMLTest, VisitAccept)
     GCUML.Accept(&real);
     GCUML.Accept(&test);
 }
-TEST(VisitGoodUMLTest, VisitIsGood)
+TEST(VisitBadUMLTest, VisitIsGood)
 {
     Game game;
     UMLData data(&game);
@@ -107,7 +107,7 @@ TEST(VisitGoodUMLTest, VisitIsGood)
     ASSERT_TRUE((testBad.IsBad()));
 }
 
-TEST(VisitGoodUMLTest, VisitInheritance)
+TEST(VisitBadUMLTest, VisitInheritance)
 {
     Game game;
     UMLData data(&game);

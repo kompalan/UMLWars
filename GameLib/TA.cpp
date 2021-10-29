@@ -53,7 +53,7 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 0,
                 0);
         /// Call some function in game to remove all TA and switch the state to not spawned
-        mGame->DeleteAllUML(this);
+        mGame->DeleteAllBadUML(this);
         mTAState = State::NotSpawned;
     }
 

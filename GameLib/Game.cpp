@@ -152,6 +152,7 @@ void Game::OnLeftDown(int mouseX, int mouseY)
         item->HandleMouseDown(virtualX, virtualY);
     }
 }
+
 /**
  * HitTest using center point of pen against range of tested object's dimensions
  * @param pen Pen object, center point used
@@ -185,7 +186,7 @@ bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 
 /**
  * Tests an item against the bounds of the screen
- * @param item Item object being tested
+ * @param item item object being tested
  * @return bool true if item passes bounds of screen
  */
 void Game::CheckItemOnScreen(std::shared_ptr<Item> item)
@@ -194,9 +195,9 @@ void Game::CheckItemOnScreen(std::shared_ptr<Item> item)
     item->Accept(&onScreenVisitor);
     if (!onScreenVisitor.IsOnScreen())
     {
-        BadUMLVisitor goodVisitor;
-        item->Accept(&goodVisitor);
-        if (goodVisitor.IsBad())
+        BadUMLVisitor badVisitor;
+        item->Accept(&badVisitor);
+        if (badVisitor.IsBad())
         {
             mScoreboard->IncMissed();
         }
@@ -219,7 +220,7 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             continue;
         }
 
-        BadUMLVisitor goodVisitor;
+        BadUMLVisitor badVisitor;
 
         if (HitTest(pen, item))
         {
@@ -233,10 +234,10 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             if (loc != mItems.end())
             {
 
-                item->Accept(&goodVisitor);
+                item->Accept(&badVisitor);
 
                 if (!taHitVisitor.GetHit()) {
-                    if(!goodVisitor.IsBad()) {
+                    if(!badVisitor.IsBad()) {
                         mScoreboard->IncUnfair();
                     } else {
                         mScoreboard->IncCorrect();
@@ -281,21 +282,18 @@ void Game::DeleteUML(std::vector<UML*> toDelete)
  * Deletes all UML from the Screen and Increments
  * the Score by the Amount of UML Deleted
  */
-void Game::DeleteAllUML(TA *ta) {
+void Game::DeleteAllBadUML(TA *ta) {
     for(auto item : mItems)
     {
-        if (item.get() == ta || item.get() == mHarold.get()) {
-            continue;
-        }
 
-        BadUMLVisitor goodVisitor;
+        BadUMLVisitor badVisitor;
         UMLHitVisitor hitVisitor;
 
 
-        item->Accept(&goodVisitor);
+        item->Accept(&badVisitor);
 
 
-        if(goodVisitor.IsBad()) {
+        if(badVisitor.IsBad()) {
             item->Accept(&hitVisitor);
             mScoreboard->IncCorrect();
         }

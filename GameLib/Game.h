@@ -94,7 +94,7 @@ public:
 
     void DeleteUML(std::vector<UML*> toDelete);
 
-    void DeleteAllUML(TA *ta);
+    void DeleteAllBadUML(TA *ta);
     /**
      * Check if item is still in screen and delete it if not
      * @return Whether item is in screen or not
