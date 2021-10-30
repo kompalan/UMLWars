@@ -43,6 +43,7 @@ const double MaxEmitPositionX = 500;
  * Creates two Random Devices to independently choose good and
  * inheritance. Also initializes the UMLData object to create UML
  * @param game Game object
+ * @param data Pointer to UMLData object
  */
 Emitter::Emitter(Game *game, std::shared_ptr<UMLData> data) : mGame(game)
 {

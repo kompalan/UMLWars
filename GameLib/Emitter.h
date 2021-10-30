@@ -14,6 +14,11 @@
 
 class Game;
 
+/**
+ * Class for the UML Emitter. Objects of this class function
+ * to create bad and good uml based on time and random generation and output
+ * them to the screen.
+ */
 class Emitter {
 private:
     /// Overall elapsed time. Used to decide whether to generate UML
@@ -34,6 +39,7 @@ private:
     /// Random Variable to decide whether an Inheritance or Class UML should be emitted
     std::mt19937 mRandomInheritance;
 
+    /// Random Variable to decide the Size of the UML
     std::mt19937 mSize;
 
     /// Game object for forward reference
@@ -45,8 +51,10 @@ private:
     /// Threshold of Inheritance vs Class, limits Inheritance UML Creation
     int mInheritanceThreshold = 0;
 
-    /// Uniform Distribution to filter mRandom to a value between 0 and 100
+    /// Uniform Distribution to filter mRandomInheritance to a value between 0 and 100
     std::uniform_real_distribution<> mDistribution = std::uniform_real_distribution<>(0, 100);
+
+    /// Uniform Distribution to filter mRandomGood to a value between 0 and 100
     std::uniform_real_distribution<> mDistributionGood = std::uniform_real_distribution<>(0, 100);
 public:
     Emitter(Game *game, std::shared_ptr<UMLData> data);

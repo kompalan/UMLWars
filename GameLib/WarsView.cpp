@@ -34,6 +34,11 @@ void WarsView::Initialize(wxFrame* mainFrame)
     mStopWatch.Start();
 }
 
+/**
+ * Add the menu items for the window
+ * @param mainFrame MainFrame object to add menu on
+ * @param menuBar wxMenuBar object
+ */
 void WarsView::AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar)
 {
     auto variantMenu = new wxMenu();
@@ -105,11 +110,21 @@ void WarsView::OnLeftDown(wxMouseEvent& event)
     mGame.OnLeftDown(event.GetX(), event.GetY());
 }
 
+/**
+ * Handler for the Original Variant Menu Option. Switches the
+ * variant off.
+ * @param event wxCommandEvent object
+ */
 void WarsView::OnOriginalVariant(wxCommandEvent& event)
 {
     mGame.SwitchVariant(false);
 }
 
+/**
+ * Handler for the Custom Variant Menu Option. Switches the
+ * variant on.
+ * @param event wxCommandEvent object
+ */
 void WarsView::OnCustomVariant(wxCommandEvent& event)
 {
     mGame.SwitchVariant(true);

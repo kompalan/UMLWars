@@ -19,15 +19,42 @@
  */
 class UMLOnScreenVisitor : public ItemVisitor {
 private:
+    /// Boolean representing whether the UML is on the screen
     bool mIsOnScreen = true;
 
 public:
-
+    /**
+     * Returns whether the Last visited UML is on screen
+     * @return True if UML is on screen otherwise false
+     */
     bool IsOnScreen() { return mIsOnScreen; }
 
+    /**
+     * Visit a BadClassUML object and set mIsOnScreen to a boolean
+     * indicating whether the given uml is on the screen
+     * @param uml BadClassUML object
+     */
     void VisitBadUML(BadClassUML* uml) { mIsOnScreen = uml->CheckOnScreen(); }
+
+    /**
+     * Visit a GoodClassUML object and set mIsOnScreen to a boolean
+     * indicating whether the given uml is on the screen
+     * @param uml BadClassUML object
+     */
     void VisitGoodUML(GoodClassUML* uml) { mIsOnScreen = uml->CheckOnScreen(); }
+
+    /**
+     * Visit a BadInheritanceUML object and set mIsOnScreen to a boolean
+     * indicating whether the given uml is on the screen
+     * @param uml BadClassUML object
+     */
     void VisitBadInheritance(BadInheritance* uml) { mIsOnScreen = uml->CheckOnScreen(); }
+
+    /**
+     * Visit a GoodInheritanceUML object and set mIsOnScreen to a boolean
+     * indicating whether the given uml is on the screen
+     * @param uml BadClassUML object
+     */
     void VisitGoodInheritance(GoodInheritance* uml) { mIsOnScreen = uml->CheckOnScreen(); }
 
 };

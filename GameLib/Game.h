@@ -59,6 +59,7 @@ private:
     /// The Threshold for stop for seconds
     double mTimeToReturn = 1.7;
 
+    /// Boolean representing whether the variant is enabled
     bool mCustomVariant = false;
 
 public:
@@ -75,32 +76,22 @@ public:
      * Get the random number generator
      * @return Pointer to the random number generator
      */
-    std::mt19937 &GetRandom() {return mRandom;}
+    std::mt19937 &GetRandom() { return mRandom; }
 
     bool HitTest(Pen* pen, std::shared_ptr<Item>);
 
-    /**
-     * Remove all items overlapped by Pen
-     * @param pen
-     */
     void RemoveOnHit(Pen* pen, double mRecordTime);
-
-    /**
-     * Remove a given UML from the screen using
-     * HitTest using the animation
-     * @param item Item to destroy
-     */
-    void KillUML(Item *item);
 
     void DeleteUML(std::vector<UML*> toDelete);
 
     void DeleteAllBadUML(TA *ta);
-    /**
-     * Check if item is still in screen and delete it if not
-     * @return Whether item is in screen or not
-     */
+
     void CheckItemOnScreen(std::shared_ptr<Item> item);
 
+    /**
+     * Returns the size of the mItems vector
+     * @return Size of the items vector
+     */
     int GetSize() const {return mItems.size();}
 
     /**
@@ -115,13 +106,28 @@ public:
      */
     int GetWidth() {return mWidth;}
 
-
+    /**
+     * Getter for Harold
+     * @return Pointer to Harold Object
+     */
     std::shared_ptr<Harold> GetHarold() {return mHarold;}
 
+    /**
+     * Set the boolean representing whether the variant is enabled
+     * @param custom Boolean to set to
+     */
     void SwitchVariant(bool custom) { mCustomVariant = custom; }
 
+    /**
+     * Return a boolean representing whether the variant was selected
+     * @return
+     */
     bool IsCustomSelected() { return mCustomVariant; }
 
+    /**
+     * Return the Scale of the Screen
+     * @return Scale of the Screen
+     */
     double GetScale() { return mScale; }
 
 };

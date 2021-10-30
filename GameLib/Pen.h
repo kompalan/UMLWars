@@ -12,6 +12,9 @@
 #include "Item.h"
 #include "Vector.h"
 
+/**
+ * Class for the Pen that Harold Throws
+ */
 class Pen : public Item {
 private:
     ///< Rotation angle in radians for Pen
@@ -28,10 +31,13 @@ private:
     /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
 
+    /// Game Object
     Game *mGame;
 
+    /// Harold Object, used for width and height calculations
     std::shared_ptr<Harold> mHarold;
 
+    /// Enum representing States that a pen could take
     enum class PenState
     {
         Held,
@@ -39,14 +45,14 @@ private:
         Hit
     };
 
+    /// PenState object holding the State of the Pen
     PenState mPenState = PenState::Held;
 
     /// the time counter for pen
     double mTime = 0;
 
+    /// a boolean describing whether we should hold the pen at that position
     bool mRecord = false;
-
-    bool mClean = false;
 
 public:
     Pen(Game *game);
@@ -69,23 +75,38 @@ public:
 
     void ReturnToHarold();
 
-    /// Accept function
+    /**
+     * Accept the Item Visitor
+     * @param visitor ItemVisitor object
+     */
     void Accept(ItemVisitor* visitor) override {};
 
     void Update(double elapsed) override;
 
     void CheckBorder();
 
-    void HandleMouseMove(double virtualX, double virtualY) override;
-
+    /**
+     * Set the mRecord boolean to mIf
+     * @param mIf Boolean to set
+     */
     void SetRecord(bool mIf) {mRecord = mIf;}
 
     void Stop();
 
+    /**
+     * Transitions the pen state to thrown
+     */
     void ThrowPen() {mPenState=PenState::Thrown;}
 
+    /**
+     * Transitions the Pen State to Hit
+     */
     void HasHit() {mPenState=PenState::Hit;}
 
+    /**
+     * Returns a boolean indicating whether the pen is thrown
+     * @return True if Pen is thrown otherwise false
+     */
     bool IsThrown () {return (mPenState==PenState::Thrown);}
 };
 

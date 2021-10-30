@@ -10,27 +10,18 @@
 
 #include "TA.h"
 
+/**
+ * Visitor to determine and set whether a TA is
+ * Hit by the Pen
+ */
 class TAHitVisitor : public ItemVisitor {
 private:
+    /// Boolean indicating whether the TA is hit or not
     bool mIsHit = false;
 public:
-    /**
-     * Visit the TA and Set the Hit State
-     * Accordingly
-     * @param ta TA Object
-     */
-    void VisitTA(TA* ta) override {
-        ta->SetHitState();
-        mIsHit = true;
-    }
+    void VisitTA(TA* ta) override;
 
-    /**
-     * Get whether the TA has been Hit
-     * @return
-     */
-    bool GetHit() const {
-        return mIsHit;
-    }
+    bool GetHit();
 };
 
 #endif //INC_335PROJECT1_TAHITVISITOR_H

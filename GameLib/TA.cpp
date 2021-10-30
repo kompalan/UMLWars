@@ -13,6 +13,7 @@ const std::wstring TAImageName = L"images/sparty.png";
 /// Initial Position
 const cse335::Vector InitialPosition = cse335::Vector(0, -200);
 
+/// Integer representing how many points we need for TA to activate
 const int TAScoreThreshold = 15;
 
 /**

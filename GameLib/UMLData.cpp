@@ -17,6 +17,7 @@ const int MinItems = 0;
 /// Maximum number of attributes or operations in a UML object
 const int MaxItems = 3;
 
+/// Message to Display when we hit a good UML
 const wstring GoodUMLMessage = L"Unfair!";
 
 /**

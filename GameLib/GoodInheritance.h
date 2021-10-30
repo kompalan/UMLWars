@@ -28,6 +28,11 @@ public:
 
     GoodInheritance(Game *game, std::shared_ptr<ClassUML> base, std::shared_ptr<ClassUML> derived);
 
+    /**
+     * Accept the visitor and call VisitGoodInheritance on the
+     * visitor object
+     * @param visitor ItemVisitor object
+     */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitGoodInheritance(this); }
 };
 

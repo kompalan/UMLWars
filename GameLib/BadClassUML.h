@@ -32,6 +32,10 @@ public:
     BadClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations, std::wstring reason);
 
+    /**
+     * Accept the Item visitor and call VisitBadUML on it
+     * @param visitor ItemVisitor object
+     */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitBadUML(this); }
 
     /**

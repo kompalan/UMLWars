@@ -6,6 +6,7 @@
 #include "Pen.h"
 #include "Game.h"
 
+/// Path to Pen Image
 const std::wstring PenImageName = L"images/redpen.png";
 
 /// The angle of Pen
@@ -14,8 +15,10 @@ const double PenAngle = 1;
 /// Pen's Initial Position on the Screen
 cse335::Vector InitialPos = cse335::Vector(0, 850);
 
+/// Velocity of pen in pixels per second
 const double Velocity = 1000;
 
+/// Distance at which to keep the pen relative to harold's center
 const double Radius = 61.3;
 
 /**
@@ -56,7 +59,6 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 0,
                 0,
                 0);
-        mClean = false;
     }
 
     else if(mPenState==PenState::Held)
@@ -145,6 +147,10 @@ void Pen::Update(double elapsed)
 
 }
 
+/**
+ * Checks whether the Pen is hitting the border of the screen
+ * and sets the X and Y velocity to be opposite. Used for Game Variant
+ */
 void Pen::CheckBorder(){
     if((GetY() < 0) || (GetY() > mGame->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
@@ -154,13 +160,8 @@ void Pen::CheckBorder(){
     }
 }
 
-void Pen::HandleMouseMove(double virtualX, double virtualY)
-{
-}
-
 /**
- * Patch Fix to Return Pen To Harold After Pen Hit
- * Something
+ * Return the Pen To Harold After It Has Hit Something
  */
 void Pen::ReturnToHarold()
 {
@@ -179,5 +180,4 @@ void Pen::Stop()
     mPenState = PenState::Hit;
     mVelocity = cse335::Vector();
     mRecord = false;
-    mClean = true;
 }

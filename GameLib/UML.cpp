@@ -41,6 +41,11 @@ void UML::Update(double elapsed)
     SetLocation(newX, newY);
 }
 
+/**
+ * Check whether a UML Object has gone beyond the
+ * bounds of the screen
+ * @return True if the UML is out of screen, false if not
+ */
 bool UML::CheckOnScreen()
 {
     double gameWidth = GetGame()->GetWidth();

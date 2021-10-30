@@ -210,6 +210,7 @@ void Game::CheckItemOnScreen(std::shared_ptr<Item> item)
  * on the item to figure out how to update the scoreboard
  *
  * @param pen Pen pointer
+ * @param mTime Cumulative time passed since pen was thrown
  */
 void Game::RemoveOnHit(Pen *pen, double mTime)
 {
@@ -265,6 +266,11 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
     }
 }
 
+/**
+ * Deletes all UML which appear in the parameter list from the
+ * main list
+ * @param toDelete List of UML Objects to Delete
+ */
 void Game::DeleteUML(std::vector<UML*> toDelete)
 {
     for (auto uml : toDelete)
@@ -281,6 +287,7 @@ void Game::DeleteUML(std::vector<UML*> toDelete)
 /**
  * Deletes all UML from the Screen and Increments
  * the Score by the Amount of UML Deleted
+ * @param ta TA object to filter out
  */
 void Game::DeleteAllBadUML(TA *ta) {
     for(auto item : mItems)

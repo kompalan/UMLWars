@@ -11,6 +11,10 @@
 #pragma once
 #include "Item.h"
 
+/**
+ *  Class for Items which Have an image associated
+ *  with them
+ */
 class ItemWithImage : public Item{
 private:
     /// The Item Image

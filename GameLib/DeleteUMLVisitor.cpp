@@ -6,6 +6,7 @@
 #include "pch.h"
 #include "DeleteUMLVisitor.h"
 
+/// Waiting time before UML is removed from the list
 const double TimeBeforeDelete = 1;
 
 /**

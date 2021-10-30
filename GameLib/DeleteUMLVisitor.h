@@ -20,6 +20,7 @@
  */
 class DeleteUMLVisitor : public ItemVisitor {
 private:
+    /// List of UML To Be Deleted
     std::vector<UML*> mToDelete;
 
 public:
@@ -30,9 +31,28 @@ public:
      */
     std::vector<UML*> GetToDelete() { return mToDelete; }
 
+    /**
+     * Visit Bad UML and call CheckDeleteUML on It
+     * @param uml BadClassUML object
+     */
     void VisitBadUML(BadClassUML* uml) { CheckDeleteUML(uml); }
+
+    /**
+     * Visit Good UML and call CheckDeleteUML on It
+     * @param uml BadClassUML object
+     */
     void VisitGoodUML(GoodClassUML* uml) { CheckDeleteUML(uml); }
+
+    /**
+     * Visit Bad Inheritance and call CheckDeleteUML on It
+     * @param uml BadClassUML object
+     */
     void VisitBadInheritance(BadInheritance* uml) { CheckDeleteUML(uml); }
+
+    /**
+     * Visit Good Inheritance and call CheckDeleteUML on It
+     * @param uml BadClassUML object
+     */
     void VisitGoodInheritance(GoodInheritance* uml) { CheckDeleteUML(uml); }
 
     void CheckDeleteUML(UML* uml);

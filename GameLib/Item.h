@@ -65,6 +65,11 @@ public:
      */
     virtual void HandleMouseMove(double virtualX, double virtualY) {};
 
+    /**
+     * Handle Mouse Down Event
+     * @param virtualX X coordinate in virtual pixels
+     * @param virtualY Y coordinate in virtual pixels
+     */
     virtual void HandleMouseDown(double virtualX, double virtualY) {};
 
     /**
