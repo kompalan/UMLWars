@@ -44,7 +44,7 @@ public:
     /**
      * Transition the TA State to Hit
      */
-    void SetHitState() { mTAState = State::Hit; }
+    bool SetHitState();
 
     /**
      * Increment the Score Counter

@@ -78,9 +78,24 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void TA::Update(double elapsed)
 {
-    if (mScoreCount > TAScoreThreshold && mTAState == State::NotSpawned) {
+    if (mScoreCount > TAScoreThreshold && mTAState == State::NotSpawned)
+    {
         SetLocation(-250, 850);
         mScoreCount = 0;
         mTAState = State::Spawned;
     }
+}
+
+bool TA::SetHitState()
+{
+    if (mTAState == State::Spawned)
+    {
+        mTAState = State::Hit;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+
 }

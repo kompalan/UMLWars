@@ -12,8 +12,7 @@
  * @param ta TA Object
  */
 void TAHitVisitor::VisitTA(TA* ta) {
-    ta->SetHitState();
-    mIsHit = true;
+    mIsHit = ta->SetHitState();
 }
 
 /**
