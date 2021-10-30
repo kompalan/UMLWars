@@ -9,6 +9,7 @@
 #define INC_335PROJECT1_UML_H
 
 #include "Item.h"
+#include "Vector.h"
 
 /**
  * Base class for all UML objects
@@ -33,18 +34,21 @@ private:
     /// If the UML has been hit by the pen
     bool mIsHit = false;
 
+    /// The velocity of the UML
+    cse335::Vector mVelocity = cse335::Vector();
+
 protected:
     UML(Game *game);
 
 public:
-//    /// Default constructor (disabled)
-//    UML() = delete;
-//
-//    /// Copy constructor (disabled)
-//    UML(const UML &) = delete;
-//
-//    /// Assignment operator
-//    void operator=(const UML &) = delete;
+    /// Default constructor (disabled)
+    UML() = delete;
+
+    /// Copy constructor (disabled)
+    UML(const UML &) = delete;
+
+    /// Assignment operator
+    void operator=(const UML &) = delete;
 
     /**
      * Calculates the dimensions of a UML object
@@ -139,6 +143,19 @@ public:
     void SetTimeHit(double time) { mTimeHit = time; }
 
     bool CheckOnScreen();
+
+    /**
+     * Get the velocity vector of the item
+     * @return the velocity vector of the item
+     */
+    const cse335::Vector& GetVelocity() const { return mVelocity; }
+
+    /**
+     * Set the x and y velocity of the item
+     * @param speedX the x speed of the UML object in pixels second
+     * @param speedY the x speed of the UML object in pixels second
+     */
+    void SetVelocity(double speedX, double speedY) { mVelocity.Set(speedX, speedY); };
 };
 
 #endif //INC_335PROJECT1_UML_H

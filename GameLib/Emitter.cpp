@@ -98,7 +98,7 @@ void Emitter::Create(double elapsed)
  */
 void Emitter::Emit(double good, double inheritance)
 {
-    std::shared_ptr<Item> uml;
+    std::shared_ptr<UML> uml;
 
     if (inheritance > mInheritanceThreshold) {
         uml = MakeClass(good);
@@ -117,11 +117,11 @@ void Emitter::Emit(double good, double inheritance)
 
     if (xPosition < 0)
     {
-        uml->SetSpeed(xSpeed,mYSpeed);
+        uml->SetVelocity(xSpeed,mYSpeed);
     }
     else
     {
-        uml->SetSpeed(-xSpeed,mYSpeed);
+        uml->SetVelocity(-xSpeed,mYSpeed);
     }
     mGame->AddItem(uml);
 }

@@ -10,7 +10,6 @@
 
 #include <wx/graphics.h>
 #include "ItemVisitor.h"
-#include "Vector.h"
 
 class Game; ///< Forward Reference to the Game Class
 
@@ -25,9 +24,6 @@ private:
 
     double mX = 0; ///< X location for the center of the item in virtual pixels
     double mY = 0; ///< Y location for the center of the item in virtual pixels
-
-    /// The velocity of the object
-    cse335::Vector mVelocity = cse335::Vector();
 
 public:
     double GetX() const;
@@ -99,19 +95,6 @@ public:
      * @return mGame object
      */
     Game* GetGame() {return mGame;}
-
-    /**
-     * Set the x and y speed of the item
-     * @param speedX the x speed of the UML object in pixels second
-     * @param speedY the x speed of the UML object in pixels second
-     */
-    void SetSpeed(double speedX, double speedY) { mVelocity.Set(speedX, speedY); };
-
-    /**
-     * Get the velocity vector of the item
-     * @return the velocity vector of the item
-     */
-    const cse335::Vector& GetVelocity() const { return mVelocity; }
 
 protected:
     Item(Game *game, double posX, double posY);

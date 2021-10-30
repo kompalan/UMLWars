@@ -9,6 +9,12 @@
 
 using namespace std;
 
+/// Initial x speed of UML
+const double InitialSpeedX = 0;
+
+/// Initial y speed of UML
+const double InitialSpeedY = 0;
+
 /**
  * Constructor
  * @param game the game the UML is a part of
@@ -27,7 +33,7 @@ void UML::Update(double elapsed)
     if (mIsHit)
     {
         mTimeHit += elapsed;
-        SetSpeed(0,0);
+        SetVelocity(InitialSpeedX,InitialSpeedY);
     }
 
     double newX = GetX() + GetVelocity().X() * elapsed;
