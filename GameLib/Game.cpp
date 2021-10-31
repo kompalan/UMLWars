@@ -50,8 +50,6 @@ Game::Game()
     auto ta = std::make_shared<TA>(this);
     AddItem(ta);
 
-    mBackgroundImage = std::make_unique<wxImage>(VarBackground, wxBITMAP_TYPE_ANY);
-
     mBackground = wxBitmap(VarBackground, wxBITMAP_TYPE_ANY);
 }
 
@@ -84,16 +82,6 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
     {
         graphics->SetBrush(wxBrush(*wxWHITE_BRUSH));
         graphics->DrawRectangle(-mWidth/2, 0, mWidth, mHeight);
-    }
-    else
-    {
-        //mBackground = wxBitmap(VarBackground, wxBITMAP_TYPE_ANY);
-        //mBackgroundBitmap = graphics->CreateBitmapFromImage(*mBackgroundImage);
-        //graphics->DrawBitmap(mBackgroundBitmap,
-                //-mWidth/2,
-                //0,
-                //mWidth,
-                //mHeight);
     }
     for(auto item : mItems)
     {
