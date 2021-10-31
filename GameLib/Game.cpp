@@ -19,6 +19,8 @@ using namespace std;
 
 /// XML file to read the UML data from
 const std::wstring Filename = L"data/uml.xml";
+///PNG file for the variant background image
+const std::wstring VarBackground = L"images/bounce house.png";
 
 /**
  * Constructor
@@ -47,6 +49,8 @@ Game::Game()
 
     auto ta = std::make_shared<TA>(this);
     AddItem(ta);
+
+    mBackgroundImage = std::make_unique<wxImage>(VarBackground, wxBITMAP_TYPE_ANY);
 }
 
 /**
@@ -74,10 +78,20 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 
     graphics->Translate(mXOffset, mYOffset);
     graphics->Scale(mScale, mScale);
-
-    graphics->SetBrush(wxBrush(*wxWHITE_BRUSH));
-    graphics->DrawRectangle(-mWidth/2, 0, mWidth, mHeight);
-
+    if (!mCustomVariant)
+    {
+        graphics->SetBrush(wxBrush(*wxWHITE_BRUSH));
+        graphics->DrawRectangle(-mWidth/2, 0, mWidth, mHeight);
+    }
+    else
+    {
+        //mBackgroundBitmap = graphics->CreateBitmapFromImage(*mBackgroundImage);
+        graphics->DrawBitmap(mBackgroundBitmap,
+                -mWidth/2,
+                0,
+                mWidth,
+                mHeight);
+    }
     for(auto item : mItems)
     {
         item->Draw(graphics);

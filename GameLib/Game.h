@@ -62,6 +62,10 @@ private:
     /// Boolean representing whether the variant is enabled
     bool mCustomVariant = false;
 
+    std::unique_ptr<wxImage> mBackgroundImage;
+
+    wxGraphicsBitmap mBackgroundBitmap;
+
 public:
     Game();
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
@@ -129,6 +133,10 @@ public:
      * @return Scale of the Screen
      */
     double GetScale() { return mScale; }
+
+    void SetBackgroundBitmap(std::shared_ptr<wxGraphicsContext> graphics) {mBackgroundBitmap = graphics->CreateBitmapFromImage(*mBackgroundImage);}
+
+    bool BackgroundIsNotSet() {return mBackgroundBitmap.IsNull();}
 
 };
 

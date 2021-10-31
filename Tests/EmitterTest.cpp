@@ -19,6 +19,7 @@ TEST(EmitterTest, TestNothing) {
 
     game->Update(1);
     int size = game->GetSize();
+    std::cout<<size<<"\n";
     ASSERT_TRUE(size == 3);
 }
 

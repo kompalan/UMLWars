@@ -79,8 +79,10 @@ void WarsView::OnPaint(wxPaintEvent& event)
 
     // Create a graphics context
     auto gc = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
-
-
+    if (mGame.BackgroundIsNotSet())
+    {
+        mGame.SetBackgroundBitmap(gc);
+    }
     mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 
 }
