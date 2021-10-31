@@ -42,10 +42,12 @@ void WarsView::Initialize(wxFrame* mainFrame)
 void WarsView::AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar)
 {
     auto variantMenu = new wxMenu();
-    variantMenu->AppendRadioItem(IDM_VARIANT_ORIGINAL, L"&Original", L"Original Variant");
-    variantMenu->AppendRadioItem(IDM_VARIANT_CUSTOM, L"&Custom", L"Custom Variant");
+    variantMenu->Append(IDM_VARIANT_ORIGINAL, L"&Original", L"Original Variant",wxITEM_CHECK);
+    variantMenu->Append(IDM_VARIANT_CUSTOM, L"&Custom", L"Custom Variant",wxITEM_CHECK);
     mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED, &WarsView::OnOriginalVariant, this, IDM_VARIANT_ORIGINAL);
+    mainFrame->Bind(wxEVT_UPDATE_UI, &WarsView::OnUpdateOriginalVariant, this, IDM_VARIANT_ORIGINAL);
     mainFrame->Bind(wxEVT_COMMAND_MENU_SELECTED, &WarsView::OnCustomVariant, this, IDM_VARIANT_CUSTOM);
+    mainFrame->Bind(wxEVT_UPDATE_UI, &WarsView::OnUpdateCustomVariant, this, IDM_VARIANT_CUSTOM);
     menuBar->Append(variantMenu, "&Variant");
 }
 
@@ -117,7 +119,9 @@ void WarsView::OnLeftDown(wxMouseEvent& event)
  */
 void WarsView::OnOriginalVariant(wxCommandEvent& event)
 {
-    mGame.SwitchVariant(false);
+        mVariantSelected = false;
+        mGame.SwitchVariant(mVariantSelected);
+
 }
 
 /**
@@ -127,5 +131,24 @@ void WarsView::OnOriginalVariant(wxCommandEvent& event)
  */
 void WarsView::OnCustomVariant(wxCommandEvent& event)
 {
-    mGame.SwitchVariant(true);
+        mVariantSelected = true;
+        mGame.SwitchVariant(mVariantSelected);
+}
+
+/**
+ * Update handler for Variant>Original menu option
+ * @param event Update event
+ */
+void WarsView::OnUpdateOriginalVariant(wxUpdateUIEvent& event)
+{
+    event.Check(!mVariantSelected);
+}
+
+/**
+ * Update handler for Variant>Custom menu option
+ * @param event Update event
+ */
+void WarsView::OnUpdateCustomVariant(wxUpdateUIEvent& event)
+{
+    event.Check(mVariantSelected);
 }
