@@ -83,6 +83,10 @@ void WarsView::OnPaint(wxPaintEvent& event)
     {
         mGame.SetBackgroundBitmap(gc);
     }
+    if (mGame.IsCustomSelected())
+    {
+        dc.DrawBitmap(mGame.GetBackground(),0,0);
+    }
     mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 
 }

@@ -51,6 +51,8 @@ Game::Game()
     AddItem(ta);
 
     mBackgroundImage = std::make_unique<wxImage>(VarBackground, wxBITMAP_TYPE_ANY);
+
+    mBackground = wxBitmap(VarBackground, wxBITMAP_TYPE_ANY);
 }
 
 /**
@@ -85,12 +87,13 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
     }
     else
     {
+        //mBackground = wxBitmap(VarBackground, wxBITMAP_TYPE_ANY);
         //mBackgroundBitmap = graphics->CreateBitmapFromImage(*mBackgroundImage);
-        graphics->DrawBitmap(mBackgroundBitmap,
-                -mWidth/2,
-                0,
-                mWidth,
-                mHeight);
+        //graphics->DrawBitmap(mBackgroundBitmap,
+                //-mWidth/2,
+                //0,
+                //mWidth,
+                //mHeight);
     }
     for(auto item : mItems)
     {

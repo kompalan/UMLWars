@@ -66,6 +66,8 @@ private:
 
     wxGraphicsBitmap mBackgroundBitmap;
 
+    wxBitmap mBackground;
+
 public:
     Game();
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
@@ -137,6 +139,8 @@ public:
     void SetBackgroundBitmap(std::shared_ptr<wxGraphicsContext> graphics) {mBackgroundBitmap = graphics->CreateBitmapFromImage(*mBackgroundImage);}
 
     bool BackgroundIsNotSet() {return mBackgroundBitmap.IsNull();}
+
+    wxBitmap GetBackground() {return mBackground;}
 
 };
 
