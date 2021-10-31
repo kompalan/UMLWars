@@ -40,13 +40,16 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
     }
 
-    if (mTAState == State::Spawned) {
+    if (mTAState == State::Spawned)
+    {
         graphics->DrawBitmap(mItemBitmap,
                 GetX(),
                 GetY(),
                 GetWidth(),
                 GetHeight());
-    } else if (mTAState == State::Hit) {
+    }
+    else if (mTAState == State::Hit)
+    {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
         graphics->DrawBitmap(mItemBitmap,
                 GetX(),
@@ -56,7 +59,9 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         /// Call some function in game to remove all TA and switch the state to not spawned
         mGame->DeleteAllBadUML(this);
         mTAState = State::NotSpawned;
-    } else {
+    }
+    else
+    {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
         graphics->DrawBitmap(mItemBitmap,
                 GetX(),
@@ -91,11 +96,7 @@ bool TA::SetHitState()
     if (mTAState == State::Spawned)
     {
         mTAState = State::Hit;
-        return true;
-    }
-    else
-    {
-        return false;
     }
 
+    return true;
 }

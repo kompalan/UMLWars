@@ -174,20 +174,24 @@ void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
 
     // Go through each attribute in the UML object and add the required height to the UML height and check if
     // the UML width needs to be replaced with a larger value to accommodate wider text
-    for (auto attribute: mAttributes) {
+    for (auto attribute: mAttributes)
+    {
         graphics->GetTextExtent(attribute->GetItem(), &wid, &hit);
         height += hit;
-        if (wid > width) {
+        if (wid > width)
+        {
             width = wid;
         }
     }
 
     // Go through each operation in the UML object and add the required height to the UML height and check if
     // the UML width needs to be replaced with a larger value to accommodate wider text
-    for (auto operation: mOperations) {
+    for (auto operation: mOperations)
+    {
         graphics->GetTextExtent(operation->GetItem(), &wid, &hit);
         height += hit;
-        if (wid > width) {
+        if (wid > width)
+        {
             width = wid;
         }
     }

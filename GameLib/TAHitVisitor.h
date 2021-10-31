@@ -18,10 +18,16 @@ class TAHitVisitor : public ItemVisitor {
 private:
     /// Boolean indicating whether the TA is hit or not
     bool mIsHit = false;
+
+    /// Boolean indicating whether the TA is spawned or not
+    bool mIsSpawned = false;
+
 public:
     void VisitTA(TA* ta) override;
 
     bool GetHit();
+
+    bool GetSpawned();
 };
 
 #endif //INC_335PROJECT1_TAHITVISITOR_H

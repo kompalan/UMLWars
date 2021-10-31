@@ -46,6 +46,8 @@ public:
      */
     bool SetHitState();
 
+    bool IsSpawned() const { return mTAState == State::Spawned; }
+
     /**
      * Increment the Score Counter
      */

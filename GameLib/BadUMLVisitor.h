@@ -27,33 +27,33 @@ public:
      * Return Whether the Last UMLVisited was good or bad
      * @return Boolean where false is Good UML and true is Bad UML
      */
-    bool IsBad() {return mIsBad;}
+    bool IsBad() { return mIsBad; }
 
     /**
      * Visit a good UML and set mIsBad to false.
      * @param UML GoodClassUML Object
      */
-    void VisitGoodUML(GoodClassUML* UML) override {mIsBad = false;}
+    void VisitGoodUML(GoodClassUML* UML) override { mIsBad = false; }
 
     /**
      * Visit a bad UML and set mIsBad to true;
      * @param UML BadClassUML object
      */
-    void VisitBadUML(BadClassUML* UML) override {mIsBad = true;}
+    void VisitBadUML(BadClassUML* UML) override { mIsBad = true; }
 
     /**
      * Visit a good inheritance uml object and set
      * mIsBad to false
      * @param UML GoodInheritance Object
      */
-    void VisitGoodInheritance(GoodInheritance* UML) override {mIsBad = false;}
+    void VisitGoodInheritance(GoodInheritance* UML) override { mIsBad = false; }
 
     /**
      * Visit a bad inheritance uml object and set
      * mIsBad to false
      * @param UML BadInheritance Object
      */
-    void VisitBadInheritance(BadInheritance* UML) override {mIsBad = true;}
+    void VisitBadInheritance(BadInheritance* UML) override { mIsBad = true; }
 };
 
 #endif //INC_335PROJECT1_BADUMLVISITOR_H

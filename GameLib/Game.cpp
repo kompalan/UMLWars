@@ -216,8 +216,8 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
 {
     for(auto item : mItems)
     {
-        if (item.get() == pen|| item.get() == mHarold.get()) {
-
+        if (item.get() == pen|| item.get() == mHarold.get())
+        {
             continue;
         }
 
@@ -231,19 +231,30 @@ void Game::RemoveOnHit(Pen *pen, double mTime)
             TAHitVisitor taHitVisitor;
             item->Accept(&taHitVisitor);
 
+            if (taHitVisitor.GetHit() && !taHitVisitor.GetSpawned())
+            {
+                continue;
+            }
+
             auto loc = find(mItems.begin(), mItems.end(), item);
             if (loc != mItems.end())
             {
 
+
                 item->Accept(&badVisitor);
 
-                if (!taHitVisitor.GetHit()) {
-                    if(!badVisitor.IsBad()) {
+                if (!taHitVisitor.GetHit())
+                {
+                    if(!badVisitor.IsBad())
+                    {
                         mScoreboard->IncUnfair();
-                    } else {
+                    }
+                    else
+                    {
                         mScoreboard->IncCorrect();
 
-                        for (auto item : mItems) {
+                        for (auto item : mItems)
+                        {
                             TAScoreVisitor ta;
                             item->Accept(&ta);
 
@@ -300,7 +311,8 @@ void Game::DeleteAllBadUML(TA *ta) {
         item->Accept(&badVisitor);
 
 
-        if(badVisitor.IsBad()) {
+        if(badVisitor.IsBad())
+        {
             item->Accept(&hitVisitor);
             mScoreboard->IncCorrect();
         }

@@ -13,6 +13,7 @@
  */
 void TAHitVisitor::VisitTA(TA* ta) {
     mIsHit = ta->SetHitState();
+    mIsSpawned = ta->IsSpawned();
 }
 
 /**
@@ -20,5 +21,11 @@ void TAHitVisitor::VisitTA(TA* ta) {
  * @return
  */
 bool TAHitVisitor::GetHit() {
+
     return mIsHit;
+}
+
+bool TAHitVisitor::GetSpawned()
+{
+    return mIsSpawned;
 }
