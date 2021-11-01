@@ -20,7 +20,7 @@ const int TAScoreThreshold = 15;
  * Constructor
  * @param game Game object to pass to item
  */
-TA::TA(Game* game) :Item(game, InitialPosition.X(), InitialPosition.Y())
+TA::TA(Game* game) :ItemWithImage(game, InitialPosition.X(), InitialPosition.Y(), TAImageName)
 {
     mItemImage = std::make_unique<wxImage>(TAImageName, wxBITMAP_TYPE_ANY);
     mGame = game;

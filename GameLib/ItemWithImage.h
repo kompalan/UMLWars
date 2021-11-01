@@ -17,6 +17,8 @@
  */
 class ItemWithImage : public Item{
 private:
+    Game *mGame;
+
     /// The Item Image
     std::unique_ptr<wxImage> mImage;
 
@@ -24,6 +26,19 @@ private:
     wxGraphicsBitmap mBitmap;
 
 public:
+    /**
+        * Deleted Default Constructor
+        */
+    ItemWithImage() = delete;
+
+    /**
+     * Deleted Copy Constructor
+     * @param item
+     */
+    ItemWithImage(const ItemWithImage &itemwithImage) = delete;
+
+protected:
+    ItemWithImage(Game *game, double posX, double posY, const std::wstring& imageName);
 
 };
 
