@@ -15,6 +15,9 @@ using namespace std;
 /// Frame duration in milliseconds
 const int FrameDuration = 30;
 
+/// Miliseconds conversion
+const double MiliConversion = 0.001;
+
 /**
  * Initialize the Game View and Bind the Paint and Timer events
  * to their respective handlers. Also Set Up Timer for Animations
@@ -58,7 +61,7 @@ void WarsView::AddMenus(wxFrame* mainFrame, wxMenuBar *menuBar)
 void WarsView::OnPaint(wxPaintEvent& event)
 {
     auto newTime = mStopWatch.Time();
-    auto elapsed = (double)(newTime - mTime) * 0.001;
+    auto elapsed = (double)(newTime - mTime) * MiliConversion;
     mTime = newTime;
     mGame.Update(elapsed);
 
@@ -79,16 +82,17 @@ void WarsView::OnPaint(wxPaintEvent& event)
 
     // Create a graphics context
     auto gc = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
+
+    // Draw Background if variant is selected
     if (mGame.IsCustomSelected())
     {
-        //dc.DrawBitmap(mGame.GetBackground(),0,0);
         gc->DrawBitmap(mGame.GetBackground(),
                 rect.GetWidth()/2 - (mGame.GetWidth()/2 * mGame.GetScale()),
                 rect.GetHeight()/2 - (mGame.GetHeight()/2 * mGame.GetScale()),
                 mGame.GetWidth()*mGame.GetScale() ,mGame.GetHeight()*mGame.GetScale());
     }
-    mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 
+    mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 }
 
 /**
