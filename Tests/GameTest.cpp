@@ -8,6 +8,7 @@
 #include <Game.h>
 #include <Item.h>
 #include <Pen.h>
+#include <TA.h>
 
 
 TEST(GameTest, HitTest)
@@ -50,4 +51,27 @@ TEST(GameTest, HitTest)
     ASSERT_TRUE(game.HitTest(pen.get(),uml));
     uml->SetLocation(-76,89);
     ASSERT_TRUE(!game.HitTest(pen.get(),uml));
+}
+TEST(GameTest, TAHitTest)
+{
+    Game game;
+
+    std::shared_ptr<Pen> pen = std::make_shared<Pen>(&game);
+    pen->SetLocation(0,400);
+    pen->ThrowPen();
+
+    std::shared_ptr<TA> ta = std::make_shared<TA>(&game);
+    ta->SetLocation(0,400);
+
+    std::cout<<(ta->GetX())<<"\n";
+    std::cout<<(ta->GetY())<<"\n";
+    std::cout<<(ta->GetHeight())<<"\n";
+    std::cout<<(ta->GetWidth())<<"\n";
+
+    ta->SetSpawned();
+    ASSERT_TRUE(ta->IsSpawned());
+
+    ASSERT_TRUE(game.HitTest(pen.get(),ta));
+    pen->SetLocation(0,460);
+    ASSERT_TRUE(game.HitTest(pen.get(),ta));
 }

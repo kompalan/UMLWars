@@ -51,6 +51,11 @@ public:
      * @param visitor ItemVisitor object
      */
     virtual void Accept(ItemVisitor* visitor) override { visitor->VisitTA(this); }
+
+    /**
+     * Setter for TA state to spawned
+     */
+    void SetSpawned() {mTAState = State::Spawned;}
 };
 
 #endif //INC_335PROJECT1_TA_H

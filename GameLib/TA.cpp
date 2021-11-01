@@ -85,9 +85,11 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     if (mTAState == State::Spawned)
     {
+        this->SetLocation(TAPositionX+(this->GetWidth()/2),
+                TAPositionY+(this->GetHeight()/2));
         graphics->DrawBitmap(GetGraphicsBitmap(),
-                GetX(),
-                GetY(),
+                TAPositionX,
+                TAPositionY,
                 GetWidth(),
                 GetHeight());
 
