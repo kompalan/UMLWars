@@ -5,6 +5,7 @@
 
 #include "pch.h"
 #include "Harold.h"
+#include "ItemWithImage.h"
 
 /// Harold Filename
 const std::wstring HaroldImageName = L"images/harold.png";
@@ -19,9 +20,9 @@ cse335::Vector InitialPosition = cse335::Vector(0, 900);
  * Constructor
  * @param game Game object for forward reference
  */
-Harold::Harold(Game* game) : Item(game, InitialPosition.X(), InitialPosition.Y() )
+Harold::Harold(Game* game) : ItemWithImage(game, InitialPosition.X(), InitialPosition.Y(), HaroldImageName)
 {
-    mItemImage = std::make_unique<wxImage>(HaroldImageName, wxBITMAP_TYPE_ANY);
+
 }
 
 /**
@@ -34,12 +35,12 @@ void Harold::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
     graphics->Translate(GetX(), GetY());
     graphics->Rotate(mRotation);
-    if(mItemBitmap.IsNull())
+    if(GetGraphicsBitmap().IsNull())
     {
-        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
+        SetGraphicsBitmap(graphics->CreateBitmapFromImage(*GetImage()));
     }
 
-    graphics->DrawBitmap(mItemBitmap,
+    graphics->DrawBitmap(GetGraphicsBitmap(),
             -GetWidth()/2,
             -GetHeight()/2,
             GetWidth(),

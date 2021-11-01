@@ -18,12 +18,39 @@
 class ItemWithImage : public Item{
 private:
     /// The Item Image
-    std::unique_ptr<wxImage> mImage;
+    std::shared_ptr<wxImage> mImage;
 
     /// The Bitmap for the Item
     wxGraphicsBitmap mBitmap;
 
 public:
+    std::shared_ptr<wxImage> GetImage() {return mImage;}
+    /**
+     * Get the Height of the Image for Pen
+     * @return Image Height for Pen
+     */
+    double GetHeight() const override { return mImage->GetHeight(); }
+
+    /**
+     * Get the Width of the Image for Pen
+     * @return Image Width for Pen
+     */
+    double GetWidth() const override { return mImage->GetWidth(); }
+
+    /**
+     * Get the Bitmap for Items
+     * @return mBitmap member variable
+     */
+    auto GetGraphicsBitmap() {return mBitmap;}
+
+    /**
+     * Renew the Bitmap member variable value
+     * @param: varBitmap wxGraphicsBitmap type variable
+     */
+    void SetGraphicsBitmap(const wxGraphicsBitmap& varBitmap) {mBitmap = varBitmap;}
+
+protected:
+    ItemWithImage(Game *game, double posX, double posY, std::wstring imageName);
 
 };
 

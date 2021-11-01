@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Pen.h"
 #include "Game.h"
+#include "ItemWithImage.h"
 
 /// Path to Pen Image
 const std::wstring PenImageName = L"images/redpen.png";
@@ -21,13 +22,18 @@ const double Velocity = 1000;
 /// Distance at which to keep the pen relative to harold's center
 const double Radius = 61.3;
 
+/// Correction number for Pen during Launch
+const double LaunchCorrection = 1.0;
+
+/// Correction number for Pen with Hand
+const double HaroldCorrection = 4.71;
+
 /**
  * Constructor
  * @param game Game object for forward reference
  */
-Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
+Pen::Pen(Game* game) : ItemWithImage(game, InitialPos.X(), InitialPos.Y(), PenImageName)
 {
-    mItemImage = std::make_unique<wxImage>(PenImageName, wxBITMAP_TYPE_ANY);
     mGame = game;
     mHarold = game->GetHarold();
 }
@@ -44,17 +50,17 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(mPenState==PenState::Held)
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
-        graphics->Rotate(mRotation - 4.71);
+        graphics->Rotate(mRotation - HaroldCorrection);
     }
 
-    if(mItemBitmap.IsNull())
+    if(GetGraphicsBitmap().IsNull())
     {
-        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
+        SetGraphicsBitmap(graphics->CreateBitmapFromImage(*GetImage()));
     }
 
     if (mPenState==PenState::Hit)
     {
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 0,
                 0,
                 0,
@@ -63,7 +69,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     else if(mPenState==PenState::Held)
     {
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 -GetWidth()-30,
                 -GetHeight()-30,
                 GetWidth(),
@@ -73,7 +79,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     {
         graphics->Translate(GetX()-10, GetY()-10);
         graphics->Rotate(mThrownRotation- 4.71);
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 0,
                 0,
                 GetWidth(),
@@ -137,7 +143,8 @@ void Pen::Update(double elapsed)
     }
     else
     {
-        SetLocation(mHarold->GetX() + Radius * cos(mRotation -1 ), mHarold->GetY() + Radius * sin(mRotation - 1));
+        SetLocation(mHarold->GetX() + Radius * cos(mRotation - LaunchCorrection),
+                       mHarold->GetY() + Radius * sin(mRotation - LaunchCorrection));
     }
     if (mRecord)
     {

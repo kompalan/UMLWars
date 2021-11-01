@@ -75,7 +75,7 @@ public:
     /**
      * Deleted Default Constructor
      */
-    Item() = delete;
+    Item() = default;
 
     /**
      * Deleted Copy Constructor

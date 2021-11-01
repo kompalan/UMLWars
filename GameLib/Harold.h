@@ -10,19 +10,14 @@
 
 #include "Item.h"
 #include "Vector.h"
+#include "ItemWithImage.h"
 
 /**
  * Class Representing the Main Character: Harold
  */
-class Harold : public Item {
+class Harold : public ItemWithImage {
 private:
     double mRotation; ///< Rotation angle in radians for Harold
-
-    /// The Item Image
-    std::unique_ptr<wxImage> mItemImage;
-
-    /// The Bitmap for the Item
-    wxGraphicsBitmap mItemBitmap;
 
 public:
     Harold(Game *game);
@@ -34,18 +29,6 @@ public:
      * @return Rotation in Radians
      */
     double GetRotation() const {return mRotation;}
-
-    /**
-     * Get the Height of the Image for Harold
-     * @return Image Height for Harold
-     */
-    double GetHeight() const override { return mItemImage->GetHeight(); }
-
-    /**
-     * Get the Width of the Image for Harold
-     * @return Image Width for Harold
-     */
-    double GetWidth() const override { return mItemImage->GetWidth(); }
 
     /**
      * Accept visitor
