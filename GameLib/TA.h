@@ -24,12 +24,6 @@ private:
     /// State Object representing the state of the TA
     State mTAState = State::NotSpawned;
 
-    /// The Item Image
-    std::unique_ptr<wxImage> mItemImage;
-
-    /// The Bitmap for the Item
-    wxGraphicsBitmap mItemBitmap;
-
     /// Integer tracking the running correct score for the User
     int mScoreCount = 0;
 
@@ -51,7 +45,6 @@ public:
      * Increment the Score Counter
      */
     void IncrementScoreCount() { if (mTAState == State::NotSpawned) {mScoreCount++;} }
-
 
     /**
      * Accept the Visitor for this class and call VisitTA on it
