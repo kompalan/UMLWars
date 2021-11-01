@@ -34,6 +34,16 @@ TA::TA(Game* game) :Item(game, InitialPosition.X(), InitialPosition.Y())
  */
 void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    /// Font of the Scoreboard
+    wxFont bigFont(wxSize(0, 85),
+            wxFONTFAMILY_DEFAULT,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+
+    /// Color of the Scoreboard
+    wxColour cyanBlue = wxColour(0,200,200);
+    graphics->SetFont(bigFont,cyanBlue);
+
     graphics->PushState();
     if(mItemBitmap.IsNull())
     {
@@ -47,6 +57,8 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 GetY(),
                 GetWidth(),
                 GetHeight());
+
+        graphics->DrawText(L"Hit Me!",-600,900);
     }
     else if (mTAState == State::Hit)
     {
@@ -68,6 +80,8 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 GetY(),
                 0,
                 0);
+
+        graphics->DrawText(std::to_string(15-mScoreCount),-400,900);
     }
 
 
@@ -83,7 +97,7 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void TA::Update(double elapsed)
 {
-    if (mScoreCount > TAScoreThreshold && mTAState == State::NotSpawned)
+    if (mScoreCount >= TAScoreThreshold && mTAState == State::NotSpawned)
     {
         SetLocation(-250, 850);
         mScoreCount = 0;

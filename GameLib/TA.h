@@ -51,7 +51,7 @@ public:
     /**
      * Increment the Score Counter
      */
-    void IncrementScoreCount() { mScoreCount++; }
+    void IncrementScoreCount() { if (mTAState == State::NotSpawned) {mScoreCount++;} }
 
     /**
      * Get the Height of the Image for Sparty
