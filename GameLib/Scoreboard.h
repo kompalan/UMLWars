@@ -30,17 +30,17 @@ public:
     /**
     * Increments the Correct score by 1
     */
-    void IncCorrect() {mCorrect+=1;}
+    void IncCorrect() {mCorrect++;}
 
     /**
     * Increments the Missed score by 1
     */
-    void IncMissed() {mMissed+=1;}
+    void IncMissed() {mMissed++;}
 
     /**
     * Increments the Unfair score by 1
     */
-    void IncUnfair() {mUnfair+=1;}
+    void IncUnfair() {mUnfair++;}
 
     /**
      * Getter for Correct score
