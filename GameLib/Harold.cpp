@@ -58,6 +58,6 @@ void Harold::HandleMouseMove(double virtualX, double virtualY)
     double diffX = virtualX - (GetX());
     double diffY = virtualY - (GetY());
 
-    // Rotate the Image to Point Harolds Hand Towards the Mouse
+    /// Rotate the Image to Point Harold's Hand Towards the Mouse
     mRotation = atan2(diffY, diffX) + HaroldsHand;
 }
