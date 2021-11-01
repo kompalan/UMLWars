@@ -22,13 +22,23 @@ const double Velocity = 1000;
 /// Distance at which to keep the pen relative to harold's center
 const double Radius = 61.3;
 
+/// Correction of Position for Pen with Harold's hand
+const double HandCorrection = 1.0;
+
+/// Make Correction for Rotation
+const double RotateCorrection = 4.71;
+
+/// Translation Correction
+const double TranslateCorrection = 10.0;
+
+/// The correction for width and height
+const double BitmapCorrection = 30;
 /**
  * Constructor
  * @param game Game object for forward reference
  */
 Pen::Pen(Game* game) : ItemWithImage(game, InitialPos.X(), InitialPos.Y(), PenImageName)
 {
-//    mGame = game;
     mHarold = game->GetHarold();
 }
 
@@ -44,7 +54,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(mPenState==PenState::Held)
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
-        graphics->Rotate(mRotation - 4.71);
+        graphics->Rotate(mRotation - RotateCorrection);
     }
 
     if(GetGraphicsBitmap().IsNull())
@@ -64,15 +74,15 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     else if(mPenState==PenState::Held)
     {
         graphics->DrawBitmap(GetGraphicsBitmap(),
-                -GetWidth()-30,
-                -GetHeight()-30,
+                -GetWidth()-BitmapCorrection,
+                -GetHeight()-BitmapCorrection,
                 GetWidth(),
                 GetHeight());
     }
     else
     {
-        graphics->Translate(GetX()-10, GetY()-10);
-        graphics->Rotate(mThrownRotation- 4.71);
+        graphics->Translate(GetX() - TranslateCorrection, GetY()- TranslateCorrection);
+        graphics->Rotate(mThrownRotation- RotateCorrection);
         graphics->DrawBitmap(GetGraphicsBitmap(),
                 0,
                 0,
@@ -137,7 +147,8 @@ void Pen::Update(double elapsed)
     }
     else
     {
-        SetLocation(mHarold->GetX() + Radius * cos(mRotation -1 ), mHarold->GetY() + Radius * sin(mRotation - 1));
+        SetLocation(mHarold->GetX() + Radius * cos(mRotation - HandCorrection),
+                    mHarold->GetY() + Radius * sin(mRotation - HandCorrection));
     }
     if (mRecord)
     {
