@@ -34,6 +34,12 @@ TA::TA(Game* game) :Item(game, InitialPosition.X(), InitialPosition.Y())
  */
 void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    /// Font of the categories
+    wxFont smallFont(wxSize(0, 40),
+            wxFONTFAMILY_DEFAULT,
+            wxFONTSTYLE_NORMAL,
+            wxFONTWEIGHT_BOLD);
+
     /// Font of the Scoreboard
     wxFont bigFont(wxSize(0, 85),
             wxFONTFAMILY_DEFAULT,
@@ -81,7 +87,9 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 0,
                 0);
 
-        graphics->DrawText(std::to_string(15-mScoreCount),-400,900);
+        graphics->DrawText(std::to_string(15-mScoreCount),-600,900);
+        graphics->SetFont(smallFont,cyanBlue);
+        graphics->DrawText(L"TA in:",-600,850);
     }
 
 
