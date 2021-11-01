@@ -62,16 +62,19 @@ private:
     /// Boolean representing whether the variant is enabled
     bool mCustomVariant = false;
 
+    ///Bitmap for the background image in variant
     wxBitmap mBackground;
 
 public:
     Game();
     void OnDraw(std::shared_ptr<wxGraphicsContext> graphics, int width, int height);
+
     void Update(double elapsed);
 
     void OnMouseMove(int mouseX, int mouseY);
 
     void OnLeftDown(int mouseX, int mouseY);
+
     void AddItem(std::shared_ptr<Item> item);
 
     /**
@@ -132,8 +135,11 @@ public:
      */
     double GetScale() { return mScale; }
 
+    /**
+     * Returns the wxBitmap for Variant Background image
+     * @return Bitmap of Background image
+     */
     wxBitmap GetBackground() {return mBackground;}
-
 };
 
 #endif //INC_335PROJECT1_GAME_H

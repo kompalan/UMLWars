@@ -11,17 +11,22 @@
 
 #include "Item.h"
 #include "Vector.h"
-#include "ItemWithImage.h"
 
 /**
  * Class for the Pen that Harold Throws
  */
-class Pen : public ItemWithImage {
+class Pen : public Item {
 private:
     ///< Rotation angle in radians for Pen
     double mRotation = 0.0;
     /// Stored rotation angle in radians for Pen while Thrown
     double mThrownRotation = 0.0;
+
+    /// The Item Image
+    std::unique_ptr<wxImage> mItemImage;
+
+    /// The Bitmap for the Item
+    wxGraphicsBitmap mItemBitmap;
 
     /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
@@ -51,11 +56,30 @@ private:
 
 public:
     Pen(Game *game);
+
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
 
     void HandleMouseDown(double virtualX, double virtualY) override;
 
+    void Update(double elapsed) override;
+
+    void CheckBorder();
+
     void ReturnToHarold();
+
+    void Stop();
+
+    /**
+     * Get the Height of the Image for Pen
+     * @return Image Height for Pen
+     */
+    double GetHeight() const override { return mItemImage->GetHeight(); }
+
+    /**
+     * Get the Width of the Image for Pen
+     * @return Image Width for Pen
+     */
+    double GetWidth() const override { return mItemImage->GetWidth(); }
 
     /**
      * Accept the Item Visitor
@@ -63,27 +87,16 @@ public:
      */
     void Accept(ItemVisitor* visitor) override {};
 
-    void Update(double elapsed) override;
-
-    void CheckBorder();
-
     /**
      * Set the mRecord boolean to mIf
      * @param mIf Boolean to set
      */
     void SetRecord(bool mIf) {mRecord = mIf;}
 
-    void Stop();
-
     /**
      * Transitions the pen state to thrown
      */
     void ThrowPen() {mPenState=PenState::Thrown;}
-
-//    /**
-//     * Transitions the Pen State to Hit
-//     */
-//    void HasHit() {mPenState=PenState::Hit;}
 
     /**
      * Returns a boolean indicating whether the pen is thrown

@@ -21,7 +21,8 @@ using namespace std;
 const std::wstring Filename = L"data/uml.xml";
 ///PNG file for the variant background image
 const std::wstring VarBackground = L"images/bounce house.png";
-
+///Width of pen image
+const double PenW = 50;
 /**
  * Constructor
  */
@@ -176,10 +177,10 @@ bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
         double objWidth = obj->GetWidth();
         double objHeight = obj->GetHeight();
 
-        //HitTest using center point of pen against range of tested object's dimensions
+        //HitTest using two points of the pen against tested object's dimensions
         if (((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
                 (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))) ||
-                ((penX-50>=(objX-objWidth/2) && penX-50<=(objX+objWidth/2)) &&
+                ((penX-PenW>=(objX-objWidth/2) && penX-PenW<=(objX+objWidth/2)) &&
                 (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2)))
                 ) {
             return true;

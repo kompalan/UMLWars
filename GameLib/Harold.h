@@ -17,11 +17,14 @@
  */
 class Harold : public ItemWithImage {
 private:
-    double mRotation; ///< Rotation angle in radians for Harold
+    /// Rotation angle in radians for Harold
+    double mRotation;
 
 public:
     Harold(Game *game);
+
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
     void HandleMouseMove(double virtualX, double virtualY) override;
 
     /**

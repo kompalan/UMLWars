@@ -13,8 +13,35 @@ const std::wstring TAImageName = L"images/sparty.png";
 /// Initial Position
 const cse335::Vector InitialPosition = cse335::Vector(0, -200);
 
+/// TA Hidden Position
+const double TAPositionX = -250;
+
 /// Integer representing how many points we need for TA to activate
 const int TAScoreThreshold = 15;
+
+/// Score and Hit Me! X position
+const double TextPositionX = -600;
+
+/// Score and Hit Me! Y position
+const double TextPositionY = 900;
+
+///small Text Y position
+const double TAPositionY = 850;
+
+/// String for TA can be used
+const std::string TAUsable = "Hit Me!";
+
+/// String for small text "TA in:"
+const std::string TACountdown = "TA in:";
+
+///Value of Blue and Green in Cyan color
+const double CyanValue = 200;
+
+///Pixel size of small font
+const double SmallSize = 40;
+
+///Pixel size of large font
+const double LargeSize = 85;
 
 /**
  * Constructor
@@ -34,20 +61,21 @@ TA::TA(Game* game) :Item(game, InitialPosition.X(), InitialPosition.Y())
  */
 void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    /// Font of the categories
-    wxFont smallFont(wxSize(0, 40),
+    /// Font of the text
+    wxFont smallFont(wxSize(0, SmallSize),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
-    /// Font of the Scoreboard
-    wxFont bigFont(wxSize(0, 85),
+    /// Font of the Countdown and Hit Me! text
+    wxFont bigFont(wxSize(0, LargeSize),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
-    /// Color of the Scoreboard
-    wxColour cyanBlue = wxColour(0,200,200);
+    /// Color of the Font
+    wxColour cyanBlue = wxColour(0,CyanValue,CyanValue);
+
     graphics->SetFont(bigFont,cyanBlue);
 
     graphics->PushState();
@@ -64,7 +92,7 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 GetWidth(),
                 GetHeight());
 
-        graphics->DrawText(L"Hit Me!",-600,900);
+        graphics->DrawText(TAUsable,TextPositionX,TextPositionY);
     }
     else if (mTAState == State::Hit)
     {
@@ -87,9 +115,9 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 0,
                 0);
 
-        graphics->DrawText(std::to_string(15-mScoreCount),-600,900);
+        graphics->DrawText(std::to_string(TAScoreThreshold-mScoreCount),TextPositionX,TextPositionY);
         graphics->SetFont(smallFont,cyanBlue);
-        graphics->DrawText(L"TA in:",-600,850);
+        graphics->DrawText(TACountdown,TextPositionX,TAPositionY);
     }
 
 
@@ -107,12 +135,15 @@ void TA::Update(double elapsed)
 {
     if (mScoreCount >= TAScoreThreshold && mTAState == State::NotSpawned)
     {
-        SetLocation(-250, 850);
+        SetLocation(TAPositionX, TAPositionY);
         mScoreCount = 0;
         mTAState = State::Spawned;
     }
 }
-
+/**
+ * Setter for mTAState to change when hit with pen
+ * @return Always returns true
+ */
 bool TA::SetHitState()
 {
     if (mTAState == State::Spawned)

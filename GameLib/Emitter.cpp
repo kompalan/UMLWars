@@ -38,6 +38,12 @@ const double MinEmitPositionX = -500;
 /// The maximum x coordinate the objects are emitted at
 const double MaxEmitPositionX = 500;
 
+/// Set Probability Threshold for comparison
+const double ProbabilityThreshold = 50;
+
+/// Increment constant for game progression
+const double TimeIncrements = 2;
+
 /**
  * Constructor for Emitter
  * Creates two Random Devices to independently choose good and
@@ -80,12 +86,12 @@ void Emitter::Create(double elapsed)
 
         Emit(mDistributionGood(mRandomGood), mDistribution(mRandomInheritance));
 
-        if (mBadThreshold < 50) {
-            mBadThreshold += 2;
+        if (mBadThreshold < ProbabilityThreshold) {
+            mBadThreshold += TimeIncrements;
         }
 
-        if (mInheritanceThreshold < 50) {
-            mInheritanceThreshold += 2;
+        if (mInheritanceThreshold < ProbabilityThreshold) {
+            mInheritanceThreshold += TimeIncrements;
         }
     }
 }
@@ -167,7 +173,7 @@ std::shared_ptr<Inheritance> Emitter::MakeInheritance(double good)
     }
     else
     {
-        // Make good inheritance
+        /// Make good inheritance
         inheritance = mData->GenerateGoodInheritance();
     }
     return inheritance;
