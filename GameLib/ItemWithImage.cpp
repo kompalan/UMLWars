@@ -4,7 +4,6 @@
  */
 
 #include "pch.h"
-#include "Game.h"
 #include "ItemWithImage.h"
 
 /**

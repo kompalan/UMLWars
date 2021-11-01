@@ -7,12 +7,12 @@
 
 #ifndef INC_335PROJECT1_TA_H
 #define INC_335PROJECT1_TA_H
-#include "Item.h"
+#include "ItemWithImage.h"
 
 /**
  * Class for the TA Item
  */
-class TA : public Item {
+class TA : public ItemWithImage {
 private:
     /// Enum representing the states a TA could take
     enum State {

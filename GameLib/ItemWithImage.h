@@ -17,6 +17,8 @@
  */
 class ItemWithImage : public Item{
 private:
+    Game *mGame;
+
     /// The Item Image
     std::shared_ptr<wxImage> mImage;
 
@@ -24,6 +26,17 @@ private:
     wxGraphicsBitmap mBitmap;
 
 public:
+    /**
+    * Deleted Default Constructor
+    */
+    ItemWithImage() = delete;
+
+    /**
+     * Deleted Copy Constructor
+     * @param item
+     */
+    ItemWithImage(const ItemWithImage &itemwithImage) = delete;
+
     std::shared_ptr<wxImage> GetImage() {return mImage;}
     /**
      * Get the Height of the Image for Pen
