@@ -81,7 +81,11 @@ void WarsView::OnPaint(wxPaintEvent& event)
     auto gc = std::shared_ptr<wxGraphicsContext>(wxGraphicsContext::Create( dc ));
     if (mGame.IsCustomSelected())
     {
-        dc.DrawBitmap(mGame.GetBackground(),0,0);
+        //dc.DrawBitmap(mGame.GetBackground(),0,0);
+        gc->DrawBitmap(mGame.GetBackground(),
+                rect.GetWidth()/2 - (mGame.GetWidth()/2 * mGame.GetScale()),
+                rect.GetHeight()/2 - (mGame.GetHeight()/2 * mGame.GetScale()),
+                mGame.GetWidth()*mGame.GetScale() ,mGame.GetHeight()*mGame.GetScale());
     }
     mGame.OnDraw(gc, rect.GetWidth(), rect.GetHeight());
 
