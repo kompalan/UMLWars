@@ -11,22 +11,17 @@
 
 #include "Item.h"
 #include "Vector.h"
+#include "ItemWithImage.h"
 
 /**
  * Class for the Pen that Harold Throws
  */
-class Pen : public Item {
+class Pen : public ItemWithImage {
 private:
     ///< Rotation angle in radians for Pen
     double mRotation = 0.0;
     /// Stored rotation angle in radians for Pen while Thrown
     double mThrownRotation = 0.0;
-
-    /// The Item Image
-    std::unique_ptr<wxImage> mItemImage;
-
-    /// The Bitmap for the Item
-    wxGraphicsBitmap mItemBitmap;
 
     /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
@@ -68,18 +63,6 @@ public:
     void ReturnToHarold();
 
     void Stop();
-
-    /**
-     * Get the Height of the Image for Pen
-     * @return Image Height for Pen
-     */
-    double GetHeight() const override { return mItemImage->GetHeight(); }
-
-    /**
-     * Get the Width of the Image for Pen
-     * @return Image Width for Pen
-     */
-    double GetWidth() const override { return mItemImage->GetWidth(); }
 
     /**
      * Accept the Item Visitor

@@ -5,6 +5,7 @@
 #include "pch.h"
 #include "Pen.h"
 #include "Game.h"
+#include "ItemWithImage.h"
 
 /// Path to Pen Image
 const std::wstring PenImageName = L"images/redpen.png";
@@ -21,22 +22,12 @@ const double Velocity = 1000;
 /// Distance at which to keep the pen relative to harold's center
 const double Radius = 61.3;
 
-///Rotation offset in radians
-const double RotationOffset = 4.71;
-
-///Held Draw Offset in pixels
-const double HeldOffset = 30;
-
-///Thrown Translate Offset in pixels
-const double ThrownOffset = 10;
-
 /**
  * Constructor
  * @param game Game object for forward reference
  */
-Pen::Pen(Game* game) : Item(game, InitialPos.X(), InitialPos.Y() )
+Pen::Pen(Game* game) : ItemWithImage(game, InitialPos.X(), InitialPos.Y(), PenImageName)
 {
-    mItemImage = std::make_unique<wxImage>(PenImageName, wxBITMAP_TYPE_ANY);
     mGame = game;
     mHarold = game->GetHarold();
 }
@@ -53,17 +44,17 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     if(mPenState==PenState::Held)
     {
         graphics->Translate(mHarold->GetX(), mHarold->GetY());
-        graphics->Rotate(mRotation - RotationOffset);
+        graphics->Rotate(mRotation - 4.71);
     }
 
-    if(mItemBitmap.IsNull())
+    if(GetGraphicsBitmap().IsNull())
     {
-        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
+        SetGraphicsBitmap(graphics->CreateBitmapFromImage(*GetImage()));
     }
 
     if (mPenState==PenState::Hit)
     {
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 0,
                 0,
                 0,
@@ -72,24 +63,22 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
     else if(mPenState==PenState::Held)
     {
-        graphics->DrawBitmap(mItemBitmap,
-                -GetWidth()-HeldOffset,
-                -GetHeight()-HeldOffset,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
+                -GetWidth()-30,
+                -GetHeight()-30,
                 GetWidth(),
                 GetHeight());
     }
-
     else
     {
-        graphics->Translate(GetX()-ThrownOffset, GetY()-ThrownOffset);
-        graphics->Rotate(mThrownRotation - RotationOffset);
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->Translate(GetX()-10, GetY()-10);
+        graphics->Rotate(mThrownRotation- 4.71);
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 0,
                 0,
                 GetWidth(),
                 GetHeight());
     }
-
     graphics->PopState();
 }
 
@@ -130,37 +119,32 @@ void Pen::Update(double elapsed)
         {
             CheckBorder();
         }
-
         double newX = GetX()+mVelocity.X()*elapsed;
         double newY = GetY()+mVelocity.Y()*elapsed;
 
+        auto tempGame = GetGame();
         if (mTime > 1 && mPenState==PenState::Hit) {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
             mPenState=PenState::Held;
             mTime = 0;
         }
-
         else
         {
             SetLocation(newX, newY);
         }
-
         mGame->RemoveOnHit(this, mTime);
     }
-
     else
     {
-        SetLocation(mHarold->GetX() + Radius * cos(mRotation - PenAngle),
-                mHarold->GetY() + Radius * sin(mRotation - PenAngle));
+        SetLocation(mHarold->GetX() + Radius * cos(mRotation -1 ), mHarold->GetY() + Radius * sin(mRotation - 1));
     }
-
     if (mRecord)
     {
         mTime += elapsed;
     }
-
     mRotation = mHarold->GetRotation();
+
 }
 
 /**
@@ -171,7 +155,6 @@ void Pen::CheckBorder(){
     if((GetY() < 0) || (GetY() > mGame->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
     }
-
     if((GetX() < ((-mGame->GetWidth()/2) + GetWidth()/2)) || (GetX() > (mGame->GetWidth()/2))){
         mVelocity.SetX(-mVelocity.X());
     }

@@ -50,6 +50,7 @@ public:
     void SetGraphicsBitmap(const wxGraphicsBitmap& varBitmap) {mBitmap = varBitmap;}
 
 protected:
+
     ItemWithImage(Game *game, double posX, double posY, std::wstring imageName);
 
 };
