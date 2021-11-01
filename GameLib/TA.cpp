@@ -49,8 +49,7 @@ const double LargeSize = 85;
  */
 TA::TA(Game* game) :ItemWithImage(game, InitialPosition.X(), InitialPosition.Y(), TAImageName)
 {
-    mItemImage = std::make_unique<wxImage>(TAImageName, wxBITMAP_TYPE_ANY);
-    mGame = game;
+
 }
 
 /**
@@ -79,14 +78,14 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->SetFont(bigFont,cyanBlue);
 
     graphics->PushState();
-    if(mItemBitmap.IsNull())
+    if(GetGraphicsBitmap().IsNull())
     {
-        mItemBitmap = graphics->CreateBitmapFromImage(*mItemImage);
+        SetGraphicsBitmap(graphics->CreateBitmapFromImage(*GetImage()));
     }
 
     if (mTAState == State::Spawned)
     {
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 GetX(),
                 GetY(),
                 GetWidth(),
@@ -97,19 +96,19 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     else if (mTAState == State::Hit)
     {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 GetX(),
                 GetY(),
                 0,
                 0);
         /// Call some function in game to remove all TA and switch the state to not spawned
-        mGame->DeleteAllBadUML(this);
+        GetGame()->DeleteAllBadUML(this);
         mTAState = State::NotSpawned;
     }
     else
     {
         SetLocation(InitialPosition.X(), InitialPosition.Y());
-        graphics->DrawBitmap(mItemBitmap,
+        graphics->DrawBitmap(GetGraphicsBitmap(),
                 GetX(),
                 GetY(),
                 0,

@@ -30,9 +30,6 @@ private:
     /// The Bitmap for the Item
     wxGraphicsBitmap mItemBitmap;
 
-    /// Game object to call delete methods on
-    Game *mGame;
-
     /// Integer tracking the running correct score for the User
     int mScoreCount = 0;
 
@@ -55,17 +52,6 @@ public:
      */
     void IncrementScoreCount() { if (mTAState == State::NotSpawned) {mScoreCount++;} }
 
-    /**
-     * Get the Height of the Image for Sparty
-     * @return Image Height for Sparty
-     */
-    double GetHeight() const override { return mItemImage->GetHeight(); }
-
-    /**
-     * Get the Width of the Image for Sparty
-     * @return Image Width for Sparty
-     */
-    double GetWidth() const override { return mItemImage->GetWidth(); }
 
     /**
      * Accept the Visitor for this class and call VisitTA on it
