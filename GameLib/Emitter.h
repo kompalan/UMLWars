@@ -58,9 +58,13 @@ private:
     std::uniform_real_distribution<> mDistributionGood = std::uniform_real_distribution<>(0, 100);
 public:
     Emitter(Game *game, std::shared_ptr<UMLData> data);
+
     void Create(double elapsed);
+
     void Emit(double good, double inheritance);
+
     std::shared_ptr<Inheritance> MakeInheritance(double good);
+
     std::shared_ptr<ClassUML> MakeClass(double good);
 
     /**
