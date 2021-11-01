@@ -26,9 +26,6 @@ private:
     /// Define the initial Velocity
     cse335::Vector mVelocity = cse335::Vector();
 
-    /// Game Object
-    Game *mGame;
-
     /// Harold Object, used for width and height calculations
     std::shared_ptr<Harold> mHarold;
 

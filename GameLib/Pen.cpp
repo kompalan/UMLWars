@@ -28,7 +28,7 @@ const double Radius = 61.3;
  */
 Pen::Pen(Game* game) : ItemWithImage(game, InitialPos.X(), InitialPos.Y(), PenImageName)
 {
-    mGame = game;
+//    mGame = game;
     mHarold = game->GetHarold();
 }
 
@@ -115,7 +115,7 @@ void Pen::Update(double elapsed)
     if((mPenState==PenState::Thrown || mPenState==PenState::Hit))
     {
         mTime+=elapsed;
-        if(mGame->IsCustomSelected())
+        if(GetGame()->IsCustomSelected())
         {
             CheckBorder();
         }
@@ -133,7 +133,7 @@ void Pen::Update(double elapsed)
         {
             SetLocation(newX, newY);
         }
-        mGame->RemoveOnHit(this, mTime);
+        GetGame()->RemoveOnHit(this, mTime);
     }
     else
     {
@@ -152,10 +152,10 @@ void Pen::Update(double elapsed)
  * and sets the X and Y velocity to be opposite. Used for Game Variant
  */
 void Pen::CheckBorder(){
-    if((GetY() < 0) || (GetY() > mGame->GetHeight())){
+    if((GetY() < 0) || (GetY() > GetGame()->GetHeight())){
         mVelocity.SetY(-mVelocity.Y());
     }
-    if((GetX() < ((-mGame->GetWidth()/2) + GetWidth()/2)) || (GetX() > (mGame->GetWidth()/2))){
+    if((GetX() < ((-GetGame()->GetWidth()/2) + GetWidth()/2)) || (GetX() > (GetGame()->GetWidth()/2))){
         mVelocity.SetX(-mVelocity.X());
     }
 }
