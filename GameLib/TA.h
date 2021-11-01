@@ -38,7 +38,9 @@ private:
 
 public:
     TA(Game *game);
+
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
     void Update(double elapsed) override;
 
     /**

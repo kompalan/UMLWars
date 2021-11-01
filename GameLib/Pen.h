@@ -56,7 +56,18 @@ private:
 
 public:
     Pen(Game *game);
+
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
+
+    void HandleMouseDown(double virtualX, double virtualY) override;
+
+    void Update(double elapsed) override;
+
+    void CheckBorder();
+
+    void ReturnToHarold();
+
+    void Stop();
 
     /**
      * Get the Height of the Image for Pen
@@ -70,20 +81,11 @@ public:
      */
     double GetWidth() const override { return mItemImage->GetWidth(); }
 
-
-    void HandleMouseDown(double virtualX, double virtualY) override;
-
-    void ReturnToHarold();
-
     /**
      * Accept the Item Visitor
      * @param visitor ItemVisitor object
      */
     void Accept(ItemVisitor* visitor) override {};
-
-    void Update(double elapsed) override;
-
-    void CheckBorder();
 
     /**
      * Set the mRecord boolean to mIf
@@ -91,17 +93,10 @@ public:
      */
     void SetRecord(bool mIf) {mRecord = mIf;}
 
-    void Stop();
-
     /**
      * Transitions the pen state to thrown
      */
     void ThrowPen() {mPenState=PenState::Thrown;}
-
-    /**
-     * Transitions the Pen State to Hit
-     */
-    void HasHit() {mPenState=PenState::Hit;}
 
     /**
      * Returns a boolean indicating whether the pen is thrown

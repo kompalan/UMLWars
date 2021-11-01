@@ -32,12 +32,19 @@ private:
     bool mVariantSelected = false;
 
     void OnPaint(wxPaintEvent& event);
+
     void OnTimer(wxTimerEvent& event);
+
     void OnMouseMove(wxMouseEvent &event);
+
     void OnLeftDown(wxMouseEvent &event);
+
     void OnOriginalVariant(wxCommandEvent&);
+
     void OnCustomVariant(wxCommandEvent&);
+
     void OnUpdateOriginalVariant(wxUpdateUIEvent& event);
+
     void OnUpdateCustomVariant(wxUpdateUIEvent& event);
 public:
     void Initialize(wxFrame *mainFrame);
