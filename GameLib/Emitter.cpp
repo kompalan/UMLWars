@@ -86,11 +86,13 @@ void Emitter::Create(double elapsed)
 
         Emit(mDistributionGood(mRandomGood), mDistribution(mRandomInheritance));
 
-        if (mBadThreshold < ProbabilityThreshold) {
+        if (mBadThreshold < ProbabilityThreshold)
+        {
             mBadThreshold += TimeIncrements;
         }
 
-        if (mInheritanceThreshold < ProbabilityThreshold) {
+        if (mInheritanceThreshold < ProbabilityThreshold)
+        {
             mInheritanceThreshold += TimeIncrements;
         }
     }
@@ -107,7 +109,8 @@ void Emitter::Emit(double good, double inheritance)
 {
     std::shared_ptr<UML> uml;
 
-    if (inheritance > mInheritanceThreshold) {
+    if (inheritance > mInheritanceThreshold)
+    {
         uml = MakeClass(good);
     }
     else
@@ -145,12 +148,12 @@ std::shared_ptr<ClassUML> Emitter::MakeClass(double good)
     std::shared_ptr<ClassUML> uml;
     if (good > mBadThreshold)
     {
-        /// Make Bad Class
+        // Make Bad Class
         uml = mData->GenerateBadClassUML();
     }
     else
     {
-        /// Make Good Class
+        // Make Good Class
         uml = mData->GenerateGoodClassUML();
     }
     return uml;
@@ -168,12 +171,12 @@ std::shared_ptr<Inheritance> Emitter::MakeInheritance(double good)
     std::shared_ptr<Inheritance> inheritance;
     if (good > mBadThreshold)
     {
-        /// Make Bad Inheritance
+        // Make Bad Inheritance
         inheritance = mData->GenerateBadInheritance();
     }
     else
     {
-        /// Make good inheritance
+        // Make good inheritance
         inheritance = mData->GenerateGoodInheritance();
     }
     return inheritance;

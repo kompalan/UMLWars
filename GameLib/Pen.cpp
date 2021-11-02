@@ -33,6 +33,7 @@ const double TranslateCorrection = 10.0;
 
 /// The correction for width and height
 const double BitmapCorrection = 30;
+
 /**
  * Constructor
  * @param game Game object for forward reference
@@ -99,7 +100,7 @@ void Pen::Draw(std::shared_ptr<wxGraphicsContext> graphics)
  */
 void Pen::HandleMouseDown(double virtualX, double virtualY)
 {
-    /// determine if the pen has been thrown
+    // determine if the pen has been thrown
     if (mPenState==PenState::Held)
     {
         double diffX = virtualX - (GetX());
@@ -132,8 +133,8 @@ void Pen::Update(double elapsed)
         double newX = GetX()+mVelocity.X()*elapsed;
         double newY = GetY()+mVelocity.Y()*elapsed;
 
-        auto tempGame = GetGame();
-        if (mTime > 1 && mPenState==PenState::Hit) {
+        if (mTime > 1 && mPenState==PenState::Hit)
+        {
             mVelocity = cse335::Vector();
             SetLocation(mHarold->GetX(), mHarold->GetY());
             mPenState=PenState::Held;
@@ -163,10 +164,12 @@ void Pen::Update(double elapsed)
  * and sets the X and Y velocity to be opposite. Used for Game Variant
  */
 void Pen::CheckBorder(){
-    if((GetY() < 0) || (GetY() > GetGame()->GetHeight())){
+    if((GetY() < 0) || (GetY() > GetGame()->GetHeight()))
+    {
         mVelocity.SetY(-mVelocity.Y());
     }
-    if((GetX() < ((-GetGame()->GetWidth()/2) + GetWidth()/2)) || (GetX() > (GetGame()->GetWidth()/2))){
+    if((GetX() < ((-GetGame()->GetWidth()/2) + GetWidth()/2)) || (GetX() > (GetGame()->GetWidth()/2)))
+    {
         mVelocity.SetX(-mVelocity.X());
     }
 }

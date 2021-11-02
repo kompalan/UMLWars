@@ -89,7 +89,7 @@ public:
 
     void DeleteUML(std::vector<UML*> toDelete);
 
-    void DeleteAllBadUML(TA *ta);
+    void DeleteAllBadUML();
 
     void CheckItemOnScreen(std::shared_ptr<Item> item);
 

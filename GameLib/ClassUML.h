@@ -31,9 +31,6 @@ private:
     /// The list of operations of the UML object
     std::vector<std::shared_ptr<UMLOperation>> mOperations;
 
-
-
-
 protected:
     ClassUML(Game *game, std::shared_ptr<UMLName> name, std::vector<std::shared_ptr<UMLAttribute>> attributes,
             std::vector<std::shared_ptr<UMLOperation>> operations);

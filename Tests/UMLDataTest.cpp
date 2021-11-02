@@ -11,7 +11,7 @@
 using namespace std;
 
 /// XML file to read the UML data from
-const std::wstring Filename = L"data/uml.xml";
+const std::wstring Filename = L"data/uml1.xml";
 
 /// Seed for the random number generator being used
 const unsigned int RandomSeed = 12345;

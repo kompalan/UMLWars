@@ -17,8 +17,6 @@
  */
 class ItemWithImage : public Item{
 private:
-    Game *mGame;
-
     /// The Item Image
     std::shared_ptr<wxImage> mImage;
 
@@ -26,16 +24,19 @@ private:
     wxGraphicsBitmap mBitmap;
 
 public:
-    /**
-    * Deleted Default Constructor
-    */
+    /// Default constructor (disabled)
     ItemWithImage() = delete;
 
+    /// Copy constructor (disabled)
+    ItemWithImage(const ItemWithImage &) = delete;
+
+    /// Assignment operator
+    void operator=(const ItemWithImage &) = delete;
+
     /**
-     * Deleted Copy Constructor
-     * @param item
+     * Get the image of the item
+     * @return the image of the item
      */
-    ItemWithImage(const ItemWithImage &itemwithImage) = delete;
 
     std::shared_ptr<wxImage> GetImage() {return mImage;}
     /**
@@ -58,12 +59,11 @@ public:
 
     /**
      * Renew the Bitmap member variable value
-     * @param: varBitmap wxGraphicsBitmap type variable
+     * @param varBitmap wxGraphicsBitmap type variable
      */
     void SetGraphicsBitmap(const wxGraphicsBitmap& varBitmap) {mBitmap = varBitmap;}
 
 protected:
-
     ItemWithImage(Game *game, double posX, double posY, std::wstring imageName);
 
 };

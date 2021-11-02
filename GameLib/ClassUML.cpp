@@ -23,6 +23,15 @@ const double LeftRightPadding = 5;
 /// Number of pixels to pad the top and bottom of the UML object
 const double TopBottomPadding = 5;
 
+/// Font size for class names
+int NameFontSize = 15;
+
+/// Font size for attributes and operations
+int NormalFontSize = 15;
+
+/// Font size for display message
+int ClassDisplayFontSize = 30;
+
 /**
  * Constructor
  * @param game the game the UML object is a part of
@@ -47,19 +56,19 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     graphics->PushState();
 
     // The font for class names
-    wxFont nameFont(wxSize(0,15),
+    wxFont nameFont(wxSize(0,NameFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
 
     // The font for attributes and operations
-    wxFont normalFont(wxSize(0,15),
+    wxFont normalFont(wxSize(0,NormalFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
 
     // The font for displaying the message after UML is hit
-    wxFont displayFont(wxSize(0,30),
+    wxFont displayFont(wxSize(0,ClassDisplayFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
@@ -121,12 +130,14 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
         }
     }
 
+    // Displays the message for when a UML is hit
     if (IsHit())
     {
         BadUMLVisitor visitor;
 
         Accept(&visitor);
 
+        // Color of the font depends on if the hit UML is good or bad
         if (!visitor.IsBad())
         {
             graphics->SetFont(displayFont, *wxRED);
@@ -150,13 +161,13 @@ void ClassUML::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 void ClassUML::CalculateDimensions(shared_ptr<wxGraphicsContext> graphics)
 {
     // The font for class names
-    wxFont nameFont(wxSize(0,15),
+    wxFont nameFont(wxSize(0,NameFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
 
     // The font for attributes and operations
-    wxFont normalFont(wxSize(0,15),
+    wxFont normalFont(wxSize(0,NormalFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);

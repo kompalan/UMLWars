@@ -19,6 +19,9 @@ const double ArrowTipHeight = 10;
 /// The width of the tip of the arrow in pixels
 const double ArrowTipWidth = 12;
 
+/// Font size for display message
+int InheritanceDisplayFontSize = 30;
+
 /**
  * Constructor
  * @param game the game the inheritance UML is a part of
@@ -54,8 +57,8 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
 
     graphics->PushState();
 
-    /// The font for displaying the message after UML is hit
-    wxFont displayFontInheritance(wxSize(0,30),
+    // The font for displaying the message after UML is hit
+    wxFont displayFontInheritance(wxSize(0,InheritanceDisplayFontSize),
             wxFONTFAMILY_SWISS,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_NORMAL);
@@ -136,12 +139,15 @@ void Inheritance::Draw(shared_ptr<wxGraphicsContext> graphics)
         graphics->StrokeLine(GetX(), derivedY - mDerived->GetHeight()/2 - ArrowLineLength - ArrowTipHeight,
                 GetX() - ArrowTipWidth/2, derivedY - mDerived->GetHeight()/2 - ArrowLineLength);
     }
+
+    // Displays the message for when a UML is hit
     if (IsHit())
     {
         BadUMLVisitor visitor;
 
         Accept(&visitor);
 
+        // Color of the font depends on if the hit UML is good or bad
         if (!visitor.IsBad())
         {
             graphics->SetFont(displayFontInheritance, *wxRED);

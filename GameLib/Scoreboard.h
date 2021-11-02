@@ -18,10 +18,13 @@ class Scoreboard {
 private:
     ///Correct score
     int mCorrect=0;
+
     ///Missed score
     int mMissed=0;
+
     ///Unfair score
     int mUnfair=0;
+
 public:
     Scoreboard();
 

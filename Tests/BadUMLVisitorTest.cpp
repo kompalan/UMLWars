@@ -15,7 +15,7 @@
 #include <BadInheritanceItem.h>
 
 
-const std::wstring Filename = L"data/uml.xml";
+const std::wstring Filename = L"data/uml1.xml";
 
 using namespace std;
 

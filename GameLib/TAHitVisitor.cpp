@@ -18,13 +18,17 @@ void TAHitVisitor::VisitTA(TA* ta) {
 
 /**
  * Get whether the TA has been Hit
- * @return
+ * @return whether the TA is hit
  */
 bool TAHitVisitor::GetHit() {
 
     return mIsHit;
 }
 
+/**
+ * Get whether the TA is spawned
+ * @return whether the TA is spawned
+ */
 bool TAHitVisitor::GetSpawned()
 {
     return mIsSpawned;

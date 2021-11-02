@@ -11,11 +11,17 @@
 
 using namespace std;
 
-/// Minimum number of attributes or operations in a UML object
-const int MinItems = 0;
+/// Minimum number of attributes in a UML object
+const int MinAttributes = 0;
 
-/// Maximum number of attributes or operations in a UML object
-const int MaxItems = 3;
+/// Maximum number of attributes in a UML object
+const int MaxAttributes = 3;
+
+/// Minimum number of operations in a UML object
+const int MinOperations = 0;
+
+/// Maximum number of operations in a UML object
+const int MaxOperations = 3;
 
 /// Message to Display when we hit a good UML
 const wstring GoodUMLMessage = L"Unfair!";
@@ -196,8 +202,11 @@ void UMLData::XmlInheritance(wxXmlNode *node)
  */
 shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
 {
-    // Random number distribution between the min and max number of items for a UML object
-    std::uniform_int_distribution<> DistributionItems(MinItems, MaxItems);
+    // Random number distribution between the min and max number of attributes for a UML object
+    std::uniform_int_distribution<> DistributionAttributes(MinAttributes, MaxAttributes);
+
+    // Random number distribution between the min and max number of operations for a UML object
+    std::uniform_int_distribution<> DistributionOperations(MinOperations, MaxOperations);
 
     auto umlName = make_shared<GoodUMLName>(name);
 
@@ -212,7 +221,7 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
 
     // Shuffle list of good attributes and pick a random number between the min and max number of items
     shuffle(mGoodAttributes.begin(), mGoodAttributes.end(), mGame->GetRandom());
-    int numAttributes = DistributionItems(mGame->GetRandom());
+    int numAttributes = DistributionAttributes(mGame->GetRandom());
 
     // Push random number of attributes from good attributes list onto attributes
     for (int i=0; i < numAttributes; i++)
@@ -224,7 +233,7 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
 
     // Shuffle list of good operations and pick a random number between the min and max number of items
     shuffle(mGoodOperations.begin(), mGoodOperations.end(), mGame->GetRandom());
-    int numOperations = DistributionItems(mGame->GetRandom());
+    int numOperations = DistributionOperations(mGame->GetRandom());
 
     // Push random number of operations from good operations list onto operations
     for (int i=0; i < numOperations; i++)
@@ -235,6 +244,7 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
     // Make a good class UML object from the selected name, attributes, and operations
     auto goodUml = make_shared<GoodClassUML>(mGame, umlName, attributes, operations);
 
+    // Set the display message for the UML
     goodUml->SetMessage(GoodUMLMessage);
 
     return goodUml;
@@ -246,8 +256,11 @@ shared_ptr<GoodClassUML> UMLData::GenerateGoodClassUML(std::wstring name)
  */
 std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
 {
-    // Random number distribution between the min and max number of items for a UML object
-    std::uniform_int_distribution<> DistributionItems(MinItems, MaxItems);
+    // Random number distribution between the min and max number of attributes for a UML object
+    std::uniform_int_distribution<> DistributionAttributes(MinAttributes, MaxAttributes);
+
+    // Random number distribution between the min and max number of operations for a UML object
+    std::uniform_int_distribution<> DistributionOperations(MinOperations, MaxOperations);
 
     // Random number distribution between 0 and 1 which correspond to two choices
     std::uniform_int_distribution<> DistributionTwoChoices(0,1);
@@ -255,8 +268,8 @@ std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
     // Random number distribution between 0 and 2 which correspond to three choices
     std::uniform_int_distribution<> DistributionThreeChoices(0,2);
 
-    int numAttributes = DistributionItems(mGame->GetRandom()); //< Pick random number of attributes
-    int numOperations = DistributionItems(mGame->GetRandom()); //< Pick random number of operations
+    int numAttributes = DistributionAttributes(mGame->GetRandom()); //< Pick random number of attributes
+    int numOperations = DistributionOperations(mGame->GetRandom()); //< Pick random number of operations
 
     // Create an empty bad class UML object which will be assigned later
     shared_ptr<BadClassUML> badUml;
@@ -323,6 +336,7 @@ std::shared_ptr<BadClassUML> UMLData::GenerateBadClassUML()
         badUml = MakeUMLWithBadName(numAttributes, numOperations);
     }
 
+    // Set the display message for the UML
     badUml->SetMessage(badUml->GetReason());
 
     return badUml;
@@ -346,6 +360,7 @@ std::shared_ptr<GoodInheritance> UMLData::GenerateGoodInheritance()
     // Make a good inheritance object from the created base and derived classes
     auto goodInheritance = make_shared<GoodInheritance>(mGame, baseClass, derivedClass);
 
+    // Set the display message for the UML
     goodInheritance->SetMessage(GoodUMLMessage);
 
     return goodInheritance;
@@ -373,6 +388,7 @@ std::shared_ptr<BadInheritance> UMLData::GenerateBadInheritance()
     // Make a bad inheritance object from the created base and derived classes
     auto badInheritance = make_shared<BadInheritance>(mGame, baseClass, derivedClass, reason, down);
 
+    // Set the display message for the UML
     badInheritance->SetMessage(badInheritance->GetReason());
 
     return badInheritance;

@@ -39,6 +39,10 @@ public:
      */
     bool SetHitState();
 
+    /**
+     * Get if the TA is spawned
+     * @return boolean of if the TA is spawned
+     */
     bool IsSpawned() const { return mTAState == State::Spawned; }
 
     /**

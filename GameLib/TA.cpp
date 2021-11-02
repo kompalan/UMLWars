@@ -60,19 +60,19 @@ TA::TA(Game* game) :ItemWithImage(game, InitialPosition.X(), InitialPosition.Y()
  */
 void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
-    /// Font of the text
+    // Font of the text
     wxFont smallFont(wxSize(0, SmallSize),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
-    /// Font of the Countdown and Hit Me! text
+    // Font of the Countdown and Hit Me! text
     wxFont bigFont(wxSize(0, LargeSize),
             wxFONTFAMILY_DEFAULT,
             wxFONTSTYLE_NORMAL,
             wxFONTWEIGHT_BOLD);
 
-    /// Color of the Font
+    // Color of the Font
     wxColour cyanBlue = wxColour(0,CyanValue,CyanValue);
 
     graphics->SetFont(bigFont,cyanBlue);
@@ -103,8 +103,8 @@ void TA::Draw(std::shared_ptr<wxGraphicsContext> graphics)
                 GetY(),
                 0,
                 0);
-        /// Call some function in game to remove all TA and switch the state to not spawned
-        GetGame()->DeleteAllBadUML(this);
+        // Call some function in game to remove all TA and switch the state to not spawned
+        GetGame()->DeleteAllBadUML();
         mTAState = State::NotSpawned;
     }
     else

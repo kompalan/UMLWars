@@ -10,7 +10,7 @@
 TEST(EmitterTest, TestNothing) {
     std::shared_ptr<Game> game = std::make_shared<Game>();
     std::shared_ptr<UMLData> data = std::make_shared<UMLData>(game.get());
-    data->LoadData(L"data/uml.xml");
+    data->LoadData(L"data/uml1.xml");
 
     std::shared_ptr<Emitter> emitter = std::make_shared<Emitter>(game.get(), data);
 
@@ -26,7 +26,7 @@ TEST(EmitterTest, TestNothing) {
 TEST(EmitterTest, TestGoodClass) {
     std::shared_ptr<Game> game = std::make_shared<Game>();
     std::shared_ptr<UMLData> data = std::make_shared<UMLData>(game.get());
-    data->LoadData(L"data/uml.xml");
+    data->LoadData(L"data/uml1.xml");
 
     std::shared_ptr<Emitter> emitter = std::make_shared<Emitter>(game.get(), data);
 
@@ -45,7 +45,7 @@ TEST(EmitterTest, TestGoodClass) {
 TEST(EmitterTest, TestBadClass) {
     std::shared_ptr<Game> game = std::make_shared<Game>();
     std::shared_ptr<UMLData> data = std::make_shared<UMLData>(game.get());
-    data->LoadData(L"data/uml.xml");
+    data->LoadData(L"data/uml1.xml");
 
     std::shared_ptr<Emitter> emitter = std::make_shared<Emitter>(game.get(), data);
 
@@ -64,7 +64,7 @@ TEST(EmitterTest, TestBadClass) {
 TEST(EmitterTest, TestGoodInheritance) {
     std::shared_ptr<Game> game = std::make_shared<Game>();
     std::shared_ptr<UMLData> data = std::make_shared<UMLData>(game.get());
-    data->LoadData(L"data/uml.xml");
+    data->LoadData(L"data/uml1.xml");
 
     std::shared_ptr<Emitter> emitter = std::make_shared<Emitter>(game.get(), data);
 
@@ -83,7 +83,7 @@ TEST(EmitterTest, TestGoodInheritance) {
 TEST(EmitterTest, TestBadInheritance) {
     std::shared_ptr<Game> game = std::make_shared<Game>();
     std::shared_ptr<UMLData> data = std::make_shared<UMLData>(game.get());
-    data->LoadData(L"data/uml.xml");
+    data->LoadData(L"data/uml1.xml");
 
     std::shared_ptr<Emitter> emitter = std::make_shared<Emitter>(game.get(), data);
 

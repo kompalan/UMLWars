@@ -19,38 +19,44 @@ using namespace std;
 
 /// XML file to read the UML data from
 const std::wstring Filename = L"data/uml.xml";
+
 ///PNG file for the variant background image
 const std::wstring VarBackground = L"images/bounce house.png";
+
 ///Width of pen image
 const double PenW = 50;
+
 /**
  * Constructor
  */
 Game::Game()
 {
-    /// Add and load the UML data
+    // Add and load the UML data
     mData = std::make_shared<UMLData>(this);
     mData->LoadData(Filename);
 
-    ///Add Scoreboard to Game
+    // Add Scoreboard to Game
     mScoreboard = std::make_shared<Scoreboard>();
 
-    /// Add Harold to the Screen
+    // Add Harold to the Screen
     mHarold = std::make_shared<Harold>(this);
     AddItem(mHarold);
 
-    ///Add Pen to the Screen
+    // Add Pen to the Screen
     AddItem(std::make_shared<Pen>(this));
 
-    /// Instantiate random device for the game
+    // Instantiate random device for the game
     std::random_device rd;
     mRandom.seed(rd());
 
+    // Instantiate emitter for the game
     mEmitter = std::make_shared<Emitter>(this, mData);
 
+    // Create a TA item to add to the game
     auto ta = std::make_shared<TA>(this);
     AddItem(ta);
 
+    // Make a background for the variant of the game
     mBackground = wxBitmap(VarBackground, wxBITMAP_TYPE_ANY);
 }
 
@@ -71,7 +77,8 @@ void Game::OnDraw(shared_ptr<wxGraphicsContext> graphics, int width, int height)
 
     mXOffset = width / 2;
     mYOffset = 0;
-    if (height > mHeight * mScale) {
+    if (height > mHeight * mScale)
+    {
         mYOffset = (float)((height - mHeight * mScale) / 2);
     }
 
@@ -167,7 +174,8 @@ void Game::OnLeftDown(int mouseX, int mouseY)
  */
 bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
 {
-    if (pen->IsThrown()) {
+    if (pen->IsThrown())
+    {
         double penX = pen->GetX()+(pen->GetWidth()/2);
         double penY = pen->GetY()-(pen->GetHeight()/2);
 
@@ -181,8 +189,8 @@ bool Game::HitTest(Pen *pen, std::shared_ptr<Item> obj)
         if (((penX>=(objX-objWidth/2) && penX<=(objX+objWidth/2)) &&
                 (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))) ||
                 ((penX-PenW>=(objX-objWidth/2) && penX-PenW<=(objX+objWidth/2)) &&
-                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2)))
-                ) {
+                (penY>=(objY-objHeight/2) && penY<=(objY+objHeight/2))))
+        {
             return true;
         }
     }
@@ -306,16 +314,14 @@ void Game::DeleteUML(std::vector<UML*> toDelete)
  * the Score by the Amount of UML Deleted
  * @param ta TA object to filter out
  */
-void Game::DeleteAllBadUML(TA *ta) {
+void Game::DeleteAllBadUML()
+{
     for(auto item : mItems)
     {
-
         BadUMLVisitor badVisitor;
         UMLHitVisitor hitVisitor;
 
-
         item->Accept(&badVisitor);
-
 
         if(badVisitor.IsBad())
         {
